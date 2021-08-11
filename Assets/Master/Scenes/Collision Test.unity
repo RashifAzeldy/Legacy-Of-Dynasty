@@ -401,10 +401,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 462669929}
-  - component: {fileID: 462669928}
   - component: {fileID: 462669930}
   - component: {fileID: 462669931}
   - component: {fileID: 462669932}
+  - component: {fileID: 462669933}
+  - component: {fileID: 462669928}
+  - component: {fileID: 462669934}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -421,32 +423,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 462669927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52b891de72b39e446bbb9bf875c13d05, type: 3}
+  m_Script: {fileID: 11500000, guid: 78ab7ad2232a58e4d97346721c67d011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positiveBlockPrefab: {fileID: 8411800946645773637, guid: c7b64a42436781742874924fff7da1c9,
-    type: 3}
-  neutralBlockPrefab: {fileID: 8468018568617429080, guid: f46808836b816784fa6a9757e28affce,
-    type: 3}
-  negativeBlockPrefab: {fileID: 2671020184612394135, guid: 4487413cfe1e1f94fb5aca902355bbe2,
-    type: 3}
-  attempBlockPrefab: {fileID: 984823575701919843, guid: 680a9fe8294e48c44bf7343fb64142ad,
-    type: 3}
-  positiveBlocksParent: {fileID: 1893993786}
-  neutralBlocksParent: {fileID: 1740400027}
-  negativeBlocksParent: {fileID: 1980929856}
-  blockList: []
-  unlockedPositiveSC:
-  - {fileID: 11400000, guid: 65ed15ecbc935cd46910b258300a77ce, type: 2}
-  - {fileID: 11400000, guid: e879a66d884d1cd47ac2ff40b2024d6f, type: 2}
-  unlockedNeutralSC:
-  - {fileID: 11400000, guid: 165f7bcf70917d04bbf8fedba26f405f, type: 2}
-  - {fileID: 11400000, guid: 8a357442c3ba13c43a72d2f451c9fd98, type: 2}
-  unlockedNegativeSC:
-  - {fileID: 11400000, guid: ea1e80ed04f9e1b4a9b8553fb186a243, type: 2}
-  unlockedAttempSC: []
-  blockSpeed: 0.05
-  scoreText: {fileID: 1553262571}
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0
@@ -522,6 +501,33 @@ MonoBehaviour:
   - ageState: Elder
     playerObject: {fileID: 21300000, guid: fc13920dee8a4864ba819bbb4ad9afb6, type: 3}
   player: {fileID: 6897627098548547271}
+--- !u!114 &462669933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462669927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b8fb4544a9ef9c42958660fde52a263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testObjPrefab: {fileID: 8411800946645773637, guid: c7b64a42436781742874924fff7da1c9,
+    type: 3}
+--- !u!114 &462669934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462669927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92a3e84157931044da8e87caf201a2ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockList: []
 --- !u!1 &480420905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1114,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 500637878}
   pauseButton: {fileID: 859829760}
   countdownText: {fileID: 250813921}
-  manager: {fileID: 462669928}
   controller: {fileID: 6897627098548547275}
   backgroundManager: {fileID: 462669931}
   ground: {fileID: 462669930}
@@ -1958,7 +1963,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 5.5
-  manager: {fileID: 462669928}
 --- !u!1 &6897627099453924176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,8 +2078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6719a8515b38e45a9643a40443e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6897627098548547270}
-  smooth: 0.01
 --- !u!20 &6897627099641919754
 Camera:
   m_ObjectHideFlags: 0
