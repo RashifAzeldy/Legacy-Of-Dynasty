@@ -9,7 +9,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject pauseButton;
     [SerializeField] TextMeshProUGUI countdownText;
 
-    [SerializeField] GManager manager;
     [SerializeField] PlayerController controller;
     [SerializeField] BackgroundManager backgroundManager;
     [SerializeField] GroundController ground;

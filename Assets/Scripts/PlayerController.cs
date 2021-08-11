@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpPower = 5f;
 
     Rigidbody2D rb;
-    [SerializeField] GManager manager;
     SCObject collectedStoryCard;
     public SCObject GetCollectedStoryObject
     {
@@ -49,14 +48,10 @@ public class PlayerController : MonoBehaviour
 
         if (pause)
         {
-            //rb.constraints = RigidbodyConstraints2D.FreezePositionY;
-
             rb.simulated = false;
         }
         else
         {
-            //rb.constraints = RigidbodyConstraints2D.None;
-            //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.simulated = true;
         }
     }
@@ -75,19 +70,6 @@ public class PlayerController : MonoBehaviour
         {
             SCObject otherDesc = collectedObj.GetComponent<SCObject>();
             collectedStoryCard = otherDesc;
-            if (!otherDesc.IsCollected && playerScore >= otherDesc.GetStoryCard.GetScoreRequirement)
-            {
-                otherDesc.IsCollected = true;
-                manager.DisableCollected(otherDesc.GetCardObject,
-                    otherDesc.GetStoryCard, manager.GetBlockList.IndexOf(otherDesc));
-                playerScore += otherDesc.GetStoryCard.GetScore;
-                manager.UpdateScoreText(collectedObj);
-            }
-            else if (!otherDesc.IsCollected && playerScore < otherDesc.GetStoryCard.GetScoreRequirement)
-            {
-                // Not Enough Score to Collect Descission
-                Debug.LogWarning("Not Enough Score to Get This Descission!");
-            }
         }
     }
 

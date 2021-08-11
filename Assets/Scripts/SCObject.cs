@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SCObject : MonoBehaviour
 {
-    [SerializeField] StoryCard storyCard;
-    public StoryCard GetStoryCard { get { return storyCard; } set { storyCard = value; } }
-
     [SerializeField] bool collected;
     public bool IsCollected { get { return collected; } set { collected = value; } }
 
