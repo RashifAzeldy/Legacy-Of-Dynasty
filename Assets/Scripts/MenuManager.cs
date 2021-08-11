@@ -17,7 +17,6 @@ public class MenuManager : MonoBehaviour
     public void PauseGame()
     {
         // Stop Game Time
-        manager.isPaused = true;
         controller.PlayerPause = true;
         backgroundManager.BackgroundPause = true;
         ground.GroundPause = true;
@@ -50,7 +49,6 @@ public class MenuManager : MonoBehaviour
             if (i == 0)
             {
                 controller.PlayerPause = false;
-                manager.isPaused = false;
                 backgroundManager.BackgroundPause = false;
                 ground.GroundPause = false;
 
