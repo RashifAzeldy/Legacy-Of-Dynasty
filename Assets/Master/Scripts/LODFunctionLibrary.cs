@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public static class LODFunctionLibrary
+public class LODFunctionLibrary
 {
     public static void TeleportBlock(GameObject block, Vector3 destination)
     {
