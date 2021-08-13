@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: DummyCardHolder
   m_EditorClassIdentifier: Assembly-CSharp::CardStagesList
-  cardStagesHolder: []
+  cardStagesHolder:
+  - cardDataList:
+    - {fileID: 0}

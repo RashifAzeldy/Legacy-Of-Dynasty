@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public enum CardValue { Positive, Negative, Mystery }
+public enum CardValue { Positive, Negative, Mystery, Neutral }
 
 [System.Serializable]
 public struct CardInfo
