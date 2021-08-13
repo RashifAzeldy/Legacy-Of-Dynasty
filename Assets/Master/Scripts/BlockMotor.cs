@@ -9,9 +9,10 @@ public class BlockMotor : MonoBehaviour
         transform.Translate(-3.5f * Time.deltaTime, 0, 0);
 
         // Teleport Block Later
-        //if ( gameObject.transform.position.x >= Desired Pos )
+        //if ( gameObject.transform.position.x <= -4f )
         //{
-        //    LODFunctionLibrary.TeleportBlock(block/gameObject, destination);
+        //    LODFunctionLibrary.TeleportBlock(gameObject, new Vector3(55f, 0f));
+        //    LODFunctionLibrary.RandomizeYPos(gameObject, Effort??);
         //}
     }
 }

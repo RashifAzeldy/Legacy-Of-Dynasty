@@ -4,30 +4,44 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    BlockMotor motor;
-
-    private void Start()
+    public void SpawnObject(GameObject spawnObj, Transform parent, int objQuantity, BlockEffort effortType)
     {
-        motor = FindObjectOfType<BlockMotor>();
+        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, effortType));
     }
 
-    public void SpawnObject( GameObject spawnObj, Vector3 position, Transform parent, int objQuantity )
+    IEnumerator SpawnDelay(float time, GameObject spawnObj, Transform parent, int objQuantity, BlockEffort effortType)
     {
-        StartCoroutine(SpawnDelay(1f, spawnObj, position, parent, 5));
-    }
-
-    IEnumerator SpawnDelay( float time, GameObject spawnObj, Vector3 pos, Transform parent, int objQuantity )
-    {
-        for ( int i = 0; i < objQuantity; i++ )
+        for (int i = 0; i < objQuantity; i++)
         {
+            GameObject block;
             yield return new WaitForSeconds(time);
-            GameObject block = Instantiate(spawnObj, pos + new Vector3(0, Random.Range(2, -2), 0), Quaternion.identity, parent);
-            AddBlockComponent(block);
+            if (effortType == BlockEffort.High)
+            {
+                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
+                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.High);
+                LODFunctionLibrary.FreezeYRigidbody(block);
+            }
+            else if (effortType == BlockEffort.Medium)
+            {
+                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
+                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Medium);
+                LODFunctionLibrary.FreezeYRigidbody(block);
+            }
+            else
+            {
+                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
+                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Low);
+                LODFunctionLibrary.FreezeYRigidbody(block);
+            }
         }
     }
 
-    public void AddBlockComponent(GameObject gameObj)
-    {
-        gameObj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-    }
+
+}
+
+public enum BlockEffort
+{
+    High,
+    Medium,
+    Low
 }
