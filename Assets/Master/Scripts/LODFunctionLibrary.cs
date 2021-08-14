@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using TMPro;
 
 public class LODFunctionLibrary
 {
@@ -34,10 +36,22 @@ public class LODFunctionLibrary
         gameObj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
     }
 
+    public static void ShowStoryText(string storyText, GameObject uiObject, TextMeshProUGUI textUI)
+    {
+        uiObject.SetActive(true);
+        textUI.text = storyText;
+    }
+
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))
     {
         gameObject.SCObject.GetStoryCard = storyCard;
+    }
+
+    public
+    public static void UpdateStoryText(string storyText, GameObject textObject)
+    {
+
     }
     */
 }
