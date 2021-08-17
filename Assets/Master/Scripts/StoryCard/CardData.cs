@@ -38,14 +38,3 @@ public class CardData : ScriptableObject
 
 }
 
-[System.Serializable]
-public class CardHolder
-{
-    public CardData[] cardDataList;
-}
-
-[CreateAssetMenu(menuName = "Card/Card List", fileName = "Card List")]
-public class CardStagesList : ScriptableObject
-{
-    public CardHolder[] cardStagesHolder;
-}

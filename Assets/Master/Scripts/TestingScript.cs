@@ -6,6 +6,8 @@ public class TestingScript : MonoBehaviour
 {
     [SerializeField] GameObject testObjPrefab;
 
+    [SerializeField] CardStagesList cardStagesList;
+
     void Update()
     {
         if ( Input.GetKeyDown(KeyCode.X) )
