@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9070844230347977144}
   - component: {fileID: 8267125086138934182}
   - component: {fileID: 1504488697806155882}
-  - component: {fileID: 2601280767478040872}
   - component: {fileID: -1096028875250703662}
   m_Layer: 0
   m_Name: PositiveBlock
@@ -117,7 +116,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,18 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.8}
   m_EdgeRadius: 0
---- !u!114 &2601280767478040872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8411800946645773637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a3e84157931044da8e87caf201a2ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1096028875250703662
 MonoBehaviour:
   m_ObjectHideFlags: 0

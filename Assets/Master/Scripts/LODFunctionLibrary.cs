@@ -31,6 +31,11 @@ public class LODFunctionLibrary
         }
     }
 
+    public static void SetBlockStoryCard(BlockController block, CardData card)
+    {
+        block.cardData = card;
+    }
+
     public static void FreezeYRigidbody(GameObject gameObj)
     {
         gameObj.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
@@ -41,17 +46,10 @@ public class LODFunctionLibrary
         uiObject.SetActive(true);
         textUI.text = storyText;
     }
-
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))
     {
         gameObject.SCObject.GetStoryCard = storyCard;
-    }
-
-    public
-    public static void UpdateStoryText(string storyText, GameObject textObject)
-    {
-
     }
     */
 }

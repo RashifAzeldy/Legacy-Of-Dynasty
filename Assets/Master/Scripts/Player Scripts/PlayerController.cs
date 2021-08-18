@@ -1,18 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float jumpPower = 5f;
+    [SerializeField] GameObject crawlTextUI;
+    [SerializeField] TextMeshProUGUI crawlText;
 
     Rigidbody2D rb;
-    SCObject collectedStoryCard;
-    public SCObject GetCollectedStoryObject
-    {
-        get { return collectedStoryCard; }
-        set { collectedStoryCard = value; }
-    }
     GameObject collectedSCObject;
     float playerScore;
     public float GetPlayerScore
@@ -58,18 +55,17 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        collectedSCObject = other.gameObject;
-        if (collectedSCObject != null)
-            UpdateBlock(collectedSCObject);
+        UpdateBlock(other.gameObject);
     }
 
     void UpdateBlock(GameObject collectedObj)
     {
         collectedObj.SetActive(false);
-        if (collectedObj.GetComponent<SCObject>() != null)
+        if (collectedObj.GetComponent<BlockController>() != null)
         {
-            SCObject otherDesc = collectedObj.GetComponent<SCObject>();
-            collectedStoryCard = otherDesc;
+            BlockController otherDesc = collectedObj.GetComponent<BlockController>();
+            LODFunctionLibrary.ShowStoryText(otherDesc.cardData.card.cardStory, crawlTextUI, crawlText);
+            crawlTextUI.GetComponent<StoryCardTextCrawl>().MoveText = true;
         }
     }
 

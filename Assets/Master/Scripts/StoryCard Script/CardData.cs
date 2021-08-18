@@ -31,9 +31,9 @@ public struct CardInfo
 public class CardData : ScriptableObject
 {
 
-    public CardInfo cardData;
+    public CardInfo card;
 
-    public int getCardScoreValue() { return cardData.cardScoreValue; }
+    public int getCardScoreValue() { return card.cardScoreValue; }
 
 
 }

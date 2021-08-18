@@ -12,5 +12,9 @@ public class StoryCardTextCrawl : MonoBehaviour
         {
             gameObject.transform.Translate(-5f * Time.deltaTime, 0, 0);
         }
+        if (gameObject.transform.position.x <= -3.53f)
+        {
+            move = false;
+        }
     }
 }

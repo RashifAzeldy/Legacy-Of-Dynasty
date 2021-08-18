@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
+    [SerializeField] CardStagesList cardList;
     public void SpawnObject(GameObject spawnObj, Transform parent, int objQuantity, BlockEffort effortType)
     {
         StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, effortType));
@@ -19,23 +20,27 @@ public class BlockSpawner : MonoBehaviour
             {
                 block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.High);
-                LODFunctionLibrary.FreezeYRigidbody(block);
             }
             else if (effortType == BlockEffort.Medium)
             {
                 block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Medium);
-                LODFunctionLibrary.FreezeYRigidbody(block);
             }
             else
             {
                 block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Low);
-                LODFunctionLibrary.FreezeYRigidbody(block);
             }
+            yield return new WaitForSeconds(0.25f);
+            SetBlockComponent(block);
         }
     }
 
+    void SetBlockComponent(GameObject block)
+    {
+        LODFunctionLibrary.FreezeYRigidbody(block);
+        LODFunctionLibrary.SetBlockStoryCard(block.GetComponent<BlockController>(), cardList.cardStagesHolder[0].cardDataList[0]);
+    }
 
 }
 

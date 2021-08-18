@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ad7c208fa73c8439f1363b2c787f4e, type: 3}
-  m_Name: StoryCard_Child_High_PlayingToys
+  m_Script: {fileID: 11500000, guid: 4d52cc21c6b744b43ba9435fea7e2179, type: 3}
+  m_Name: Positive_Child_High
   m_EditorClassIdentifier: 
-  type: 0
-  action: Playing Toys
-  score: 1500
-  scoreRequirement: -99999
-  cardToUnlock: []
+  card:
+    cardValue: 0
+    cardName: Play with Friends
+    cardStory: Play with Your Friends
+    cardScoreValue: 1000
+    cardSpawnOverScore: 0

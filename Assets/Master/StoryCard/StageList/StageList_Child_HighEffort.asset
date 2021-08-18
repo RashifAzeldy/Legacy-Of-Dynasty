@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ad7c208fa73c8439f1363b2c787f4e, type: 3}
-  m_Name: StoryCard_Child_Low_Negative_LateForSchool
+  m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
+  m_Name: StageList_Child_HighEffort
   m_EditorClassIdentifier: 
-  type: 2
-  action: Late for School
-  score: -2000
-  scoreRequirement: -99999
-  cardToUnlock: []
+  cardStagesHolder:
+  - cardDataList:
+    - {fileID: 11400000, guid: 41d258691d1a09c47a681dc9889be62e, type: 2}
