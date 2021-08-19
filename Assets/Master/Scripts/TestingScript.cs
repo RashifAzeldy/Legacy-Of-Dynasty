@@ -10,12 +10,9 @@ public class TestingScript : MonoBehaviour
 
     void Update()
     {
-        if ( Input.GetKeyDown(KeyCode.X) )
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            BlockSpawner block = FindObjectOfType<BlockSpawner>();
-            block.SpawnObject(testObjPrefab, gameObject.transform, 5, BlockEffort.High);
-            block.SpawnObject(testObjPrefab, gameObject.transform, 5, BlockEffort.Medium);
-            block.SpawnObject(testObjPrefab, gameObject.transform, 5, BlockEffort.Low);
+
         }
     }
 }

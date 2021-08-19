@@ -9,6 +9,7 @@ public enum CardValue { Positive, Negative, Mystery, Neutral }
 public struct CardInfo
 {
     [Header("Card Data : ")]
+    public BlockEffort cardSpawnAtEffort;
     public CardValue cardValue;
 
     public string cardName;

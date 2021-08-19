@@ -4,44 +4,73 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
+    [SerializeField] BlockController block;
     [SerializeField] CardStagesList cardList;
-    public void SpawnObject(GameObject spawnObj, Transform parent, int objQuantity, BlockEffort effortType)
+
+    PlayerState player;
+    private void Start()
     {
-        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, effortType));
+        player = FindObjectOfType<PlayerState>();
+        SpawnObject(block, gameObject.transform, 5);
+    }
+    public void SpawnObject(BlockController spawnObj, Transform parent, int objQuantity)
+    {
+        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity));
     }
 
-    IEnumerator SpawnDelay(float time, GameObject spawnObj, Transform parent, int objQuantity, BlockEffort effortType)
+    IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity)
     {
         for (int i = 0; i < objQuantity; i++)
         {
             GameObject block;
             yield return new WaitForSeconds(time);
-            if (effortType == BlockEffort.High)
+            block = Instantiate(spawnObj.gameObject, new Vector3(15, 0, 0), Quaternion.identity, parent);
+            AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>());
+            LODFunctionLibrary.FreezeYRigidbody(block);
+
+            yield return new WaitForSeconds(0.15f);
+            if (block.GetComponent<BlockController>().cardData.card.cardSpawnAtEffort == BlockEffort.High)
             {
-                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.High);
             }
-            else if (effortType == BlockEffort.Medium)
+            else if (block.GetComponent<BlockController>().cardData.card.cardSpawnAtEffort == BlockEffort.Medium)
             {
-                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Medium);
             }
             else
             {
-                block = Instantiate(spawnObj, new Vector3(15, 0, 0), Quaternion.identity, parent);
                 LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Low);
             }
-            yield return new WaitForSeconds(0.25f);
-            SetBlockComponent(block);
         }
     }
 
-    void SetBlockComponent(GameObject block)
+    // Child Index State = 0
+    // Teen Index State = 1
+    // Adult Index State = 2
+    // Elder Index State = 3
+    void AddBlockStoryCard(CardStagesList cardList, Age playerState, BlockController block)
     {
-        LODFunctionLibrary.FreezeYRigidbody(block);
-        LODFunctionLibrary.SetBlockStoryCard(block.GetComponent<BlockController>(), cardList.cardStagesHolder[0].cardDataList[0]);
+        switch (playerState)
+        {
+            case Age.Child:
+                int randomIndex = Random.Range(0, 2);
+                block.cardData = cardList.cardStagesHolder[0].cardDataList[randomIndex];
+                Debug.Log(cardList.cardStagesHolder[0].cardDataList[randomIndex] + ", " + block.cardData.card.cardName);
+                break;
+            case Age.Teen:
+                block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
+                                cardList.cardStagesHolder[1].cardDataList.Length)];
+                break;
+            case Age.Adult:
+                block.cardData = cardList.cardStagesHolder[2].cardDataList[Random.Range(0,
+                                cardList.cardStagesHolder[2].cardDataList.Length)];
+                break;
+            case Age.Elder:
+                block.cardData = cardList.cardStagesHolder[3].cardDataList[Random.Range(0,
+                                cardList.cardStagesHolder[3].cardDataList.Length)];
+                break;
+        }
     }
-
 }
 
 public enum BlockEffort

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
-    [SerializeField] List<Age> ageList = new List<Age>();
+    [SerializeField] List<AgeState> ageList = new List<AgeState>();
     [SerializeField] SpriteRenderer player;
     bool switchState;
     int ageIndex = 0;
+    Age currentState;
+    public Age GetPlayerCurrentState { get { return currentState; } }
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerState : MonoBehaviour
         }
         // Change To Game Object When it's Converted to 3D Game!
         player.sprite = ageList[ageIndex].GetAgeObject;
+        currentState = ageList[ageIndex].GetState;
 
         yield return new WaitForSeconds(time);
         switchState = true;
@@ -40,11 +43,20 @@ public class PlayerState : MonoBehaviour
 }
 
 [System.Serializable]
-public class Age
+public class AgeState
 {
-    [SerializeField] string ageState = "";
+    [SerializeField] Age ageState;
+    public Age GetState { get { return ageState; } }
 
     // Change To Game Object When it's Converted to 3D Game!
     [SerializeField] Sprite playerObject;
     public Sprite GetAgeObject { get { return playerObject; } set { playerObject = value; } }
+}
+
+public enum Age
+{
+    Child,
+    Teen,
+    Adult,
+    Elder
 }

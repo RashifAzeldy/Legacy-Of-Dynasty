@@ -15,3 +15,4 @@ MonoBehaviour:
   cardStagesHolder:
   - cardDataList:
     - {fileID: 11400000, guid: 41d258691d1a09c47a681dc9889be62e, type: 2}
+    - {fileID: 11400000, guid: 2ae5c4e0f265d1d4bb3ab306dbd943a1, type: 2}
