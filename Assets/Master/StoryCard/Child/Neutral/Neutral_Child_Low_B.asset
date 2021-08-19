@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d52cc21c6b744b43ba9435fea7e2179, type: 3}
-  m_Name: Positive_Child_Medium
+  m_Name: Neutral_Child_Low_B
   m_EditorClassIdentifier: 
   card:
     cardSpawnAtEffort: 1
-    cardValue: 0
-    cardName: Buy a pet
-    cardStory: You Buy a Pet
-    cardScoreValue: 3000
+    cardValue: 3
+    cardName: Copying Homework
+    cardStory: Copying your Friends Homework Before Class
+    cardScoreValue: 1000
     cardSpawnOverScore: 0

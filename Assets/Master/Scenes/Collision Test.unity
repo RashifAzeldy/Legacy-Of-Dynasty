@@ -474,7 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 8008200819032577093, guid: f46808836b816784fa6a9757e28affce, type: 3}
-  cardList: {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
+  cardList:
+  - {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0

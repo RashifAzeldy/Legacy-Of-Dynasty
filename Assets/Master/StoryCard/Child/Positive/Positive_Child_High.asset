@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Positive_Child_High
   m_EditorClassIdentifier: 
   card:
+    cardSpawnAtEffort: 0
     cardValue: 0
-    cardName: Play with Friends
-    cardStory: Play with Your Friends
-    cardScoreValue: 1000
+    cardName: Win Language Competition
+    cardStory: You Won a Language Competition
+    cardScoreValue: 3000
     cardSpawnOverScore: 0

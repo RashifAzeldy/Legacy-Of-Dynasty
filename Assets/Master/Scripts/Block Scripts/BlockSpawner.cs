@@ -5,7 +5,7 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] BlockController block;
-    [SerializeField] CardStagesList cardList;
+    [SerializeField] List<CardStagesList> cardList = new List<CardStagesList>();
 
     PlayerState player;
     private void Start()
@@ -15,17 +15,19 @@ public class BlockSpawner : MonoBehaviour
     }
     public void SpawnObject(BlockController spawnObj, Transform parent, int objQuantity)
     {
-        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity));
+        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.High));
+        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Medium));
+        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Low));
     }
 
-    IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity)
+    IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity, BlockEffort effort)
     {
         for (int i = 0; i < objQuantity; i++)
         {
             GameObject block;
             yield return new WaitForSeconds(time);
-            block = Instantiate(spawnObj.gameObject, new Vector3(15, 0, 0), Quaternion.identity, parent);
-            AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>());
+            block = Instantiate(spawnObj.gameObject, new Vector3(16.5f, 0, 0), Quaternion.identity, parent);
+            AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>(), effort);
             LODFunctionLibrary.FreezeYRigidbody(block);
 
             yield return new WaitForSeconds(0.15f);
@@ -48,26 +50,23 @@ public class BlockSpawner : MonoBehaviour
     // Teen Index State = 1
     // Adult Index State = 2
     // Elder Index State = 3
-    void AddBlockStoryCard(CardStagesList cardList, Age playerState, BlockController block)
+    void AddBlockStoryCard(List<CardStagesList> cardList, Age playerState, BlockController block, BlockEffort effort)
     {
         switch (playerState)
         {
             case Age.Child:
-                int randomIndex = Random.Range(0, 2);
-                block.cardData = cardList.cardStagesHolder[0].cardDataList[randomIndex];
-                Debug.Log(cardList.cardStagesHolder[0].cardDataList[randomIndex] + ", " + block.cardData.card.cardName);
-                break;
-            case Age.Teen:
-                block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
-                                cardList.cardStagesHolder[1].cardDataList.Length)];
-                break;
-            case Age.Adult:
-                block.cardData = cardList.cardStagesHolder[2].cardDataList[Random.Range(0,
-                                cardList.cardStagesHolder[2].cardDataList.Length)];
-                break;
-            case Age.Elder:
-                block.cardData = cardList.cardStagesHolder[3].cardDataList[Random.Range(0,
-                                cardList.cardStagesHolder[3].cardDataList.Length)];
+                if (effort == BlockEffort.High)
+                {
+                    block.cardData = cardList[0].cardStagesHolder[0].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[0].cardDataList.Length)];
+                }
+                else if (effort == BlockEffort.Medium)
+                {
+                    block.cardData = cardList[0].cardStagesHolder[1].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[1].cardDataList.Length)];
+                }
+                else
+                {
+                    block.cardData = cardList[0].cardStagesHolder[2].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[2].cardDataList.Length)];
+                }
                 break;
         }
     }
@@ -79,3 +78,18 @@ public enum BlockEffort
     Medium,
     Low
 }
+
+/*
+    case Age.Teen:
+        block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
+                        cardList.cardStagesHolder[1].cardDataList.Length)];
+        break;
+    case Age.Adult:
+        block.cardData = cardList.cardStagesHolder[2].cardDataList[Random.Range(0,
+                        cardList.cardStagesHolder[2].cardDataList.Length)];
+        break;
+    case Age.Elder:
+        block.cardData = cardList.cardStagesHolder[3].cardDataList[Random.Range(0,
+                        cardList.cardStagesHolder[3].cardDataList.Length)];
+        break;
+*/
