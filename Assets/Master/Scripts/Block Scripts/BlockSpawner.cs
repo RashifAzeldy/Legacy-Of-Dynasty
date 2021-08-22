@@ -5,19 +5,40 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] BlockController block;
+<<<<<<< Updated upstream
     [SerializeField] List<CardStagesList> cardList = new List<CardStagesList>();
+=======
+    [SerializeField] CardStagesList cardList;
+    [SerializeField] List<EffortPosition> spawnPositions = new List<EffortPosition>();
+>>>>>>> Stashed changes
 
     PlayerState player;
+
+    int SpawnPosIndex(BlockEffort effort)
+    {
+        int index = 0;
+        foreach (EffortPosition item in spawnPositions)
+        {
+            if (item.GetEffort == effort)
+            {
+                index = spawnPositions.IndexOf(item);
+                return index;
+            }
+        }
+        return index;
+    }
     private void Start()
     {
-        player = FindObjectOfType<PlayerState>();
-        SpawnObject(block, gameObject.transform, 5);
-    }
-    public void SpawnObject(BlockController spawnObj, Transform parent, int objQuantity)
-    {
+<<<<<<< Updated upstream
         StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.High));
         StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Medium));
         StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Low));
+=======
+        player = FindObjectOfType<PlayerState>();
+        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.High));
+        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.Medium));
+        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.Low));
+>>>>>>> Stashed changes
     }
 
     IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity, BlockEffort effort)
@@ -26,23 +47,17 @@ public class BlockSpawner : MonoBehaviour
         {
             GameObject block;
             yield return new WaitForSeconds(time);
+<<<<<<< Updated upstream
             block = Instantiate(spawnObj.gameObject, new Vector3(16.5f, 0, 0), Quaternion.identity, parent);
             AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>(), effort);
+=======
+            block = Instantiate(spawnObj.gameObject, new Vector3(15, 0, 0), Quaternion.identity, parent);
+            //AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>());
+>>>>>>> Stashed changes
             LODFunctionLibrary.FreezeYRigidbody(block);
 
             yield return new WaitForSeconds(0.15f);
-            if (block.GetComponent<BlockController>().cardData.card.cardSpawnAtEffort == BlockEffort.High)
-            {
-                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.High);
-            }
-            else if (block.GetComponent<BlockController>().cardData.card.cardSpawnAtEffort == BlockEffort.Medium)
-            {
-                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Medium);
-            }
-            else
-            {
-                LODFunctionLibrary.RandomizeYPos(block, BlockEffort.Low);
-            }
+            block.transform.position = spawnPositions[SpawnPosIndex(effort)].GetSpawnPos[Random.Range(0, 3)].position;
         }
     }
 
@@ -79,6 +94,7 @@ public enum BlockEffort
     Low
 }
 
+<<<<<<< Updated upstream
 /*
     case Age.Teen:
         block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
@@ -93,3 +109,13 @@ public enum BlockEffort
                         cardList.cardStagesHolder[3].cardDataList.Length)];
         break;
 */
+=======
+[System.Serializable]
+public class EffortPosition
+{
+    [SerializeField] BlockEffort effort;
+    public BlockEffort GetEffort { get { return effort; } }
+    [SerializeField] List<Transform> spawnPos = new List<Transform>(3);
+    public List<Transform> GetSpawnPos { get { return spawnPos; } }
+}
+>>>>>>> Stashed changes
