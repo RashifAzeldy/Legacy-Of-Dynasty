@@ -55,7 +55,8 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        UpdateBlock(other.gameObject);
+        //UpdateBlock(other.gameObject);
+        other.gameObject.GetComponent<BlockController>().DestroyObject();
     }
 
     void UpdateBlock(GameObject collectedObj)
