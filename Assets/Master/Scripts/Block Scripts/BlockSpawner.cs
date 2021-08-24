@@ -5,14 +5,14 @@ using UnityEngine;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField] BlockController block;
-<<<<<<< Updated upstream
     [SerializeField] List<CardStagesList> cardList = new List<CardStagesList>();
-=======
-    [SerializeField] CardStagesList cardList;
     [SerializeField] List<EffortPosition> spawnPositions = new List<EffortPosition>();
->>>>>>> Stashed changes
 
     PlayerState player;
+    [SerializeField] List<GameObject> spawnedBlock = new List<GameObject>();
+    public List<GameObject> GetSpawnedBlock { get { return spawnedBlock; } set { spawnedBlock = value; } }
+
+    bool startCheck;
 
     int SpawnPosIndex(BlockEffort effort)
     {
@@ -29,16 +29,25 @@ public class BlockSpawner : MonoBehaviour
     }
     private void Start()
     {
-<<<<<<< Updated upstream
-        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.High));
-        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Medium));
-        StartCoroutine(SpawnDelay(1f, spawnObj, parent, objQuantity, BlockEffort.Low));
-=======
         player = FindObjectOfType<PlayerState>();
-        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.High));
-        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.Medium));
-        StartCoroutine(SpawnDelay(1f, block, gameObject.transform, 5, BlockEffort.Low));
->>>>>>> Stashed changes
+        SpawnBlock(1, block, gameObject.transform, 5);
+    }
+
+    private void Update()
+    {
+        if (spawnedBlock.Count < 15 && startCheck)
+        {
+            SpawnBlock(1.5f, block, gameObject.transform, 1);
+        }
+    }
+
+    public void SpawnBlock(float delay, BlockController block, Transform parent, int quantity)
+    {
+        startCheck = false;
+        StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.High));
+        StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Medium));
+        StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Low));
+        //StartCoroutine(CheckingCountdown(delay * quantity));
     }
 
     IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity, BlockEffort effort)
@@ -47,18 +56,24 @@ public class BlockSpawner : MonoBehaviour
         {
             GameObject block;
             yield return new WaitForSeconds(time);
-<<<<<<< Updated upstream
             block = Instantiate(spawnObj.gameObject, new Vector3(16.5f, 0, 0), Quaternion.identity, parent);
             AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>(), effort);
-=======
-            block = Instantiate(spawnObj.gameObject, new Vector3(15, 0, 0), Quaternion.identity, parent);
-            //AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>());
->>>>>>> Stashed changes
             LODFunctionLibrary.FreezeYRigidbody(block);
 
             yield return new WaitForSeconds(0.15f);
             block.transform.position = spawnPositions[SpawnPosIndex(effort)].GetSpawnPos[Random.Range(0, 3)].position;
+            spawnedBlock.Add(block);
+            if (i == (objQuantity - 1))
+            {
+                startCheck = true;
+            }
         }
+    }
+
+    IEnumerator CheckingCountdown(float time)
+    {
+        yield return new WaitForSeconds(time);
+        startCheck = true;
     }
 
     // Child Index State = 0
@@ -94,7 +109,6 @@ public enum BlockEffort
     Low
 }
 
-<<<<<<< Updated upstream
 /*
     case Age.Teen:
         block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
@@ -109,7 +123,6 @@ public enum BlockEffort
                         cardList.cardStagesHolder[3].cardDataList.Length)];
         break;
 */
-=======
 [System.Serializable]
 public class EffortPosition
 {
@@ -118,4 +131,3 @@ public class EffortPosition
     [SerializeField] List<Transform> spawnPos = new List<Transform>(3);
     public List<Transform> GetSpawnPos { get { return spawnPos; } }
 }
->>>>>>> Stashed changes

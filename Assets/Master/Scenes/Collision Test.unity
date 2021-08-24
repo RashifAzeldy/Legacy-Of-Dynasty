@@ -534,11 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   block: {fileID: 8008200819032577093, guid: f46808836b816784fa6a9757e28affce, type: 3}
-<<<<<<< Updated upstream
   cardList:
   - {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
-=======
-  cardList: {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
   spawnPositions:
   - effort: 0
     spawnPos:
@@ -555,7 +552,7 @@ MonoBehaviour:
     - {fileID: 1672752582}
     - {fileID: 792121455}
     - {fileID: 324684093}
->>>>>>> Stashed changes
+  spawnedBlock: []
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0
@@ -1991,7 +1988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.8, y: -20.299988}
+  m_AnchoredPosition: {x: 191.80005, y: -20.300049}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1553262571
@@ -2139,7 +2136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1683550692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2695,7 +2692,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6897627099641919752}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.92, y: -1.41, z: -10}
+  m_LocalPosition: {x: 13.22, y: -1.41, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1720189264635719880}
