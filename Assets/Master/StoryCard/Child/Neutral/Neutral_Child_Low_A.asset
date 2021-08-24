@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d52cc21c6b744b43ba9435fea7e2179, type: 3}
   m_Name: Neutral_Child_Low_A
   m_EditorClassIdentifier: 
-  card:
-    cardSpawnAtEffort: 1
-    cardValue: 3
-    cardName: Play video games
-    cardStory: Just Playing Video Games
-    cardScoreValue: 1000
+  cardInfo:
+    cardSpawnAtEffort: 2
+    cardValue: 0
+    cardName: 
+    cardStory: 
+    cardScoreValue: 0
     cardSpawnOverScore: 0

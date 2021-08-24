@@ -14,24 +14,27 @@ public class LODFunctionLibrary
     public static void RandomizeYPos(GameObject block, BlockEffort blockEffort)
     {
         float result;
-        if (blockEffort == BlockEffort.High)
+
+        switch (blockEffort)
         {
-            result = Random.Range(1f, 5.5f);
-            block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
-        }
-        else if (blockEffort == BlockEffort.Medium)
-        {
-            result = Random.Range(-4f, 0f);
-            block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
-        }
-        else
-        {
-            result = Random.Range(-8.6f, -5f);
-            block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
+            case BlockEffort.High:
+                result = Random.Range(1f, 5.5f);
+                block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
+                break;
+            case BlockEffort.Normal:
+                result = Random.Range(-4f, 0f);
+                block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
+                break;
+            case BlockEffort.Low:
+                result = Random.Range(-8.6f, -5f);
+                block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
+                break;
+            default:
+                break;
         }
     }
 
-    public static void SetBlockStoryCard(BlockController block, CardData card)
+    public static void SetBlockStoryCard(BlockController block, CardDataBase card)
     {
         block.cardData = card;
     }

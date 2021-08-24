@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
-    public CardData cardData;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public CardDataBase cardData;
 
     void Update()
     {

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
   m_Name: Card List
   m_EditorClassIdentifier: 
-  cardStagesHolder: []
+  highEffortCards:
+  - {fileID: 0}
+  normalEffortCards: []
+  lowEffortCards: []
