@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum JobLevel { Entry, Intermediate, Advanced, Legendary }
-public enum JobType { Doctor, Salaryman, SupermarketCashier }
+public enum JobLevel { None, Entry, Intermediate, Advanced, Legendary }
+public enum JobType { Unemployed, Doctor, Salaryman, SupermarketCashier }
 
 public class CareerCardData : CardDataBase
 {
@@ -21,5 +21,5 @@ public struct JobData
     /// <summary>
     /// What is the job level ?
     /// </summary>
-    JobLevel jobLevel;
+    public JobLevel jobLevel;
 }

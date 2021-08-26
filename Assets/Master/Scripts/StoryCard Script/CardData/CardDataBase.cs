@@ -22,32 +22,41 @@ public class CardDataBase : ScriptableObject
 
     [Header("Card Config : ")]
 
-    public PlayerStatusRequirement spawnRequirement;
-
+    [Tooltip("Which effort is this card going to be spawn at")]
     public BlockEffort cardSpawnAtEffort;
 
-    [Tooltip("The card produce certain score value if being collected by player")]
+    [Tooltip("Certain score value that will be added to the player score if being collected")]
     public int cardScoreValue;
 
-    [Tooltip("The condition where the card spawn based on player score")]
-    public int cardSpawnOverScore;
+    [Space]
 
-    public virtual bool CheckSpawnRequirement() { return false; }
+    [Header("Spawn Config : ")]
+    public PlayerStatus spawnRequirement;
 
-    public UnityAction OnCardCollected;
+    public UnityEvent OnCardCollected;
 
 }
 
 [System.Serializable]
-public class PlayerStatusRequirement
+public class PlayerStatus
 {
-    [Header("Requirement Config : ")]
-    public int scoreMinimum;
-    public Age playerAgeMinimum;
-    public EducationStage educationStageMinimum;
-    public LoverStage loverStageMinimum;
-    public bool isEmployed = true;
+    public int playerScore;
 
+    public Age playerAge;
 
-    
+    public EducationStage educationStage;
+
+    public LoverStage loverStage;
+
+    public JobData jobData;
+
+    public void SetPlayerAge(Age nextAge) { playerAge = nextAge; }
+    public void SetEducationStage(EducationStage nextEducationStage) { educationStage = nextEducationStage; }
+    public void SetLoverStage(LoverStage nextLoverStage) { loverStage = nextLoverStage; }
+    public void SetJobData(JobData nextJobData) 
+    {
+        jobData.jobType = nextJobData.jobType;
+        jobData.jobLevel = nextJobData.jobLevel;
+    }
+
 }

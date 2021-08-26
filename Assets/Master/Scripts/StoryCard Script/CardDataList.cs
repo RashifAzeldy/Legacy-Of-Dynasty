@@ -22,7 +22,7 @@ public class CardDataList : ScriptableObject
             case BlockEffort.High:
                 return highEffortCards.Length;
                 break;
-            case BlockEffort.Normal:
+            case BlockEffort.Medium:
                 return normalEffortCards.Length;
                 break;
             case BlockEffort.Low:
@@ -40,6 +40,6 @@ public class CardDataList : ScriptableObject
     /// <returns> Total length of High, Normal, Low Card Effort List </returns>
     public int getCardDataListTotalLength()
     {
-        return getCardsDataLength(BlockEffort.High) + getCardsDataLength(BlockEffort.Normal) + getCardsDataLength(BlockEffort.Low);
+        return getCardsDataLength(BlockEffort.High) + getCardsDataLength(BlockEffort.Medium) + getCardsDataLength(BlockEffort.Low);
     }
 }

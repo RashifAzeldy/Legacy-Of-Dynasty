@@ -6,7 +6,4 @@ using UnityEngine;
 public class RadiantActivitiesCardData : CardDataBase
 {
 
-    [Tooltip("Player Minimum Age for this card to be spawned")]
-    public Age minimumAgeToSpawn;
-
 }
