@@ -21,7 +21,7 @@ public class LODFunctionLibrary
                 result = Random.Range(1f, 5.5f);
                 block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
                 break;
-            case BlockEffort.Normal:
+            case BlockEffort.Medium:
                 result = Random.Range(-4f, 0f);
                 block.transform.position = new Vector3(block.transform.position.x, result, block.transform.position.z);
                 break;
