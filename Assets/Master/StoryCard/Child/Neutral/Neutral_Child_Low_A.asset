@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Neutral_Child_Low_A
   m_EditorClassIdentifier: 
   card:
-    cardSpawnAtEffort: 2
+    cardSpawnAtEffort: 1
     cardValue: 3
     cardName: Play video games
     cardStory: Just Playing Video Games
     cardScoreValue: 1000
     cardSpawnOverScore: 0
-    educationStatus: 1
-    careerStatus: 2
-    loveStatus: 1

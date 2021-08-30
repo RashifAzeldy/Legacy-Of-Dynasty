@@ -19,6 +19,3 @@ MonoBehaviour:
     cardStory: Discover the joy of video games
     cardScoreValue: 3000
     cardSpawnOverScore: 0
-    educationStatus: 1
-    careerStatus: 0
-    loveStatus: 0

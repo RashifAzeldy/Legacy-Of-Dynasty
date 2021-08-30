@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
+    [Header("Block Config : ")]
     [SerializeField] float blockSpeed = 3.5f;
-    public CardData cardData;
+
+    [HideInInspector] public CardDataBase cardData;
+
     BlockSpawner spawner;
+
     void Start()
     {
         spawner = FindObjectOfType<BlockSpawner>();
     }
     void Update()
     {
-        transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);
-        if (gameObject.transform.position.x <= -3.5f)
-        {
-            DestroyObject();
-        }
+        transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);    
     }
 
     public void DestroyObject()

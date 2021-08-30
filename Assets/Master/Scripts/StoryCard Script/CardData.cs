@@ -26,22 +26,16 @@ public struct CardInfo
     [Tooltip("The condition where the card spawn based on player score")]
     public int cardSpawnOverScore;
 
-    [Space]
-
-    [Header("Spawn Requirement : ")]
-    [SerializeField] Education educationStatus;
-    public Education GetEducationRequirement { get { return educationStatus; } }
-    [SerializeField] Career careerStatus;
-    public Career GetCareerRequirement { get { return careerStatus; } }
-    [SerializeField] LoverStage loveStatus;
-    public LoverStage GetLoveRequirement { get { return loveStatus; } }
 }
 
 [CreateAssetMenu(menuName = "Card/Card Data", fileName = "CardData")]
 public class CardData : ScriptableObject
 {
+
     public CardInfo card;
 
     public int getCardScoreValue() { return card.cardScoreValue; }
+
+
 }
 

@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         if (collectedObj.GetComponent<BlockController>() != null)
         {
             BlockController otherDesc = collectedObj.GetComponent<BlockController>();
-            LODFunctionLibrary.ShowStoryText(otherDesc.cardData.card.cardStory, crawlTextUI, crawlText);
+            LODFunctionLibrary.ShowStoryText(otherDesc.cardData.cardStory, crawlTextUI, crawlText);
             crawlTextUI.GetComponent<StoryCardTextCrawl>().MoveText = true;
         }
     }

@@ -6,7 +6,7 @@ public class TestingScript : MonoBehaviour
 {
     [SerializeField] GameObject testObjPrefab;
 
-    [SerializeField] CardStagesList cardStagesList;
+    [SerializeField] CardDataList cardStagesList;
 
     void Update()
     {
