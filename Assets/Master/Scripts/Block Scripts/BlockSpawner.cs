@@ -9,6 +9,7 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] List<EffortPosition> spawnPositions = new List<EffortPosition>();
 
     PlayerState player;
+    PlayerStatus status;
     [SerializeField] List<GameObject> spawnedBlock = new List<GameObject>();
     public List<GameObject> GetSpawnedBlock { get { return spawnedBlock; } set { spawnedBlock = value; } }
 
@@ -30,6 +31,7 @@ public class BlockSpawner : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerState>();
+        status = GetComponent<PlayerStatus>();
         SpawnBlock(1, block, gameObject.transform, 5);
     }
 
@@ -47,7 +49,6 @@ public class BlockSpawner : MonoBehaviour
         StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.High));
         StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Medium));
         StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Low));
-        //StartCoroutine(CheckingCountdown(delay * quantity));
     }
 
     IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity, BlockEffort effort)
@@ -57,10 +58,9 @@ public class BlockSpawner : MonoBehaviour
             GameObject block;
             yield return new WaitForSeconds(time);
             block = Instantiate(spawnObj.gameObject, new Vector3(16.5f, 0, 0), Quaternion.identity, parent);
-            AddBlockStoryCard(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>(), effort);
+            CheckCardEffort(cardList, player.GetPlayerCurrentState, block.GetComponent<BlockController>(), effort);
             LODFunctionLibrary.FreezeYRigidbody(block);
 
-            yield return new WaitForSeconds(0.15f);
             block.transform.position = spawnPositions[SpawnPosIndex(effort)].GetSpawnPos[Random.Range(0, 3)].position;
             spawnedBlock.Add(block);
             if (i == (objQuantity - 1))
@@ -70,34 +70,53 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator CheckingCountdown(float time)
-    {
-        yield return new WaitForSeconds(time);
-        startCheck = true;
-    }
-
     // Child Index State = 0
     // Teen Index State = 1
     // Adult Index State = 2
     // Elder Index State = 3
-    void AddBlockStoryCard(List<CardStagesList> cardList, Age playerState, BlockController block, BlockEffort effort)
+    void CheckCardEffort( List<CardStagesList> cardList, Age playerState, BlockController block, BlockEffort effort )
     {
-        switch (playerState)
+        List<CardData> tempCardList = new List<CardData>();
+        Debug.Log(tempCardList.Count);
+        switch ( playerState )
         {
             case Age.Child:
-                if (effort == BlockEffort.High)
+                foreach ( CardData item in cardList[0].cardStagesHolder[0].cardDataList )
                 {
-                    block.cardData = cardList[0].cardStagesHolder[0].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[0].cardDataList.Length)];
+                    if ( item.card.cardSpawnAtEffort == effort )
+                    {
+                        tempCardList.Add(item);
+                    }
                 }
-                else if (effort == BlockEffort.Medium)
-                {
-                    block.cardData = cardList[0].cardStagesHolder[1].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[1].cardDataList.Length)];
-                }
-                else
-                {
-                    block.cardData = cardList[0].cardStagesHolder[2].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[2].cardDataList.Length)];
-                }
-                break;
+            break;
+        }
+        Debug.Log(tempCardList.Count + ", Effort : " + effort);
+        CheckSpawnRequirement(tempCardList, block);
+    }
+
+    void CheckSpawnRequirement ( List<CardData> cardList, BlockController block ) 
+    {
+        List<CardData> resultList = new List<CardData>();
+        foreach ( CardData item in cardList )
+        {
+            if ( item.card.GetCareerRequirement == status.GetCareerStatus && item.card.GetEducationRequirement == status.GetEducationStatus
+                && item.card.GetLoveRequirement == status.GetLoverStage)
+            {
+                resultList.Add(item);
+            }
+        }
+        Debug.Log(resultList.Count);
+        if(cardList.Count != 0)
+            AddStoryCard(resultList, block);
+    }
+
+    void AddStoryCard( List<CardData> cardList, BlockController block ) 
+    {
+        if(cardList.Count > 1)
+            block.cardData = cardList[Random.Range(0, cardList.Count)];
+        else
+        {
+            block.cardData = cardList[0];
         }
     }
 }
@@ -109,20 +128,6 @@ public enum BlockEffort
     Low
 }
 
-/*
-    case Age.Teen:
-        block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[1].cardDataList.Length)];
-        break;
-    case Age.Adult:
-        block.cardData = cardList.cardStagesHolder[2].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[2].cardDataList.Length)];
-        break;
-    case Age.Elder:
-        block.cardData = cardList.cardStagesHolder[3].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[3].cardDataList.Length)];
-        break;
-*/
 [System.Serializable]
 public class EffortPosition
 {

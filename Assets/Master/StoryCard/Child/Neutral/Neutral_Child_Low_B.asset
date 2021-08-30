@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: Neutral_Child_Low_B
   m_EditorClassIdentifier: 
   card:
-    cardSpawnAtEffort: 1
+    cardSpawnAtEffort: 2
     cardValue: 3
     cardName: Copying Homework
     cardStory: Copying your Friends Homework Before Class
     cardScoreValue: 1000
     cardSpawnOverScore: 0
+    educationStatus: 1
+    careerStatus: 0
+    loveStatus: 0

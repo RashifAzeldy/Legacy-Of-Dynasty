@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] bool hasLover;
-    public bool PlayerHasLover { get { return hasLover; } set { hasLover = value; } }
+    [SerializeField] LoverStage currentLoverStage;
+    public LoverStage GetLoverStage { get { return currentLoverStage; } set { currentLoverStage = value; } }
     [SerializeField] Education educationStatus;
     public Education GetEducationStatus { get { return educationStatus; } set { educationStatus = value; } }
     [SerializeField] Career careerStatus;
@@ -17,9 +17,23 @@ public class PlayerStatus : MonoBehaviour
 
 public enum Education
 {
-    None
+    None,
+    Gradeschool,
+    Middleschool,
+    Highschool,
+    University
 }
 public enum Career
 {
-    None
+    None,
+    Jobless,
+    Doctor,
+    SupermarketCashier
+}
+public enum LoverStage 
+{
+    Single,
+    GirlfriendOrBoyfriend,
+    Married,
+    Soulmate
 }

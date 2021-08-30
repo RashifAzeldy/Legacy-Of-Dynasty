@@ -19,3 +19,6 @@ MonoBehaviour:
     cardStory: You Won a Language Competition
     cardScoreValue: 3000
     cardSpawnOverScore: 0
+    educationStatus: 3
+    careerStatus: 2
+    loveStatus: 2

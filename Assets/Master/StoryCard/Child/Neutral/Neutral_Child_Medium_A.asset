@@ -19,3 +19,6 @@ MonoBehaviour:
     cardStory: Enjoy Your Family Outing
     cardScoreValue: 1000
     cardSpawnOverScore: 0
+    educationStatus: 1
+    careerStatus: 0
+    loveStatus: 0

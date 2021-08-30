@@ -19,3 +19,6 @@ MonoBehaviour:
     cardStory: No friends come to your big birthday party
     cardScoreValue: -3000
     cardSpawnOverScore: 0
+    educationStatus: 4
+    careerStatus: 0
+    loveStatus: 0
