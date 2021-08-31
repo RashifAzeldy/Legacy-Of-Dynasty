@@ -31,14 +31,14 @@ public class CardDataBase : ScriptableObject
     [Space]
 
     [Header("Spawn Config : ")]
-    public PlayerStatus spawnRequirement;
+    public SpawnRequirement spawnRequirement;
 
     public UnityEvent OnCardCollected;
 
 }
 
 [System.Serializable]
-public class PlayerStatus
+public class SpawnRequirement
 {
     public int playerScore;
 

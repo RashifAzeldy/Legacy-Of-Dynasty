@@ -26,18 +26,19 @@ public class BlockSpawner : MonoBehaviour
 
     #endregion
 
-    
     [SerializeField] List<GameObject> spawnedBlock = new List<GameObject>();
 
     public List<GameObject> GetSpawnedBlock { get { return spawnedBlock; } set { spawnedBlock = value; } }
 
     PlayerState player;
+    PlayerStatus status;
     bool _startCheck = true;
 
 
     private void Start()
     {
         player = FindObjectOfType<PlayerState>();
+        status = GetComponent<PlayerStatus>();
     }
 
     private void Update()
@@ -62,6 +63,22 @@ public class BlockSpawner : MonoBehaviour
         return index;
     }
 
+    Vector3 getSpawnPosition( BlockEffort spawnAtEffort )
+    {
+        int index = 0;
+        foreach ( EffortPosition item in spawnPositions )
+        {
+            if ( item.GetEffort == spawnAtEffort )
+            {
+                index = spawnPositions.IndexOf(item);
+
+                return spawnPositions[SpawnPosIndex(spawnAtEffort)].GetSpawnPos[Random.Range(0, 3)].position;
+            }
+        }
+
+        return new Vector3(0, 0, 0);
+    }
+
     public void SpawnBlock(float delay, BlockController block, Transform parent, int quantity)
     {
 
@@ -81,7 +98,7 @@ public class BlockSpawner : MonoBehaviour
 
             _tempBlock = Instantiate(spawnObj.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
             
-            AddBlockStoryCard(cardList, player.GetPlayerCurrentState, _tempBlock.GetComponent<BlockController>(), effort);
+            AddBlockStoryCard(CheckRequirement(status, effort, cardList), _tempBlock.GetComponent<BlockController>());
 
             yield return new WaitForSeconds(0.15f);            
             
@@ -99,46 +116,57 @@ public class BlockSpawner : MonoBehaviour
         _startCheck = true;
     }
 
-    Vector3 getSpawnPosition(BlockEffort spawnAtEffort)
+    List<CardDataBase> CheckRequirement(PlayerStatus status, BlockEffort effort, List<CardDataList> baseCardList)
     {
-        int index = 0;
-        foreach (EffortPosition item in spawnPositions)
+        List<CardDataBase> spawnableCards = new List<CardDataBase>();
+        switch ( effort )
         {
-            if (item.GetEffort == spawnAtEffort)
+            case BlockEffort.High:
+            foreach ( CardDataBase item in baseCardList[0].highEffortCards )
             {
-                index = spawnPositions.IndexOf(item);
-
-                return spawnPositions[SpawnPosIndex(spawnAtEffort)].GetSpawnPos[Random.Range(0, 3)].position;
+                if(status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage 
+                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                {
+                    spawnableCards.Add(item);
+                }
             }
+            break;
+            case BlockEffort.Medium:
+            foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
+            {
+                if ( status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage
+                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                {
+                    spawnableCards.Add(item);
+                }
+            }
+            break;
+            case BlockEffort.Low:
+            foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
+            {
+                if ( status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage
+                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                {
+                    spawnableCards.Add(item);
+                }
+            }
+            break;
         }
-
-        return new Vector3(0, 0, 0);
+        return spawnableCards;
     }
 
     // Child Index State = 0
     // Teen Index State = 1
     // Adult Index State = 2
     // Elder Index State = 3
-    void AddBlockStoryCard(List<CardDataList> cardList, Age playerState, BlockController block, BlockEffort effort)
+    void AddBlockStoryCard(List<CardDataBase> cardList, BlockController block)
     {
-        switch (playerState)
-        {
-            //case Age.Child:
-            //    if (effort == BlockEffort.High)
-            //    {
-            //        block.cardData = cardList[0].cardStagesHolder[0].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[0].cardDataList.Length)];
-            //    }
-            //    else if (effort == BlockEffort.Medium)
-            //    {
-            //        block.cardData = cardList[0].cardStagesHolder[1].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[1].cardDataList.Length)];
-            //    }
-            //    else
-            //    {
-            //        block.cardData = cardList[0].cardStagesHolder[2].cardDataList[Random.Range(0, cardList[0].cardStagesHolder[2].cardDataList.Length)];
-            //    }
-            //    break;
-        }
+        block.cardData = cardList[Random.Range(0, cardList.Count)];
     }
+
 }
 
 public enum BlockEffort
@@ -148,20 +176,6 @@ public enum BlockEffort
     Low
 }
 
-/*
-    case Age.Teen:
-        block.cardData = cardList.cardStagesHolder[1].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[1].cardDataList.Length)];
-        break;
-    case Age.Adult:
-        block.cardData = cardList.cardStagesHolder[2].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[2].cardDataList.Length)];
-        break;
-    case Age.Elder:
-        block.cardData = cardList.cardStagesHolder[3].cardDataList[Random.Range(0,
-                        cardList.cardStagesHolder[3].cardDataList.Length)];
-        break;
-*/
 [System.Serializable]
 public class EffortPosition
 {
