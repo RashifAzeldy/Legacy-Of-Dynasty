@@ -124,9 +124,9 @@ public class BlockSpawner : MonoBehaviour
             case BlockEffort.High:
             foreach ( CardDataBase item in baseCardList[0].highEffortCards )
             {
-                if(status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage 
-                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                if(status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage 
+                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
                 {
                     spawnableCards.Add(item);
                 }
@@ -135,9 +135,9 @@ public class BlockSpawner : MonoBehaviour
             case BlockEffort.Medium:
             foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
             {
-                if ( status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage
-                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                if ( status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage
+                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
                 {
                     spawnableCards.Add(item);
                 }
@@ -146,9 +146,9 @@ public class BlockSpawner : MonoBehaviour
             case BlockEffort.Low:
             foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
             {
-                if ( status.GetPlayerState.GetPlayerCurrentState == item.spawnRequirement.playerAge && status.GetEducationStatus == item.spawnRequirement.educationStage
-                    && status.GetLoverStatus == item.spawnRequirement.loverStage && status.GetCareerStatus.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.GetCareerStatus.jobLevel == item.spawnRequirement.jobData.jobLevel )
+                if ( status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage
+                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
+                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
                 {
                     spawnableCards.Add(item);
                 }
@@ -164,6 +164,7 @@ public class BlockSpawner : MonoBehaviour
     // Elder Index State = 3
     void AddBlockStoryCard(List<CardDataBase> cardList, BlockController block)
     {
+
         block.cardData = cardList[Random.Range(0, cardList.Count)];
     }
 
