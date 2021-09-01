@@ -40,23 +40,20 @@ public class CardDataBase : ScriptableObject
 [System.Serializable]
 public class PlayerStatusData
 {
-    public int playerScore;
+    private int playerScore;
 
-    public Age playerAge;
+    private Age playerAge;
 
-    public EducationStage educationStage;
+    private EducationStage educationStage;
 
-    public LoverStage loverStage;
+    private LoverStage loverStage;
 
-    public JobData jobData;
+    private JobData jobData;
 
-    public void SetPlayerAge(Age nextAge) { playerAge = nextAge; }
-    public void SetEducationStage(EducationStage nextEducationStage) { educationStage = nextEducationStage; }
-    public void SetLoverStage(LoverStage nextLoverStage) { loverStage = nextLoverStage; }
-    public void SetJobData(JobData nextJobData) 
-    {
-        jobData.jobType = nextJobData.jobType;
-        jobData.jobLevel = nextJobData.jobLevel;
-    }
+    public int PlayerScore { get => playerScore; set => playerScore = value; }
+    public Age PlayerAge { get => playerAge; set => playerAge = value; }
+    public EducationStage EducationStage { get => educationStage; set => educationStage = value; }
+    public LoverStage LoverStage { get => loverStage; set => loverStage = value; }
+    public JobData JobData { get => jobData; set => jobData = value; }
 
 }

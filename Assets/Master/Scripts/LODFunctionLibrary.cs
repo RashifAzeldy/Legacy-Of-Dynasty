@@ -11,6 +11,24 @@ public class LODFunctionLibrary
         block.transform.position = destination;
     }
 
+    /// <summary>
+    /// Return a bool value of a comparison between two PlayerStatusData
+    /// </summary>
+    /// <param name="playerStatus"> Player status that will be compared with the other data</param>
+    /// <param name="CompareData"> The Data that will be the standard requirement of the player status data</param>
+    /// <returns></returns>
+    public static bool ComparePlayerStatusData(PlayerStatusData playerStatus, PlayerStatusData CompareData)
+    {
+        bool scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore;
+        bool ageComparison = playerStatus.PlayerAge == CompareData.PlayerAge;
+        bool educationComparison = playerStatus.EducationStage == CompareData.EducationStage;
+        bool loverComparison = playerStatus.LoverStage == CompareData.LoverStage;
+        bool jobLevelComparison = playerStatus.JobData.jobLevel == CompareData.JobData.jobLevel;
+        bool jobTypeComparison = playerStatus.JobData.jobType == CompareData.JobData.jobType;
+
+        return scoreComparison && ageComparison && educationComparison && loverComparison && jobLevelComparison && jobTypeComparison;
+    }
+
     public static void RandomizeYPos(GameObject block, BlockEffort blockEffort)
     {
         float result;

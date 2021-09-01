@@ -118,44 +118,36 @@ public class BlockSpawner : MonoBehaviour
 
     List<CardDataBase> CheckRequirement(PlayerStatus status, BlockEffort effort, List<CardDataList> baseCardList)
     {
-        List<CardDataBase> spawnableCards = new List<CardDataBase>();
+        List<CardDataBase> cacheSpawnableCards = new List<CardDataBase>();
+        
         switch ( effort )
         {
             case BlockEffort.High:
-            foreach ( CardDataBase item in baseCardList[0].highEffortCards )
-            {
-                if(status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage 
-                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
-                {
-                    spawnableCards.Add(item);
-                }
-            }
-            break;
+                
+                foreach ( CardDataBase item in baseCardList[0].highEffortCards )
+                
+                    if(LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
+                        cacheSpawnableCards.Add(item);
+                
+                break;
+
             case BlockEffort.Medium:
-            foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
-            {
-                if ( status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage
-                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
-                {
-                    spawnableCards.Add(item);
-                }
-            }
-            break;
+                
+                foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
+                    if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
+                        cacheSpawnableCards.Add(item);
+                
+                break;
+            
             case BlockEffort.Low:
-            foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
-            {
-                if ( status.playerStatusData.playerAge == item.spawnRequirement.playerAge && status.playerStatusData.educationStage == item.spawnRequirement.educationStage
-                    && status.playerStatusData.loverStage == item.spawnRequirement.loverStage && status.playerStatusData.jobData.jobType == item.spawnRequirement.jobData.jobType &&
-                    status.playerStatusData.jobData.jobLevel == item.spawnRequirement.jobData.jobLevel )
-                {
-                    spawnableCards.Add(item);
-                }
-            }
+            
+                foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
+                    if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
+                        cacheSpawnableCards.Add(item);
+                
             break;
         }
-        return spawnableCards;
+        return cacheSpawnableCards;
     }
 
     // Child Index State = 0
