@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -97,16 +98,12 @@ public class BlockSpawner : MonoBehaviour
             yield return new WaitForSeconds(time);
 
             _tempBlock = Instantiate(spawnObj.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-            
+            CheckRequirement(status, effort, cardList);
             AddBlockStoryCard(CheckRequirement(status, effort, cardList), _tempBlock.GetComponent<BlockController>());
 
-            yield return new WaitForSeconds(0.15f);            
-            
+            yield return new WaitForSeconds(0.15f);
+            _tempBlock.GetComponentInChildren<TextMeshProUGUI>().text = _tempBlock.GetComponent<BlockController>().cardData.cardName;
             spawnedBlock.Add(_tempBlock);
-            //if (i == (objQuantity - 1))
-            //{
-            //    startCheck = true;
-            //}
         }
     }
 

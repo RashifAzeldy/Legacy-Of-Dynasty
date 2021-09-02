@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d52cc21c6b744b43ba9435fea7e2179, type: 3}
-  m_Name: Neutral_Child_High
+  m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
+  m_Name: Positive_Medium_Child
   m_EditorClassIdentifier: 
-  card:
-    cardSpawnAtEffort: 0
-    cardValue: 3
-    cardName: Complete Puzzle Pieces
-    cardStory: Complete 2000 Piece Puzzle
-    cardScoreValue: 1000
-    cardSpawnOverScore: 0
+  cardName: Buy a Pet
+  cardStory: You Buy a Pet in PetStore
+  cardValue: 0
+  cardSpawnAtEffort: 1
+  cardScoreValue: 3000
+  OnCardCollected:
+    m_PersistentCalls:
+      m_Calls: []
