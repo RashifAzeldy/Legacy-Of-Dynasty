@@ -38,16 +38,15 @@ public class BlockSpawner : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerState>();
-        status = FindObjectOfType<PlayerStatus>();
+        status = GetComponent<PlayerStatus>();
     }
 
     private void Update()
     {
         if (spawnedBlock.Count < spawnLimit && _startCheck)
         {
-            SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), gameObject.transform, 1);
+            SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), blockNeutral, gameObject.transform, 1);
         }
-
     }
 
     int SpawnPosIndex(BlockEffort effort)
@@ -80,53 +79,30 @@ public class BlockSpawner : MonoBehaviour
         return new Vector3(0, 0, 0);
     }
 
-    public void SpawnBlock(float delay, Transform parent, int quantity)
+    public void SpawnBlock(float delay, BlockController block, Transform parent, int quantity)
     {
 
         _startCheck = false;
-            StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.High));
-            //StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Medium));
-            //StartCoroutine(SpawnD elay(delay, block, parent, quantity, BlockEffort.Low));
+            StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.High));
+            StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Medium));
+            StartCoroutine(SpawnDelay(delay, block, parent, quantity, BlockEffort.Low));
         StartCoroutine(CheckingCountdown(delay * quantity));
     }
 
-    IEnumerator SpawnDelay(float time, Transform parent, int objQuantity, BlockEffort effort)
+    IEnumerator SpawnDelay(float time, BlockController spawnObj, Transform parent, int objQuantity, BlockEffort effort)
     {
         for (int i = 0; i < objQuantity; i++)
         {
-
-            GameObject _cacheBlock;
-            BlockController _cacheBController;
-            CardDataBase _cacheCard = GetStoryCard(CheckRequirement(status, effort, cardList));
-
+            GameObject _tempBlock;
             yield return new WaitForSeconds(time);
 
-            switch (_cacheCard.cardValue)
-            {
-                case CardValue.Positive:
-                    _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                    break;
-                case CardValue.Negative:
-                    _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                    break;
-                case CardValue.Mystery:
-                    _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                    break;
-                case CardValue.Neutral:
-                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                    break;
-                default:
-                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                    break;
-            }
-
-            _cacheBController = _cacheBlock.GetComponent<BlockController>();
+            _tempBlock = Instantiate(spawnObj.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
             
-            _cacheBController.cardData = _cacheCard;
+            AddBlockStoryCard(CheckRequirement(status, effort, cardList), _tempBlock.GetComponent<BlockController>());
 
             yield return new WaitForSeconds(0.15f);            
             
-            spawnedBlock.Add(_cacheBlock);
+            spawnedBlock.Add(_tempBlock);
             //if (i == (objQuantity - 1))
             //{
             //    startCheck = true;
@@ -149,6 +125,7 @@ public class BlockSpawner : MonoBehaviour
             case BlockEffort.High:
                 
                 foreach ( CardDataBase item in baseCardList[0].highEffortCards )
+                
                     if(LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
                         cacheSpawnableCards.Add(item);
                 
@@ -177,9 +154,10 @@ public class BlockSpawner : MonoBehaviour
     // Teen Index State = 1
     // Adult Index State = 2
     // Elder Index State = 3
-    CardDataBase GetStoryCard(List<CardDataBase> cardList)
+    void AddBlockStoryCard(List<CardDataBase> cardList, BlockController block)
     {
-        return cardList[Random.Range(0, cardList.Count)];
+
+        block.cardData = cardList[Random.Range(0, cardList.Count)];
     }
 
 }
