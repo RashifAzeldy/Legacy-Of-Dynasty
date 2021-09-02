@@ -40,15 +40,15 @@ public class CardDataBase : ScriptableObject
 [System.Serializable]
 public class PlayerStatusData
 {
-    private int playerScore;
+    [SerializeField] private int playerScore;
 
-    private Age playerAge;
+    [SerializeField] private Age playerAge;
 
-    private EducationStage educationStage;
+    [SerializeField] private EducationStage educationStage;
 
-    private LoverStage loverStage;
+    [SerializeField] private LoverStage loverStage;
 
-    private JobData jobData;
+    [SerializeField] private JobData jobData;
 
     public int PlayerScore { get => playerScore; set => playerScore = value; }
     public Age PlayerAge { get => playerAge; set => playerAge = value; }
