@@ -457,7 +457,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -32.745438, w: 0}
+  m_margin: {x: 0, y: 0, z: -53.008286, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -555,9 +555,12 @@ MonoBehaviour:
     - {fileID: 324684093}
   blockNeutral: {fileID: 8008200819032577093, guid: f46808836b816784fa6a9757e28affce,
     type: 3}
-  blockPositive: {fileID: 0}
-  blockNegative: {fileID: 0}
-  blockMystery: {fileID: 0}
+  blockPositive: {fileID: -1096028875250703662, guid: c7b64a42436781742874924fff7da1c9,
+    type: 3}
+  blockNegative: {fileID: 779399735568271399, guid: 4487413cfe1e1f94fb5aca902355bbe2,
+    type: 3}
+  blockMystery: {fileID: -8102298011867001065, guid: 680a9fe8294e48c44bf7343fb64142ad,
+    type: 3}
   spawnedBlock: []
 --- !u!4 &462669929
 Transform:
@@ -2000,7 +2003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 191.80005, y: -20.300049}
+  m_AnchoredPosition: {x: 210.8, y: -20.300049}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1553262571
@@ -2056,7 +2059,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2465,6 +2468,7 @@ GameObject:
   - component: {fileID: 6897627098548547273}
   - component: {fileID: 6897627098548547272}
   - component: {fileID: 6897627098548547275}
+  - component: {fileID: 6897627098548547269}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2472,6 +2476,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6897627098548547269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897627098548547268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d451248413b291c44ac5f14ab002b4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatusData:
+    playerScore: 0
+    playerAge: 0
+    educationStage: 0
+    loverStage: 0
+    jobData:
+      jobType: 0
+      jobLevel: 0
 --- !u!4 &6897627098548547270
 Transform:
   m_ObjectHideFlags: 0
@@ -2578,7 +2602,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.6
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2599,6 +2623,7 @@ MonoBehaviour:
   jumpPower: 5.5
   crawlTextUI: {fileID: 273145449}
   crawlText: {fileID: 640974505}
+  scoreText: {fileID: 1553262571}
 --- !u!1 &6897627099453924176
 GameObject:
   m_ObjectHideFlags: 0

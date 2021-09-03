@@ -5,33 +5,20 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float jumpPower = 5f;
+    [SerializeField] float jumpPower = 3f;
     [SerializeField] GameObject crawlTextUI;
     [SerializeField] TextMeshProUGUI crawlText;
+    [SerializeField] TextMeshProUGUI scoreText;
 
     Rigidbody2D rb;
-    GameObject collectedSCObject;
-    float playerScore;
-    public float GetPlayerScore
-    {
-        get { return playerScore; }
-        set { playerScore = value; }
-    }
-    bool canUpdateScore;
-    public bool PlayerUpdateScore { get { return canUpdateScore; } set { canUpdateScore = value; } }
-
     bool pause;
     public bool PlayerPause { get { return pause; } set { pause = value; } }
 
     bool canJump;
 
-    int indexVar;
-    public int GetIndexVar { get { return indexVar; } set { indexVar = value; } }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        canUpdateScore = true;
         canJump = true;
     }
 
@@ -39,8 +26,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canJump && !pause)
         {
-            rb.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
-            StartCoroutine(ResetJump(0.3f));
+            rb.AddForce(new Vector2(0, jumpPower * 2), ForceMode2D.Impulse);
+            StartCoroutine(ResetJump(1f));
         }
 
         if (pause)
@@ -56,6 +43,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //UpdateBlock(other.gameObject);
+        LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
         other.gameObject.GetComponent<BlockController>().DestroyObject();
     }
 

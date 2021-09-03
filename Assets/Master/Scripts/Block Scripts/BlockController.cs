@@ -7,7 +7,7 @@ public class BlockController : MonoBehaviour
     [Header("Block Config : ")]
     [SerializeField] float blockSpeed = 3.5f;
 
-    [HideInInspector] public CardDataBase cardData;
+    [SerializeField] public CardDataBase cardData;
 
     BlockSpawner spawner;
 

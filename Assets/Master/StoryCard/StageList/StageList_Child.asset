@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
   m_Name: StageList_Child
   m_EditorClassIdentifier: 
-  cardStagesHolder:
-  - cardDataList:
-    - {fileID: 11400000, guid: 41d258691d1a09c47a681dc9889be62e, type: 2}
-    - {fileID: 11400000, guid: 70df65839289b4647a2458e87ab342e6, type: 2}
-    - {fileID: 11400000, guid: 816ada06c7d528f4e83c24686fc2e409, type: 2}
-  - cardDataList:
-    - {fileID: 11400000, guid: 2ae5c4e0f265d1d4bb3ab306dbd943a1, type: 2}
-    - {fileID: 11400000, guid: 252b29b7ae2f9ce43af6a97f8f1a10cb, type: 2}
-    - {fileID: 11400000, guid: 2624dc425a19f4945a8d16b5b50b5f19, type: 2}
-  - cardDataList:
-    - {fileID: 11400000, guid: f3aff5e3d31ed0f4fa3e237a9a62eec5, type: 2}
-    - {fileID: 11400000, guid: 4460040d0e035f94488fab18fb1935aa, type: 2}
-    - {fileID: 11400000, guid: 8cc611a51c3ca234f833599eea8551ec, type: 2}
-    - {fileID: 11400000, guid: f7b009ffb5de3544093fe3e77c710be1, type: 2}
+  highEffortCards:
+  - {fileID: 11400000, guid: 6cceba6ecae08024eb69e080b1c13175, type: 2}
+  - {fileID: 11400000, guid: aaf945958fa16654197da1b99a4e3119, type: 2}
+  - {fileID: 11400000, guid: 497b83d3eb4c9b1408d1ee14d0df774c, type: 2}
+  normalEffortCards:
+  - {fileID: 11400000, guid: 53d65f80be84df3429fdfb90e003499f, type: 2}
+  - {fileID: 11400000, guid: eb12c27bbea6e1547b71ead495690393, type: 2}
+  - {fileID: 11400000, guid: 1de2e87068ec8a145a2fb623451eaded, type: 2}
+  lowEffortCards:
+  - {fileID: 11400000, guid: 447669571f5284849806e7eebb3cc354, type: 2}
+  - {fileID: 11400000, guid: cdcaeb52eb6c90f4885fa0aae38ce2f8, type: 2}
+  - {fileID: 11400000, guid: dab4a0c1880500340ae8a6326da90a42, type: 2}
+  - {fileID: 11400000, guid: 07c263b71fa83734fb4f3c0625663835, type: 2}

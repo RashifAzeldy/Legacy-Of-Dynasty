@@ -67,6 +67,12 @@ public class LODFunctionLibrary
         uiObject.SetActive(true);
         textUI.text = storyText;
     }
+
+    public static void UpdateScore(CardDataBase card, PlayerStatus status, TextMeshProUGUI textObject)
+    {
+        status.playerStatusData.PlayerScore += card.cardScoreValue;
+        textObject.text = "" + status.playerStatusData.PlayerScore;
+    }
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))
     {
