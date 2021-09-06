@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class StoryCardTextCrawl : MonoBehaviour
 {
+    [SerializeField] float textSpeed = 5f;
+    [SerializeField] Transform defaultTextPos;
+
+    [SerializeField] BlockDestroyer destroyer;
+
     bool move;
-    public bool MoveText { get { return move; } set { move = value; } }
-    void Update()
+
+    public bool MoveText { get => move; set => move = value; }
+    public Transform GetDefaultPosition { get => defaultTextPos; }
+
+    private void Update()
     {
-        if (move)
+        if(move)
+            transform.Translate(-Vector3.right * textSpeed * Time.deltaTime);
+        else
         {
-            gameObject.transform.Translate(-5f * Time.deltaTime, 0, 0);
+            transform.position = defaultTextPos.position;
         }
-        if (gameObject.transform.position.x <= -3.53f)
-        {
-            move = false;
-        }
+    }
+
+    public void ResetText()
+    {
+        gameObject.SetActive(false);
+        move = false;
+        transform.position = new Vector3(defaultTextPos.position.x, defaultTextPos.position.y, 0);
     }
 }

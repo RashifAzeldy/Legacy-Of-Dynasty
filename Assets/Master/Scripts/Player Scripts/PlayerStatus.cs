@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    
     public PlayerStatusData playerStatusData;
 
     LoverStage GetLover() { return playerStatusData.LoverStage; }

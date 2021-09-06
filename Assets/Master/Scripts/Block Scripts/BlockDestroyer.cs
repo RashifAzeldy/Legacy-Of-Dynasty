@@ -12,6 +12,10 @@ public class BlockDestroyer : MonoBehaviour
         {
             cacheController.DestroyObject();
         }
+        if ( collider.GetComponent<StoryCardTextCrawl>() )
+        {
+            collider.GetComponent<StoryCardTextCrawl>().ResetText();
+        }
     }
 
 }

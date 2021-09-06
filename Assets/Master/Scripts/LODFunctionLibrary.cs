@@ -64,7 +64,16 @@ public class LODFunctionLibrary
 
     public static void ShowStoryText(string storyText, GameObject uiObject, TextMeshProUGUI textUI)
     {
-        uiObject.SetActive(true);
+        if ( !uiObject.activeSelf )
+        { 
+            uiObject.SetActive(true);
+            uiObject.GetComponent<StoryCardTextCrawl>().MoveText = true;
+        }
+        else
+        {
+            uiObject.transform.position = uiObject.GetComponent<StoryCardTextCrawl>().GetDefaultPosition.position;
+        }
+
         textUI.text = storyText;
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BlockController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BlockController : MonoBehaviour
     [SerializeField] float blockSpeed = 3.5f;
 
     [SerializeField] public CardDataBase cardData;
+    [SerializeField] TextMeshProUGUI text;
 
     BlockSpawner spawner;
 
@@ -18,6 +20,10 @@ public class BlockController : MonoBehaviour
     void Update()
     {
         transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);    
+        if(cardData != null )
+        {
+            text.text = cardData.cardName;
+        }
     }
 
     public void DestroyObject()
