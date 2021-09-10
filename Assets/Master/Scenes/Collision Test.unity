@@ -613,6 +613,7 @@ MonoBehaviour:
     type: 3}
   blockMystery: {fileID: -8102298011867001065, guid: 680a9fe8294e48c44bf7343fb64142ad,
     type: 3}
+  blockSpeed: 6.5
   spawnedBlock: []
 --- !u!4 &462669929
 Transform:
@@ -2722,6 +2723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPower: 5.5
+  jumpDelay: 1.25
   crawlTextUI: {fileID: 273145449}
   crawlText: {fileID: 640974505}
   scoreText: {fileID: 1553262571}

@@ -99,44 +99,43 @@ public class BlockSpawner : MonoBehaviour
             CardDataBase _cacheCard = GetStoryCard(CheckRequirement(status, effort, cardList));
 
             yield return new WaitForSeconds(time);
-
-            switch ( _cacheCard.cardValue )
-            {
-                case CardValue.Positive:
-                    _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                break;
-
-                case CardValue.Negative:
-                    _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                break;
-
-                case CardValue.Mystery:
-                    _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                break;
-                
-                case CardValue.Neutral:
-                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                break;
-                
-                default:
-                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
-                break;
-            }
-
-            _cacheBController = _cacheBlock.GetComponent<BlockController>();
-            _cacheBController.blockSpeed = blockSpeed;
-
-            _cacheBController.cardData = _cacheCard;
-
-            _cacheBController.InitBlock();
-
-            yield return new WaitForSeconds(0.15f);            
             
-            spawnedBlock.Add(_cacheBlock);
-            //if (i == (objQuantity - 1))
-            //{
-            //    startCheck = true;
-            //}
+            if (_cacheCard)
+            {
+                switch (_cacheCard.cardValue)
+                {
+                    case CardValue.Positive:
+                        _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        break;
+
+                    case CardValue.Negative:
+                        _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        break;
+
+                    case CardValue.Mystery:
+                        _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        break;
+
+                    case CardValue.Neutral:
+                        _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        break;
+
+                    default:
+                        _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        break;
+                }
+
+                _cacheBController = _cacheBlock.GetComponent<BlockController>();
+                _cacheBController.blockSpeed = blockSpeed;
+
+                _cacheBController.cardData = _cacheCard;
+
+                _cacheBController.InitBlock();
+
+                yield return new WaitForSeconds(0.15f);
+
+                spawnedBlock.Add(_cacheBlock);
+            }
         }
     }
 
@@ -187,7 +186,10 @@ public class BlockSpawner : MonoBehaviour
     // Elder Index State = 3
     CardDataBase GetStoryCard( List<CardDataBase> cardList )
     {
-        return cardList[Random.Range(0, cardList.Count)];
+        if (cardList.Count != 0)
+            return cardList[Random.Range(0, cardList.Count)];
+        
+        return null;
     }
 
 }

@@ -8,6 +8,7 @@ public class BlockController : MonoBehaviour
     [Header("Block Config : ")]
     [SerializeField] public Vector2 blockSpeedRange = new Vector2(1.5f, 3.5f);
     [SerializeField] TextMeshProUGUI blockTitleText;
+    [SerializeField] TextMeshProUGUI text;
 
     [HideInInspector] public CardDataBase cardData;
     
@@ -22,7 +23,13 @@ public class BlockController : MonoBehaviour
     }
     void Update()
     {
-        transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);    
+        transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);
+
+        if (cardData != null)
+        {
+            text.text = cardData.cardName;
+        }
+
     }
 
     public void InitBlock()
