@@ -38,8 +38,12 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //UpdateBlock(other.gameObject);
-        LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
-        other.gameObject.GetComponent<BlockController>().DestroyObject();
+        if ( other.gameObject.GetComponent<BlockController>() )
+        {
+            LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
+            LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
+            other.gameObject.GetComponent<BlockController>().DestroyObject();
+        }
     }
 
     void UpdateBlock(GameObject collectedObj)
@@ -49,7 +53,6 @@ public class PlayerController : MonoBehaviour
         {
             BlockController otherDesc = collectedObj.GetComponent<BlockController>();
             LODFunctionLibrary.ShowStoryText(otherDesc.cardData.cardStory, crawlTextUI, crawlText);
-            crawlTextUI.GetComponent<StoryCardTextCrawl>().MoveText = true;
         }
     }
 

@@ -25,7 +25,7 @@ public class BackgroundManager : MonoBehaviour
         Vector3 result;
         float xResult;
         xResult = Random.Range(minX, maxX);
-        result = new Vector3(xResult, -4.77f, 10f);
+        result = new Vector3(xResult, -4.77f, -1f);
 
         return result;
     }

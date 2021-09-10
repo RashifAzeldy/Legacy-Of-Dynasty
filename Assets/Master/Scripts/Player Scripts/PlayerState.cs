@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour
 {
     [SerializeField] List<AgeState> ageList = new List<AgeState>();
     [SerializeField] SpriteRenderer player;
+    [SerializeField] PlayerStatus status;
     bool switchState;
     int ageIndex = 0;
     Age currentState;
@@ -36,6 +37,7 @@ public class PlayerState : MonoBehaviour
         // Change To Game Object When it's Converted to 3D Game!
         player.sprite = ageList[ageIndex].GetAgeObject;
         currentState = ageList[ageIndex].GetState;
+        status.playerStatusData.PlayerAge = currentState;
 
         yield return new WaitForSeconds(time);
         switchState = true;
