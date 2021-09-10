@@ -6,6 +6,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float jumpPower = 3f;
+    [SerializeField] float jumpDelay = 1.25f;
     [SerializeField] GameObject crawlTextUI;
     [SerializeField] TextMeshProUGUI crawlText;
     [SerializeField] TextMeshProUGUI scoreText;
@@ -26,18 +27,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && canJump && !pause)
         {
-            rb.AddForce(new Vector2(0, jumpPower * 2), ForceMode2D.Impulse);
-            StartCoroutine(ResetJump(1f));
+            rb.velocity = new Vector2(0, jumpPower);
+            StartCoroutine(ResetJump(jumpDelay));
         }
 
-        if (pause)
-        {
-            rb.simulated = false;
-        }
-        else
-        {
-            rb.simulated = true;
-        }
+        rb.simulated = pause ? false : true;
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
