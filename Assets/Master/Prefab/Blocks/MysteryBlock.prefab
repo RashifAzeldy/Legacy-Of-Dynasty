@@ -129,7 +129,7 @@ Transform:
   m_GameObject: {fileID: 984823575701919843}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 8250692846106015582}
   m_Father: {fileID: 0}
@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74aeef92351c11d4fb58cbd62e27d1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSpeed: 6.125
+  blockSpeedRange: {x: 1.5, y: 3.5}
+  blockTitleText: {fileID: 1365654901793233918}
   cardData: {fileID: 0}
 --- !u!1 &8015439018593576350
 GameObject:
@@ -339,8 +340,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.7
-  m_fontSizeBase: 0.7
+  m_fontSize: 0.35
+  m_fontSizeBase: 0.35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

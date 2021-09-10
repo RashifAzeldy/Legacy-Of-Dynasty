@@ -18,11 +18,13 @@ public class BlockSpawner : MonoBehaviour
     
     [Space]
 
-    [Header("Block Prefabs : ")]
+    [Header("Block Config : ")]
     [SerializeField] BlockController blockNeutral;
     [SerializeField] BlockController blockPositive;
     [SerializeField] BlockController blockNegative;
     [SerializeField] BlockController blockMystery;
+    [Space]
+    [SerializeField] float blockSpeed;
 
     #endregion
 
@@ -51,41 +53,40 @@ public class BlockSpawner : MonoBehaviour
 
     int SpawnPosIndex(BlockEffort effort)
     {
-        int index = 0;
+
         foreach (EffortPosition item in spawnPositions)
         {
             if (item.GetEffort == effort)
-            {
-                index = spawnPositions.IndexOf(item);
-                return index;
-            }
+                return spawnPositions.IndexOf(item);
+            
         }
-        return index;
+        return 0;
     }
 
     Vector3 getSpawnPosition( BlockEffort spawnAtEffort )
     {
-        int index = 0;
+
         foreach ( EffortPosition item in spawnPositions )
         {
             if ( item.GetEffort == spawnAtEffort )
             {
-                index = spawnPositions.IndexOf(item);
+                int posIndex = SpawnPosIndex(spawnAtEffort);
 
-                return spawnPositions[SpawnPosIndex(spawnAtEffort)].GetSpawnPos[Random.Range(0, 3)].position;
+                //Change This Code
+                return spawnPositions[posIndex].GetSpawnPos[Random.Range(0, spawnPositions[posIndex].GetSpawnPos.Count)].position;
             }
         }
 
-        return new Vector3(0, 0, 0);
+        return Vector3.zero;
     }
 
     public void SpawnBlock(float delay, Transform parent, int quantity)
     {
 
         _startCheck = false;
-            StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.High));
-            StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Medium));
-            StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Low));
+        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.High));
+        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Medium));
+        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Low));
         StartCoroutine(CheckingCountdown(delay * quantity));
     }
 
@@ -102,24 +103,32 @@ public class BlockSpawner : MonoBehaviour
             switch ( _cacheCard.cardValue )
             {
                 case CardValue.Positive:
-                _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                    _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                 break;
+
                 case CardValue.Negative:
-                _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                    _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                 break;
+
                 case CardValue.Mystery:
-                _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                    _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                 break;
+                
                 case CardValue.Neutral:
-                _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                 break;
+                
                 default:
-                _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                    _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                 break;
             }
 
             _cacheBController = _cacheBlock.GetComponent<BlockController>();
+            _cacheBController.blockSpeed = blockSpeed;
+
             _cacheBController.cardData = _cacheCard;
+
+            _cacheBController.InitBlock();
 
             yield return new WaitForSeconds(0.15f);            
             
