@@ -82,6 +82,20 @@ public class LODFunctionLibrary
         status.playerStatusData.PlayerScore += card.cardScoreValue;
         textObject.text = "" + status.playerStatusData.PlayerScore;
     }
+
+    // X = Horizontal Min
+    // Y = Horizontal Max
+    // Z = Width
+    public static Vector3 CheckCamera(Camera cam)
+    {
+        float halfHeight = cam.orthographicSize;
+        float halfWidth = cam.aspect * halfHeight;
+        float horizontalMin = -halfWidth;
+        float horizontalMax = halfWidth;
+
+        return new Vector3(horizontalMin, horizontalMax, 0);
+    }
+
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))
     {

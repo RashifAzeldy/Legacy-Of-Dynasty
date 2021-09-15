@@ -5,14 +5,21 @@ using UnityEngine;
 public class StoryCardTextCrawl : MonoBehaviour
 {
     [SerializeField] float textSpeed = 5f;
-    [SerializeField] Transform defaultTextPos;
 
+    [SerializeField] Transform defaultTextPos;
+    [SerializeField] Transform cam;
     [SerializeField] BlockDestroyer destroyer;
+    [SerializeField] Vector2 offset;
 
     bool move;
 
     public bool MoveText { get => move; set => move = value; }
     public Transform GetDefaultPosition { get => defaultTextPos; }
+
+    private void Start()
+    {
+        defaultTextPos.position = new Vector2(cam.position.x, defaultTextPos.position.y) + offset;
+    }
 
     private void Update()
     {

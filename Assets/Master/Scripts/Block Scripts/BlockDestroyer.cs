@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BlockDestroyer : MonoBehaviour
 {
+    [SerializeField] Transform cam;
+    [SerializeField] Vector2 offset;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
