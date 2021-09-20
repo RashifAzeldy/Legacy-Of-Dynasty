@@ -17,10 +17,7 @@ public class BackgroundManager : MonoBehaviour
     float scaleB;
     float scaleC;
 
-    bool pause;
-    public bool BackgroundPause { get { return pause; } set { pause = value; } }
-
-    public Vector3 RandomizePos(float minX, float maxX)
+    public Vector3 RandomizePos( float minX, float maxX )
     {
         Vector3 result;
         float xResult;
@@ -30,7 +27,7 @@ public class BackgroundManager : MonoBehaviour
         return result;
     }
 
-    public float RandomizeSize(float minScale, float maxScale)
+    public float RandomizeSize( float minScale, float maxScale )
     {
         float scale = Random.Range(minScale, maxScale);
 
@@ -39,7 +36,7 @@ public class BackgroundManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < 5; i++)
+        for ( int i = 0; i < 5; i++ )
         {
             scaleA = RandomizeSize(0.5f, 1.5f);
             // Instantiate Prop A
@@ -63,82 +60,78 @@ public class BackgroundManager : MonoBehaviour
 
     private void Update()
     {
-        if (!pause)
+        if ( skyBG != null )
         {
-            if (skyBG != null)
+            skyBG.transform.Translate(new Vector3(-0.1f * Time.deltaTime, 0, 0));
+        }
+
+        foreach ( GameObject item in propAList )
+        {
+            if ( item.transform.localScale.x < 1 )
             {
-                skyBG.transform.Translate(new Vector3(-0.1f * Time.deltaTime, 0, 0));
+                item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
+            }
+            else if ( item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f )
+            {
+                item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
+            }
+            else
+            {
+                item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
             }
 
-            foreach (GameObject item in propAList)
+            if ( item.transform.position.x <= -6f )
             {
-                if (item.transform.localScale.x < 1)
-                {
-                    item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
-                }
-                else if (item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f)
-                {
-                    item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
-                }
-                else
-                {
-                    item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
-                }
+                scaleA = RandomizeSize(0.5f, 1.5f);
+                item.transform.localScale = new Vector3(scaleA, scaleA, 0);
+                item.transform.position = RandomizePos(4f, 46.5f);
+            }
+        }
 
-                if (item.transform.position.x <= -6f)
-                {
-                    scaleA = RandomizeSize(0.5f, 1.5f);
-                    item.transform.localScale = new Vector3(scaleA, scaleA, 0);
-                    item.transform.position = RandomizePos(4f, 46.5f);
-                }
+        foreach ( GameObject item in propBList )
+        {
+            if ( item.transform.localScale.x < 1 )
+            {
+                item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
+            }
+            else if ( item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f )
+            {
+                item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
+            }
+            else
+            {
+                item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
             }
 
-            foreach (GameObject item in propBList)
+            if ( item.transform.position.x <= -6f )
             {
-                if (item.transform.localScale.x < 1)
-                {
-                    item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
-                }
-                else if (item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f)
-                {
-                    item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
-                }
-                else
-                {
-                    item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
-                }
+                scaleB = RandomizeSize(0.5f, 1.5f);
+                item.transform.localScale = new Vector3(scaleB, scaleB, 0);
+                item.transform.position = RandomizePos(3f, 46.5f);
+            }
+        }
 
-                if (item.transform.position.x <= -6f)
-                {
-                    scaleB = RandomizeSize(0.5f, 1.5f);
-                    item.transform.localScale = new Vector3(scaleB, scaleB, 0);
-                    item.transform.position = RandomizePos(3f, 46.5f);
-                }
+        foreach ( GameObject item in propCList )
+        {
+            if ( item.transform.localScale.x < 1 )
+            {
+                item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
+            }
+            else if ( item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f )
+            {
+                item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
+            }
+            else
+            {
+                item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
             }
 
-            foreach (GameObject item in propCList)
+            if ( item.transform.position.x <= -6f )
             {
-                if (item.transform.localScale.x < 1)
-                {
-                    item.transform.Translate(new Vector3(-0.05f * Time.deltaTime, 0, 0));
-                }
-                else if (item.transform.localScale.x >= 1 && item.transform.localScale.x < 1.25f)
-                {
-                    item.transform.Translate(new Vector3(-0.25f * Time.deltaTime, 0, 0));
-                }
-                else
-                {
-                    item.transform.Translate(new Vector3(-0.5f * Time.deltaTime, 0, 0));
-                }
-
-                if (item.transform.position.x <= -6f)
-                {
-                    scaleC = RandomizeSize(0.5f, 1.5f);
-                    item.transform.localScale = new Vector3(scaleC, scaleC, 0);
-                    item.transform.position = RandomizePos(3f, 46.5f);
-                }
+                scaleC = RandomizeSize(0.5f, 1.5f);
+                item.transform.localScale = new Vector3(scaleC, scaleC, 0);
+                item.transform.position = RandomizePos(3f, 46.5f);
             }
         }
     }
-
 }

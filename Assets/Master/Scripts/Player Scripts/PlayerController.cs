@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI crawlText;
     [SerializeField] TextMeshProUGUI scoreText;
 
+    [SerializeField] StoryCardCollector collectedCards;
+
     Rigidbody2D rb;
     bool pause;
     public bool PlayerPause { get { return pause; } set { pause = value; } }
@@ -31,6 +33,15 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ResetJump(jumpDelay));
         }
 
+        // Only For Testing in Unity Editor !
+        // Game Over Test
+
+        if ( Input.GetKeyDown(KeyCode.G) )
+        {
+            // Game Over
+            // Show Collected StoryCard
+        }
+
         rb.simulated = pause ? false : true;
         
     }
@@ -42,6 +53,10 @@ public class PlayerController : MonoBehaviour
         {
             LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
             LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
+            if( !collectedCards.GetCollectedStoryCard.Contains(other.gameObject.GetComponent<BlockController>().cardData) )
+            {
+                collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
+            }
             other.gameObject.GetComponent<BlockController>().DestroyObject();
         }
     }

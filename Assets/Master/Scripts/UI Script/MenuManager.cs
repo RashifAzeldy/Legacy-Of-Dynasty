@@ -9,54 +9,44 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject pauseButton;
     [SerializeField] TextMeshProUGUI countdownText;
 
-    [SerializeField] PlayerController controller;
-    [SerializeField] BackgroundManager backgroundManager;
-    [SerializeField] GroundController ground;
-
     [SerializeField] int countdown;
+
     public void PauseGame()
     {
-        // Stop Game Time
-        controller.PlayerPause = true;
-        backgroundManager.BackgroundPause = true;
-        ground.GroundPause = true;
-
+        // Show Pause Menu
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
-        // Show Pause Menu
+        // Stop Game Time
+        Time.timeScale = 0;
     }
 
     public void UnpauseGame()
     {
         // Hide Pause Menu
-        // Start CountDown
         pauseMenu.SetActive(false);
+        // Start CountDown
         StartCoroutine(UnpauseCountdown(countdown));
-        // Play Game Time Normally
     }
 
     IEnumerator UnpauseCountdown(int time)
     {
         // Show Text Countdown
-        // Show Text Value Same Like int time
-
         countdownText.gameObject.SetActive(true);
         countdownText.text = " ";
+        // Change Text Number According int text - 1
         for (int i = countdown; i >= 0; i--)
         {
-            yield return new WaitForSeconds(1);
-            // Change Text Number According int text - 1
+            yield return new WaitForSecondsRealtime(1);
             if (i == 0)
             {
-                controller.PlayerPause = false;
-                backgroundManager.BackgroundPause = false;
-                ground.GroundPause = false;
-
+                // Play Game Time Normally
                 pauseButton.SetActive(true);
                 countdownText.gameObject.SetActive(false);
+                Time.timeScale = 1;
             }
             else
             {
+                // Show Text Value Same Like int time
                 countdownText.text = "" + time;
             }
             time -= 1;

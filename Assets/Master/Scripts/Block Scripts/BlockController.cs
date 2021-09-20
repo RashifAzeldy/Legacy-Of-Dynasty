@@ -11,11 +11,10 @@ public class BlockController : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
 
     [HideInInspector] public CardDataBase cardData;
-    
+
     public float blockSpeed { get; set; }
 
     BlockSpawner spawner;
-    
 
     void Start()
     {
@@ -25,11 +24,10 @@ public class BlockController : MonoBehaviour
     {
         transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);
 
-        if (cardData != null)
+        if ( cardData != null )
         {
             text.text = cardData.cardName;
         }
-
     }
 
     public void InitBlock()

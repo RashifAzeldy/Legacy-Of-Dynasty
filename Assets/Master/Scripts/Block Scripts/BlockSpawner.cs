@@ -36,7 +36,6 @@ public class BlockSpawner : MonoBehaviour
     PlayerStatus status;
     bool _startCheck = true;
 
-
     private void Start()
     {
         player = FindObjectOfType<PlayerState>();
@@ -45,7 +44,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (spawnedBlock.Count < spawnLimit && _startCheck)
+        if ( spawnedBlock.Count < spawnLimit && _startCheck && Time.timeScale == 1)
         {
             SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), gameObject.transform, 1);
         }
@@ -99,7 +98,7 @@ public class BlockSpawner : MonoBehaviour
             CardDataBase _cacheCard = GetStoryCard(CheckRequirement(status, effort, cardList));
 
             yield return new WaitForSeconds(time);
-            
+
             if (_cacheCard)
             {
                 switch (_cacheCard.cardValue)
@@ -132,14 +131,12 @@ public class BlockSpawner : MonoBehaviour
 
                 _cacheBController.InitBlock();
 
-                yield return new WaitForSeconds(0.15f);
-
                 spawnedBlock.Add(_cacheBlock);
             }
         }
     }
 
-    IEnumerator CheckingCountdown(float time)
+    public IEnumerator CheckingCountdown(float time)
     {
         yield return new WaitForSeconds(time);
         _startCheck = true;
