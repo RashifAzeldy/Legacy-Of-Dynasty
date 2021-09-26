@@ -102,4 +102,10 @@ public class LODFunctionLibrary
         gameObject.SCObject.GetStoryCard = storyCard;
     }
     */
+
+    public static void GameOver(GameObject gameOverUI)
+    {
+        gameOverUI.SetActive(true);
+        Time.timeScale = 0.1f;
+    }
 }

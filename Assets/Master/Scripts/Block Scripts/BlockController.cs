@@ -9,10 +9,12 @@ public class BlockController : MonoBehaviour
     [SerializeField] public Vector2 blockSpeedRange = new Vector2(1.5f, 3.5f);
     [SerializeField] TextMeshProUGUI blockTitleText;
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] GameObject blockSign;
 
     [HideInInspector] public CardDataBase cardData;
 
     public float blockSpeed { get; set; }
+    public GameObject GetBlockSign { get { return blockSign; } set { blockSign = value; } }
 
     BlockSpawner spawner;
 

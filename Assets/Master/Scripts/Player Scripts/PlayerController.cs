@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
 
     [SerializeField] StoryCardCollector collectedCards;
+    [SerializeField] GameOverManager gOver;
 
     Rigidbody2D rb;
     bool pause;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.G) )
         {
             // Game Over
+            gOver.GameOver();
             // Show Collected StoryCard
         }
 
