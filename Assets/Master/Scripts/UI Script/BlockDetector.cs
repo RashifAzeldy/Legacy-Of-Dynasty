@@ -7,7 +7,7 @@ public class BlockDetector : MonoBehaviour
 {
     [SerializeField] Transform tempSignPos;
     [SerializeField] GameObject signPrefab;
-    [SerializeField] Transform canvas;
+    [SerializeField] Transform parent;
 
     [SerializeField] Sprite positiveSign;
     [SerializeField] Sprite neutralSign;
@@ -16,7 +16,7 @@ public class BlockDetector : MonoBehaviour
 
     void ShowSign(BlockController block)
     {
-        GameObject sign = Instantiate(signPrefab, canvas);
+        GameObject sign = Instantiate(signPrefab, parent);
         block.GetBlockSign = sign;
         switch ( block.cardData.cardValue )
         {
