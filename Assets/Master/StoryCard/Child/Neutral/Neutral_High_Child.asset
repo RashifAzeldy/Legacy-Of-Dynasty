@@ -28,3 +28,5 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  effect: 0
+  changedStats: 0

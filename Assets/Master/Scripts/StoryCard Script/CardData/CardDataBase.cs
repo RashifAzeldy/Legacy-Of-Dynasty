@@ -35,6 +35,14 @@ public class CardDataBase : ScriptableObject
 
     public UnityEvent OnCardCollected;
 
+    [Space]
+
+    [Tooltip("Effect if player collected this card")]
+    public CardEffect effect;
+    [Header("Card Effect : ")]
+    private int changeLevel;
+    private float jumpBoost;
+    public Stats changedStats;
 }
 
 [System.Serializable]
@@ -56,4 +64,19 @@ public class PlayerStatusData
     public LoverStage LoverStage { get => loverStage; set => loverStage = value; }
     public JobData JobData { get => jobData; set => jobData = value; }
 
+}
+
+public enum CardEffect
+{
+    None,
+    ChangeStats,
+    ChangeJumpPower,
+    GameOver
+}
+
+public enum Stats
+{
+    Education,
+    Job,
+    Lover
 }
