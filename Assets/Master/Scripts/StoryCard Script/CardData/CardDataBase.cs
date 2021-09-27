@@ -22,8 +22,8 @@ public class CardDataBase : ScriptableObject
 
     [Header("Card Config : ")]
 
-    [Tooltip("Which effort is this card going to be spawn at")]
-    public BlockEffort cardSpawnAtEffort;
+    //[Tooltip("Which effort is this card going to be spawn at")]
+    //public BlockEffort cardSpawnAtEffort;
 
     [Tooltip("Certain score value that will be added to the player score if being collected")]
     public int cardScoreValue;
