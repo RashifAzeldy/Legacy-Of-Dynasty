@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum JobLevel { None, Entry, Intermediate, Advanced, Legendary }
-public enum JobType { Unemployed, Doctor, Salaryman, SupermarketCashier }
+public enum JobType { None, Unemployed, Doctor, Salaryman, SupermarketCashier }
 
 public class CareerCardData : CardDataBase
 {

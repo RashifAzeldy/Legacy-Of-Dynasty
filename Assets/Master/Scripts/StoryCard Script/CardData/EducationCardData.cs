@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EducationStage
 {
-    GradeSchool, MiddleSchool, HighSchool, University
+    None, GradeSchool, MiddleSchool, HighSchool, University
 }
 
 public class EducationCardData : CardDataBase

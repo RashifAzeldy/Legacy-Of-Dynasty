@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum LoverStage
 {
-    Single, GirlfriendOrBoyfriend, Married, Soulmate
+    None, Single, GirlfriendOrBoyfriend, Married, Soulmate
 }
 
 public class LoverCardData : CardDataBase

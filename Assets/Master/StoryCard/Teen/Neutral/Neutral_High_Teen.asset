@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Neutral_High_Child
+  m_Name: Neutral_High_Teen
   m_EditorClassIdentifier: 
-  cardName: Completing Puzzle
-  cardStory: You Completed 200 Pieces  Puzzle
+  cardName: Party With Friends
+  cardStory: You had a party with your friends
   cardValue: 3
-  cardScoreValue: 1000
+  cardScoreValue: 0
   spawnRequirement:
-    playerScore: -3000
-    playerAge: 0
-    educationStage: 0
+    playerScore: -9999
+    playerAge: 1
+    educationStage: 1
     loverStage: 0
     jobData:
       jobType: 0
@@ -27,7 +27,3 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
-  effect: 0
-  changeLevel: 0
-  jumpBoost: 0
-  changedStats: 0
