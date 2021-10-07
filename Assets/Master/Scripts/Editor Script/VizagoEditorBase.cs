@@ -36,6 +36,12 @@ namespace VEditor
         
         }
 
+        protected void Category(string categoryName)
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField(categoryName);
+        }
+
         protected SerializedProperty FindProperty(string name)
         {
             SerializedProperty res;
