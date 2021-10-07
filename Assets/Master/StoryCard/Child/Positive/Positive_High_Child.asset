@@ -15,7 +15,6 @@ MonoBehaviour:
   cardName: WIn  Language Competition
   cardStory: You Won a Language Competition
   cardValue: 0
-  cardSpawnAtEffort: 0
   cardScoreValue: 3000
   spawnRequirement:
     playerScore: 0
@@ -28,3 +27,7 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  CardEffect: 0
+  changeLevel: 0
+  jumpBoost: 0
+  ChangedStats: 0

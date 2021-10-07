@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
 
 public enum CardValue { Positive, Negative, Mystery, Neutral }
 
@@ -34,15 +33,6 @@ public class CardDataBase : ScriptableObject
     public PlayerStatusData spawnRequirement;
 
     public UnityEvent OnCardCollected;
-
-    [Space]
-
-    [Tooltip("Effect if player collected this card")]
-    public CardEffect effect;
-    [Header("Card Effect : ")]
-    private int changeLevel;
-    private float jumpBoost;
-    public Stats changedStats;
 }
 
 [System.Serializable]

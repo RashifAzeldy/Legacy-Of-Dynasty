@@ -152,7 +152,8 @@ public class BlockSpawner : MonoBehaviour
                 
                 foreach ( CardDataBase item in baseCardList[0].highEffortCards )
                 
-                    if(LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
+                    if(LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
+                    || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None )
                         cacheSpawnableCards.Add(item);
                 
                 break;
@@ -160,20 +161,21 @@ public class BlockSpawner : MonoBehaviour
             case BlockEffort.Medium:
                 
                 foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
-                    if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
-                        cacheSpawnableCards.Add(item);
+                if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
+                || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None )
+                    cacheSpawnableCards.Add(item);
                 
                 break;
             
             case BlockEffort.Low:
             
                 foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
-                    if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement))
-                        cacheSpawnableCards.Add(item);
+                if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
+                || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None )
+                    cacheSpawnableCards.Add(item);
                 
             break;
         }
-        Debug.Log("Cache Count : " + cacheSpawnableCards.Count);
         return cacheSpawnableCards;
     }
 

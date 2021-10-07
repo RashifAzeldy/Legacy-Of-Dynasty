@@ -6,8 +6,11 @@ public class SignDestroyer : MonoBehaviour
 {
     private void OnTriggerEnter2D( Collider2D other )
     {
-        GameObject destroyedSign = other.GetComponent<BlockController>().GetBlockSign;
-        other.GetComponent<BlockController>().GetBlockSign = null;
-        Destroy(destroyedSign);
+        if ( !other.gameObject.GetComponent<PlayerController>() )
+        {
+            GameObject destroyedSign = other.GetComponent<BlockController>().GetBlockSign;
+            other.GetComponent<BlockController>().GetBlockSign = null;
+            Destroy(destroyedSign);
+        }
     }
 }
