@@ -15,8 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameOverManager gOver;
 
     Rigidbody2D rb;
+
+    List<int> playerScore = new List<int>();
+    public List<int> GetScoreList { get { return playerScore; } set { playerScore = value; } }
     bool pause;
     public bool PlayerPause { get { return pause; } set { pause = value; } }
+    bool dead;
+    public bool PlayerIsDead { get { return dead; } set { dead = value; } }
+
+    public StoryCardCollector GetCollectedCards { get { return collectedCards; } }
 
     bool canJump;
 
@@ -40,12 +47,21 @@ public class PlayerController : MonoBehaviour
         if ( Input.GetKeyDown(KeyCode.G) )
         {
             // Game Over
-            gOver.GameOver();
+            gOver.ShowGameOverMenu();
             // Show Collected StoryCard
         }
 
+        if ( Input.GetKeyDown(KeyCode.D) )
+        {
+            gOver.ShowDeadMenu();
+        }
+
         rb.simulated = pause ? false : true;
-        
+
+        //if ( dead )
+        //{
+        //    gOver.ShowGameOverMenu();
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)

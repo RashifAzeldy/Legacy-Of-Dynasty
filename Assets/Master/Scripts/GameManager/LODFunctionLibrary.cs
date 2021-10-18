@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 using TMPro;
 
@@ -83,6 +84,13 @@ public class LODFunctionLibrary
         textObject.text = "" + status.playerStatusData.PlayerScore;
     }
 
+    public static int CountFinalScore(List<int> score)
+    {
+        int result = score.Sum();
+
+        return result;
+    }
+
     // X = Horizontal Min
     // Y = Horizontal Max
     // Z = Width
@@ -95,6 +103,7 @@ public class LODFunctionLibrary
 
         return new Vector3(horizontalMin, horizontalMax, 0);
     }
+
 
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))
