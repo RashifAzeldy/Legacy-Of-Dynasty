@@ -35,30 +35,6 @@ public class CardDataBase : ScriptableObject
     public UnityEvent OnCardCollected;
 }
 
-[System.Serializable]
-public class PlayerStatusData
-{
-    [SerializeField] private int playerScore;
-
-    [SerializeField] private Age playerAge;
-
-    [SerializeField] private EducationStage educationStage;
-
-    [SerializeField] private LoverStage loverStage;
-
-    [SerializeField] private JobData jobData;
-
-    [SerializeField] private bool dead;
-
-    public int PlayerScore { get => playerScore; set => playerScore = value; }
-    public Age PlayerAge { get => playerAge; set => playerAge = value; }
-    public EducationStage EducationStage { get => educationStage; set => educationStage = value; }
-    public LoverStage LoverStage { get => loverStage; set => loverStage = value; }
-    public JobData JobData { get => jobData; set => jobData = value; }
-    public bool IsDead { get => dead; set => dead = value; }
-
-}
-
 public enum CardEffect
 {
     None,

@@ -6,23 +6,27 @@ using UnityEngine;
 public class PlayerStatusData
 {
 
-    public StatusDataAs statusDataAs;
+    [SerializeField] StatusDataAs statusDataAs;
 
-    public int playerScore;
+    [SerializeField] int playerScore;
 
-    public Age playerAge;
+    [SerializeField] Age playerAge;
 
-    public EducationStage educationStage;
+    [SerializeField] EducationStage educationStage;
 
-    public LoverStage loverStage;
+    [SerializeField] LoverStage loverStage;
 
-    public JobData jobData;
+    [SerializeField] JobData jobData;
+
+    [SerializeField] private bool dead;
+
 
     public int PlayerScore { get => playerScore; set => playerScore = value; }
     public Age PlayerAge { get => playerAge; set => playerAge = value; }
     public EducationStage EducationStage { get => educationStage; set => educationStage = value; }
     public LoverStage LoverStage { get => loverStage; set => loverStage = value; }
     public JobData JobData { get => jobData; set => jobData = value; }
+    public bool IsDead { get => dead; set => dead = value; }
 
 }
 
