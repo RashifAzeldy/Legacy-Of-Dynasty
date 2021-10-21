@@ -7,6 +7,8 @@ public enum LoverStage
     None, Single, GirlfriendOrBoyfriend, Married, Soulmate
 }
 
+[CreateAssetMenu(menuName = "Card/CardData/LoverActivityData", fileName = "LoversActivityCard")]
+[System.Serializable]
 public class LoverCardData : CardDataBase
 {
     // Start is called before the first frame update

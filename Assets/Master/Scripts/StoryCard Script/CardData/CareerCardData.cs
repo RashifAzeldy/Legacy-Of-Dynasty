@@ -5,6 +5,8 @@ using UnityEngine;
 public enum JobLevel { None, Entry, Intermediate, Advanced, Legendary }
 public enum JobType { None, Unemployed, Doctor, Salaryman, SupermarketCashier }
 
+[CreateAssetMenu(menuName = "Card/CardData/CareerActivityData", fileName = "CareerActivityCard")]
+[System.Serializable]
 public class CareerCardData : CardDataBase
 {
 

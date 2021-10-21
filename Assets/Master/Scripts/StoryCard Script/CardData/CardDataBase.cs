@@ -33,14 +33,23 @@ public class CardDataBase : ScriptableObject
     public PlayerStatusData spawnRequirement;
 
     public UnityEvent OnCardCollected;
+
+    #region Effects
+    public CardEffect effect;
+    // Changed Stats
+    public Stats changedStats;
+    public int changeLevel;
+    // Can't Jump
+    public float time;
+    #endregion
 }
 
 public enum CardEffect
 {
     None,
     ChangeStats,
-    ChangeJumpPower,
-    GameOver
+    CantJump,
+    Dead
 }
 
 public enum Stats

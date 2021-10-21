@@ -7,6 +7,8 @@ public enum EducationStage
     None, GradeSchool, MiddleSchool, HighSchool, University
 }
 
+[CreateAssetMenu(menuName = "Card/CardData/EducationActivityData", fileName = "EducationActivityCard")]
+[System.Serializable]
 public class EducationCardData : CardDataBase
 {
     // Start is called before the first frame update

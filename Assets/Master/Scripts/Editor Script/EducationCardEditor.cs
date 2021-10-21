@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-// Radiant Story Cards
-
-[CustomEditor(typeof(RadiantActivitiesCardData))]
+[CustomEditor(typeof(EducationCardData))]
 [CanEditMultipleObjects]
-public class VizagoEditorBase : Editor
+public class EducationCardEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        RadiantActivitiesCardData radiantCard = (RadiantActivitiesCardData) target;
+        EducationCardData careerCard = (EducationCardData) target;
 
         EditorGUILayout.LabelField("Card Config : ");
 

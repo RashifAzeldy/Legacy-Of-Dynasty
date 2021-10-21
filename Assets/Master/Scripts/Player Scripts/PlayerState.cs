@@ -8,7 +8,6 @@ public class PlayerState : MonoBehaviour
     [SerializeField] SpriteRenderer player;
     [SerializeField] PlayerStatus status;
     bool switchState;
-    bool dead;
     int ageIndex = 0;
     Age currentState;
     List<Sprite> characterImage = new List<Sprite>();
@@ -25,7 +24,6 @@ public class PlayerState : MonoBehaviour
 
     void Update()
     {
-        dead = status.IsPlayerDead();
         if (switchState)
         {
             StartCoroutine(SwitchAgeState(60));
@@ -34,11 +32,6 @@ public class PlayerState : MonoBehaviour
                 AddCharaImage();
             }
             switchState = false;
-        }
-        if ( dead )
-        {
-            dead = false;
-            AddCharaImage();
         }
     }
 

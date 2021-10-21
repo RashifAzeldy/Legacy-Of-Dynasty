@@ -11,5 +11,6 @@ public class PlayerStatus : MonoBehaviour
     Age GetAge() { return playerStatusData.PlayerAge; }
     EducationStage GetEducation() { return playerStatusData.EducationStage; }
     int GetScore() { return playerStatusData.PlayerScore; }
-    public bool IsPlayerDead() { return playerStatusData.IsDead; }
+
+    public bool haveChild;
 }

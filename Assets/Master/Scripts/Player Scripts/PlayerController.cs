@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump && !pause)
         {
             rb.velocity = new Vector2(0, jumpPower);
-            StartCoroutine(ResetJump(jumpDelay));
+            StartJumpDelay(jumpDelay);
         }
 
         // Only For Testing in Unity Editor !
@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
             {
                 collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
             }
+            LODFunctionLibrary.ApplyEffect(gameObject, other.gameObject.GetComponent<BlockController>().cardData, gOver.gameObject);
             other.gameObject.GetComponent<BlockController>().DestroyObject();
         }
     }
@@ -87,6 +88,11 @@ public class PlayerController : MonoBehaviour
             BlockController otherDesc = collectedObj.GetComponent<BlockController>();
             LODFunctionLibrary.ShowStoryText(otherDesc.cardData.cardStory, crawlTextUI, crawlText);
         }
+    }
+
+    public void StartJumpDelay(float time)
+    {
+        StartCoroutine(ResetJump(time));
     }
 
     IEnumerator ResetJump(float time)
