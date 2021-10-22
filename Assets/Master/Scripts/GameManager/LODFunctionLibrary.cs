@@ -144,6 +144,7 @@ public class LODFunctionLibrary
             }
             break;
             case CardEffect.CantJump:
+            controller.CanPlayerJump = false;
             controller.StartJumpDelay(card.time);
             break;
             case CardEffect.Dead:
