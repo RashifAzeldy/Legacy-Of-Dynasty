@@ -41,6 +41,8 @@ public class CardDataBase : ScriptableObject
     public int changeLevel;
     // Can't Jump
     public float time;
+    // Dead
+    public string causingDeath;
     #endregion
 }
 

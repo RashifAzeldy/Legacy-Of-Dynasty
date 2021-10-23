@@ -47,6 +47,12 @@ public class VizagoEditorBase : Editor
             SerializedProperty delayTime = serializedObject.FindProperty("time");
             EditorGUILayout.PropertyField(delayTime, true);
         }
+        // 3 = Dead
+        else
+        {
+            SerializedProperty causingDeath = serializedObject.FindProperty("causingDeath");
+            EditorGUILayout.PropertyField(causingDeath, true);
+        }
         serializedObject.ApplyModifiedProperties();
     }
 }

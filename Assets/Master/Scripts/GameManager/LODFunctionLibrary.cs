@@ -151,6 +151,7 @@ public class LODFunctionLibrary
             if ( player.GetComponent<PlayerStatus>().haveChild )
             {
                 gameManager.GetComponent<GameOverManager>().ShowDeadMenu();
+                gameManager.GetComponent<GameOverManager>().SetCausingDeath.text = card.causingDeath;
             }
             else
             {
