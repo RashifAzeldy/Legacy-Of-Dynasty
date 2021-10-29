@@ -10,6 +10,7 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] PlayerState state;
     [SerializeField] GameObject gameOverMenu;
     [SerializeField] GameObject deadMenu;
+    [SerializeField] TextMeshProUGUI causingDeathText;
 
     [Space]
     [Header("Dynasty Score : ")]
@@ -33,6 +34,11 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreText;
 
     public bool gameOver;
+    public TextMeshProUGUI SetCausingDeath 
+    { 
+        get { return causingDeathText; } 
+        set { causingDeathText = value; } 
+    }
 
     private void Start()
     {

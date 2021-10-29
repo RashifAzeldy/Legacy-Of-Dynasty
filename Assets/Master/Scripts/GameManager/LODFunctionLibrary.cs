@@ -104,6 +104,62 @@ public class LODFunctionLibrary
         return new Vector3(horizontalMin, horizontalMax, 0);
     }
 
+    public static void ApplyEffect(GameObject player, CardDataBase card, GameObject gameManager)
+    {
+        PlayerStatusData status = player.GetComponent<PlayerStatus>().playerStatusData;
+        PlayerController controller = player.GetComponent<PlayerController>();
+        switch ( card.effect )
+        {
+            case CardEffect.ChangeStats:
+            switch ( card.changedStats )
+            {
+                case Stats.Education:
+                int eduIndex = (int) status.EducationStage;
+                eduIndex += card.changeLevel;
+                if ( eduIndex < 0 )
+                {
+                    eduIndex = 0;
+                }
+                status.EducationStage = (EducationStage) eduIndex;
+                break;
+                case Stats.Job:
+                int jobIndex = (int)status.JobData.jobLevel;
+
+                JobData dataResult = new JobData();
+                dataResult.jobType = status.JobData.jobType;
+                jobIndex += card.changeLevel;
+                dataResult.jobLevel = (JobLevel) jobIndex;
+
+                status.JobData = dataResult;
+                break;
+                case Stats.Lover:
+                int loverIndex = (int) status.LoverStage;
+                loverIndex += card.changeLevel;
+                if(loverIndex < 0 )
+                {
+                    loverIndex = 0;
+                }
+                status.LoverStage = (LoverStage) loverIndex;
+                break;
+            }
+            break;
+            case CardEffect.CantJump:
+            controller.CanPlayerJump = false;
+            controller.StartJumpDelay(card.time);
+            break;
+            case CardEffect.Dead:
+            if ( player.GetComponent<PlayerStatus>().haveChild )
+            {
+                gameManager.GetComponent<GameOverManager>().ShowDeadMenu();
+                gameManager.GetComponent<GameOverManager>().SetCausingDeath.text = card.causingDeath;
+            }
+            else
+            {
+                gameManager.GetComponent<GameOverManager>().ShowGameOverMenu();
+            }
+            break;
+        }
+    }
 
     /*
     public static void ChangeStoryCard(storyCard, gameObject(SCObject))

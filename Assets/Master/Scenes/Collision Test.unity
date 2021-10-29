@@ -1763,7 +1763,7 @@ MonoBehaviour:
   spawnLimit: 15
   spawnIntervalRange: {x: 2.5, y: 3.5}
   cardList:
-  - {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
+  - {fileID: 11400000, guid: bab5b247a5e931e4c97fbf462304d9f8, type: 2}
   spawnPositions:
   - effort: 0
     spawnPos:
@@ -4031,7 +4031,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 29146128}
   m_HandleRect: {fileID: 29146127}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4391,8 +4391,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1777101590}
   m_HandleRect: {fileID: 1777101589}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.66345996
+  m_Value: 0.9999997
+  m_Size: 0.66345984
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7667,14 +7667,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatusData:
+    statusDataAs: 0
     playerScore: 0
     playerAge: 0
-    educationStage: 3
+    educationStage: 2
     loverStage: 2
     jobData:
       jobType: 2
-      jobLevel: 2
-    dead: 0
+      jobLevel: 3
+  haveChild: 0
 --- !u!4 &6897627098548547270
 Transform:
   m_ObjectHideFlags: 0

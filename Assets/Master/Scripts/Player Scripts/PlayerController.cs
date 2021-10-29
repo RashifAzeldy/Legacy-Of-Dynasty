@@ -25,7 +25,10 @@ public class PlayerController : MonoBehaviour
 
     public StoryCardCollector GetCollectedCards { get { return collectedCards; } }
 
-    bool canJump;
+    [SerializeField] bool canJump;
+    public bool CanPlayerJump { get { return canJump; } set { canJump = value; } }
+
+    bool delayIsRunning;
 
     void Start()
     {
@@ -38,7 +41,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump && !pause)
         {
             rb.velocity = new Vector2(0, jumpPower);
-            StartCoroutine(ResetJump(jumpDelay));
+            canJump = false;
+            StartJumpDelay(jumpDelay);
         }
 
         // Only For Testing in Unity Editor !
@@ -57,11 +61,6 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.simulated = pause ? false : true;
-
-        //if ( dead )
-        //{
-        //    gOver.ShowGameOverMenu();
-        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -75,6 +74,7 @@ public class PlayerController : MonoBehaviour
             {
                 collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
             }
+            LODFunctionLibrary.ApplyEffect(gameObject, other.gameObject.GetComponent<BlockController>().cardData, gOver.gameObject);
             other.gameObject.GetComponent<BlockController>().DestroyObject();
         }
     }
@@ -89,10 +89,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartJumpDelay(float time)
+    {
+        if ( delayIsRunning )
+        {
+            StopAllCoroutines();
+        }
+            
+        StartCoroutine(ResetJump(time));
+    }
+
     IEnumerator ResetJump(float time)
     {
-        canJump = false;
+        delayIsRunning = true;
         yield return new WaitForSeconds(time);
         canJump = true;
+        delayIsRunning = false;
     }
 }
