@@ -17,6 +17,7 @@ MonoBehaviour:
   cardValue: 3
   cardScoreValue: 1000
   spawnRequirement:
+    statusDataAs: 0
     playerScore: -3000
     playerAge: 0
     educationStage: 0
@@ -27,7 +28,7 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
-  effect: 0
-  changeLevel: 0
-  jumpBoost: 0
-  changedStats: 0
+  effect: 1
+  changedStats: 1
+  changeLevel: -1
+  time: 5

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c492ab2061635c40bd56c92e47edc44, type: 3}
+  m_Name: Collect Score - One Run
+  m_EditorClassIdentifier: 
+  achievementName: Collect Score - One Run
+  description: Collect 50000 Score in One Run
+  type: 1
+  inOneRun: 1
+  scoreTarget: 50000
+  actTarget: {fileID: 0}
+  collectTarget: 0
+  isCompleted: 0
+  target: 1
+  playerProgress: 0
+  reward: {fileID: 11400000, guid: c744395e9479fce40969eccb265c1782, type: 2}

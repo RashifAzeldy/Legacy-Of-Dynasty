@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Accessories
+    m_ConditionEvent: Hat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6744525177204325871}
@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Accessories
+    m_ConditionEvent: Hat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 281930465810342668}
@@ -59,7 +59,7 @@ AnimatorController:
   m_Name: Canvas
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Accessories
+  - m_Name: Hat
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -143,10 +143,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6744525177204325871}
-    m_Position: {x: 30, y: 190, z: 0}
+    m_Position: {x: 30, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 281930465810342668}
-    m_Position: {x: -210, y: 300, z: 0}
+    m_Position: {x: -210, y: 380, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

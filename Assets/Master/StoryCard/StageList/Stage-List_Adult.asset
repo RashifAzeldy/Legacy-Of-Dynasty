@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
+  m_Name: Stage-List_Adult
+  m_EditorClassIdentifier: 
+  highEffortCards:
+  - {fileID: 11400000, guid: c377ac60f2d316e4eb0c335f08d5567a, type: 2}
+  - {fileID: 11400000, guid: 3cd084c3f4aef064595490ecd5b68be9, type: 2}
+  - {fileID: 11400000, guid: 466cb52d4d9c53f43829ffa50fc0ecc1, type: 2}
+  normalEffortCards:
+  - {fileID: 11400000, guid: 303887bec20d0534bb585b5826d60baa, type: 2}
+  lowEffortCards:
+  - {fileID: 11400000, guid: e619e9c35324d8542ad36e80b92a69ab, type: 2}
+  - {fileID: 11400000, guid: bc84de3ff6fffb04db480e4878a226c2, type: 2}
+  - {fileID: 11400000, guid: 6b11fef2c3d099b46b5588b5538c1eac, type: 2}

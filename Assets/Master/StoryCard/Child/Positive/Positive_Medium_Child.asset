@@ -15,9 +15,9 @@ MonoBehaviour:
   cardName: Buy a Pet
   cardStory: You Bought A Pet and Became Friends with it
   cardValue: 0
-  cardSpawnAtEffort: 1
   cardScoreValue: 3000
   spawnRequirement:
+    statusDataAs: 0
     playerScore: 0
     playerAge: 0
     educationStage: 0
@@ -25,6 +25,11 @@ MonoBehaviour:
     jobData:
       jobType: 0
       jobLevel: 0
+    dead: 0
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  effect: 0
+  changedStats: 0
+  changeLevel: 0
+  time: 9

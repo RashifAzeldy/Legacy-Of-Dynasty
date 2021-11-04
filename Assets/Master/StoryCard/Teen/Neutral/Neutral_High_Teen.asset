@@ -15,11 +15,12 @@ MonoBehaviour:
   cardName: Party With Friends
   cardStory: You had a party with your friends
   cardValue: 3
-  cardScoreValue: 0
+  cardScoreValue: 1000
   spawnRequirement:
+    statusDataAs: 0
     playerScore: -9999
     playerAge: 1
-    educationStage: 1
+    educationStage: 0
     loverStage: 0
     jobData:
       jobType: 0
@@ -27,3 +28,8 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  effect: 0
+  changedStats: 0
+  changeLevel: 0
+  time: 0
+  causingDeath: 

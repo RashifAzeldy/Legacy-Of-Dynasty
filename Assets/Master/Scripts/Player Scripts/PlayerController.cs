@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject crawlTextUI;
     [SerializeField] TextMeshProUGUI crawlText;
     [SerializeField] TextMeshProUGUI scoreText;
+    public TextMeshProUGUI GetScoreText { get { return scoreText; } set { scoreText = value; } }
 
     [SerializeField] StoryCardCollector collectedCards;
     [SerializeField] GameOverManager gOver;
@@ -45,35 +46,20 @@ public class PlayerController : MonoBehaviour
             StartJumpDelay(jumpDelay);
         }
 
-        // Only For Testing in Unity Editor !
-        // Game Over Test
-
-        if ( Input.GetKeyDown(KeyCode.G) )
-        {
-            // Game Over
-            gOver.ShowGameOverMenu();
-            // Show Collected StoryCard
-        }
-
-        if ( Input.GetKeyDown(KeyCode.D) )
-        {
-            gOver.ShowDeadMenu();
-        }
-
         rb.simulated = pause ? false : true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         //UpdateBlock(other.gameObject);
-        if ( other.gameObject.GetComponent<BlockController>() )
+        if (other.gameObject.GetComponent<BlockController>())
         {
             LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
             LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
-            if( !collectedCards.GetCollectedStoryCard.Contains(other.gameObject.GetComponent<BlockController>().cardData) )
-            {
-                collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
-            }
+            //if (!collectedCards.GetCollectedStoryCard.Contains(other.gameObject.GetComponent<BlockController>().cardData))
+            //{
+            collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
+            //}
             LODFunctionLibrary.ApplyEffect(gameObject, other.gameObject.GetComponent<BlockController>().cardData, gOver.gameObject);
             other.gameObject.GetComponent<BlockController>().DestroyObject();
         }
@@ -91,11 +77,11 @@ public class PlayerController : MonoBehaviour
 
     public void StartJumpDelay(float time)
     {
-        if ( delayIsRunning )
+        if (delayIsRunning)
         {
             StopAllCoroutines();
         }
-            
+
         StartCoroutine(ResetJump(time));
     }
 

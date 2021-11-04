@@ -15,9 +15,9 @@ MonoBehaviour:
   cardName: Enjoy Family Outing
   cardStory: You and Your Family Enjoyed Family Outing
   cardValue: 3
-  cardSpawnAtEffort: 1
   cardScoreValue: 1000
   spawnRequirement:
+    statusDataAs: 0
     playerScore: -3000
     playerAge: 0
     educationStage: 0
@@ -28,3 +28,7 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  effect: 1
+  changedStats: 1
+  changeLevel: -1
+  time: 5

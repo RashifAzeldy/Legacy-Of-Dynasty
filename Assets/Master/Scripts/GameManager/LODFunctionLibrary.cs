@@ -65,8 +65,8 @@ public class LODFunctionLibrary
 
     public static void ShowStoryText(string storyText, GameObject uiObject, TextMeshProUGUI textUI)
     {
-        if ( !uiObject.activeSelf )
-        { 
+        if (!uiObject.activeSelf)
+        {
             uiObject.SetActive(true);
             uiObject.GetComponent<StoryCardTextCrawl>().MoveText = true;
         }
@@ -108,56 +108,56 @@ public class LODFunctionLibrary
     {
         PlayerStatusData status = player.GetComponent<PlayerStatus>().playerStatusData;
         PlayerController controller = player.GetComponent<PlayerController>();
-        switch ( card.effect )
+        switch (card.effect)
         {
             case CardEffect.ChangeStats:
-            switch ( card.changedStats )
-            {
-                case Stats.Education:
-                int eduIndex = (int) status.EducationStage;
-                eduIndex += card.changeLevel;
-                if ( eduIndex < 0 )
+                switch (card.changedStats)
                 {
-                    eduIndex = 0;
-                }
-                status.EducationStage = (EducationStage) eduIndex;
-                break;
-                case Stats.Job:
-                int jobIndex = (int)status.JobData.jobLevel;
+                    case Stats.Education:
+                        int eduIndex = (int)status.EducationStage;
+                        eduIndex += card.changeLevel;
+                        if (eduIndex < 0)
+                        {
+                            eduIndex = 0;
+                        }
+                        status.EducationStage = (EducationStage)eduIndex;
+                        break;
+                    case Stats.Job:
+                        int jobIndex = (int)status.JobData.jobLevel;
 
-                JobData dataResult = new JobData();
-                dataResult.jobType = status.JobData.jobType;
-                jobIndex += card.changeLevel;
-                dataResult.jobLevel = (JobLevel) jobIndex;
+                        JobData dataResult = new JobData();
+                        dataResult.jobType = status.JobData.jobType;
+                        jobIndex += card.changeLevel;
+                        dataResult.jobLevel = (JobLevel)jobIndex;
 
-                status.JobData = dataResult;
-                break;
-                case Stats.Lover:
-                int loverIndex = (int) status.LoverStage;
-                loverIndex += card.changeLevel;
-                if(loverIndex < 0 )
-                {
-                    loverIndex = 0;
+                        status.JobData = dataResult;
+                        break;
+                    case Stats.Lover:
+                        int loverIndex = (int)status.LoverStage;
+                        loverIndex += card.changeLevel;
+                        if (loverIndex < 0)
+                        {
+                            loverIndex = 0;
+                        }
+                        status.LoverStage = (LoverStage)loverIndex;
+                        break;
                 }
-                status.LoverStage = (LoverStage) loverIndex;
                 break;
-            }
-            break;
             case CardEffect.CantJump:
-            controller.CanPlayerJump = false;
-            controller.StartJumpDelay(card.time);
-            break;
+                controller.CanPlayerJump = false;
+                controller.StartJumpDelay(card.time);
+                break;
             case CardEffect.Dead:
-            if ( player.GetComponent<PlayerStatus>().haveChild )
-            {
-                gameManager.GetComponent<GameOverManager>().ShowDeadMenu();
-                gameManager.GetComponent<GameOverManager>().SetCausingDeath.text = card.causingDeath;
-            }
-            else
-            {
-                gameManager.GetComponent<GameOverManager>().ShowGameOverMenu();
-            }
-            break;
+                if (player.GetComponent<PlayerStatus>().haveChild)
+                {
+                    gameManager.GetComponent<GameOverManager>().ShowDeadMenu();
+                    gameManager.GetComponent<GameOverManager>().SetCausingDeath.text = card.causingDeath;
+                }
+                else
+                {
+                    gameManager.GetComponent<GameOverManager>().ShowGameOverMenu();
+                }
+                break;
         }
     }
 
@@ -167,6 +167,108 @@ public class LODFunctionLibrary
         gameObject.SCObject.GetStoryCard = storyCard;
     }
     */
+
+    public static void CheckAchievementProgress(AchievementManager manager, PlayerController player,
+        List<CardDataBase> collectedCard, AchievementScriptableObj achievement)
+    {
+        int baseProgress = achievement.playerProgress;
+        if (achievement.inOneRun)
+        {
+            List<CardDataBase> actProgress = new List<CardDataBase>();
+            switch (achievement.type)
+            {
+                case AchievementType.Collect:
+                    foreach (CardDataBase card in collectedCard)
+                    {
+                        if (card == achievement.actTarget)
+                        {
+                            actProgress.Add(card);
+                        }
+                    }
+                    if (achievement.collectTarget == actProgress.Count)
+                    {
+                        achievement.playerProgress += 1;
+                    }
+                    break;
+                case AchievementType.Score:
+                    if (achievement.scoreTarget == LODFunctionLibrary.CountFinalScore(player.GetScoreList))
+                    {
+                        achievement.playerProgress += 1;
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            List<CardDataBase> actProgress = new List<CardDataBase>();
+            switch (achievement.type)
+            {
+                case AchievementType.Collect:
+                    foreach (CardDataBase card in collectedCard)
+                    {
+                        if (card == achievement.actTarget)
+                        {
+                            actProgress.Add(card);
+                        }
+                    }
+                    achievement.playerProgress += actProgress.Count;
+                    break;
+                case AchievementType.Score:
+                    achievement.playerProgress += LODFunctionLibrary.CountFinalScore(player.GetScoreList);
+                    break;
+            }
+        }
+        if (baseProgress != achievement.playerProgress)
+        {
+            //manager.SpawnAchivementNotification(achievement);
+        }
+        // Check is The Achievement Completed?
+        AchievementCompleted(achievement.playerProgress, achievement);
+        Debug.Log(achievement.achievementName + " : " + achievement.isCompleted);
+    }
+
+    public static void AchievementCompleted(int playerProgress, AchievementScriptableObj achievement)
+    {
+        switch (achievement.type)
+        {
+            case AchievementType.Collect:
+                if (playerProgress >= achievement.collectTarget)
+                {
+                    achievement.isCompleted = true;
+                    // Unlock Reward
+                    achievement.reward.IsCostumeUnlocked = true;
+                    Debug.Log(achievement.achievementName + " is Completed !");
+                }
+                break;
+            case AchievementType.Score:
+                if (playerProgress >= achievement.scoreTarget)
+                {
+                    achievement.isCompleted = true;
+                    // Unlock Reward
+                    achievement.reward.IsCostumeUnlocked = true;
+                    Debug.Log(achievement.achievementName + " is Completed !");
+                }
+                break;
+        }
+    }
+
+    public static void SetAchivementNotification(AchievementScriptableObj achievement, GameObject notificationObject)
+    {
+        AchievementNotification notif = notificationObject.GetComponent<AchievementNotification>();
+        notif.achievementName.text = achievement.achievementName;
+        notif.achievementDescription.text = achievement.description;
+        switch (achievement.type)
+        {
+            case AchievementType.Collect:
+                notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.collectTarget;
+                notif.progressBar.value = achievement.playerProgress * achievement.collectTarget / 100;
+                break;
+            case AchievementType.Score:
+                notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.scoreTarget;
+                notif.progressBar.value = achievement.playerProgress * achievement.scoreTarget / 100;
+                break;
+        }
+    }
 
     public static void GameOver(GameObject gameOverUI)
     {

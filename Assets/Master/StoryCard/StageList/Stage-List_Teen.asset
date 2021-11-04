@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
+  m_Name: Stage-List_Teen
+  m_EditorClassIdentifier: 
+  highEffortCards:
+  - {fileID: 11400000, guid: 63e2e8c575668a54193b05dd5578920d, type: 2}
+  - {fileID: 11400000, guid: ba9aabea08c455d429a4b994ec6b3c6e, type: 2}
+  - {fileID: 11400000, guid: b91ff7c94da9db64f9ea7aecba658075, type: 2}
+  normalEffortCards:
+  - {fileID: 11400000, guid: 5f29aa09c0a9e9b4aadb3de1c4dee5bc, type: 2}
+  lowEffortCards:
+  - {fileID: 11400000, guid: df3c969611ff8324dbfdf481b1429326, type: 2}
