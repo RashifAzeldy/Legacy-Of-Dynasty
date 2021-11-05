@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(CareerCardData))]
 [CanEditMultipleObjects]
 public class CareerCardEditor : Editor
@@ -54,3 +56,5 @@ public class CareerCardEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+
+#endif

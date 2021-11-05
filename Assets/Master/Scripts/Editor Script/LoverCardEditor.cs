@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(LoverCardData))]
 public class LoverCardEditor : Editor
 {
@@ -53,3 +55,5 @@ public class LoverCardEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+
+#endif

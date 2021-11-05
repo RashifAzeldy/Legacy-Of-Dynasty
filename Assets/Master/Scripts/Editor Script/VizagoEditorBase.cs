@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 // Radiant Story Cards
 
 [CustomEditor(typeof(RadiantActivitiesCardData))]
@@ -56,3 +58,5 @@ public class VizagoEditorBase : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+
+#endif

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
+
 [CustomEditor(typeof(AchievementScriptableObj))]
 public class AchievementEditor : Editor
 {
@@ -42,3 +44,4 @@ public class AchievementEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif
