@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && canJump && !pause)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && canJump && !pause)
         {
             rb.velocity = new Vector2(0, jumpPower);
             canJump = false;
