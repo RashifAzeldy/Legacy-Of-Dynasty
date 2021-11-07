@@ -15,7 +15,6 @@ MonoBehaviour:
   highEffortCards:
   - {fileID: 11400000, guid: 63e2e8c575668a54193b05dd5578920d, type: 2}
   - {fileID: 11400000, guid: ba9aabea08c455d429a4b994ec6b3c6e, type: 2}
-  - {fileID: 11400000, guid: b91ff7c94da9db64f9ea7aecba658075, type: 2}
   normalEffortCards:
   - {fileID: 11400000, guid: 5f29aa09c0a9e9b4aadb3de1c4dee5bc, type: 2}
   lowEffortCards:

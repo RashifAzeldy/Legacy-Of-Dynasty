@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Positive_Medium_Child
+  m_Name: DiscoverVideoGame(Child)
   m_EditorClassIdentifier: 
-  cardName: Buy a Pet
-  cardStory: You Bought A Pet and Became Friends with it
+  cardName: Discover Video Games
+  cardStory: You Discovered Joy of Playing Video Games
   cardValue: 0
+  cardSpawnAtEffort: 2
   cardScoreValue: 3000
   spawnRequirement:
-    statusDataAs: 0
     playerScore: 0
     playerAge: 0
     educationStage: 0
@@ -25,11 +25,6 @@ MonoBehaviour:
     jobData:
       jobType: 0
       jobLevel: 0
-    dead: 0
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
-  effect: 0
-  changedStats: 0
-  changeLevel: 0
-  time: 9

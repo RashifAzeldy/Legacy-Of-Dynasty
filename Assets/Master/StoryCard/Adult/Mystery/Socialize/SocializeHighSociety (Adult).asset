@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Negative_Medium_Teen
+  m_Name: SocializeHighSociety (Adult)
   m_EditorClassIdentifier: 
-  cardName: Use Cheap Soap
-  cardStory: You using cheap soap for Bath
-  cardValue: 1
-  cardScoreValue: -3000
+  cardName: Socialize In High Society
+  cardStory: 
+  cardValue: 2
+  random: 1
+  randomCards:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  cardScoreValue: 0
   spawnRequirement:
     statusDataAs: 0
-    playerScore: -9999
-    playerAge: 1
+    playerScore: 0
+    playerAge: 2
     educationStage: 0
     loverStage: 0
     jobData:

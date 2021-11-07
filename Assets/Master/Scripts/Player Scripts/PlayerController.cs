@@ -51,27 +51,33 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //UpdateBlock(other.gameObject);
         if (other.gameObject.GetComponent<BlockController>())
         {
-            LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
-            LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
-            //if (!collectedCards.GetCollectedStoryCard.Contains(other.gameObject.GetComponent<BlockController>().cardData))
-            //{
-            collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
-            //}
-            LODFunctionLibrary.ApplyEffect(gameObject, other.gameObject.GetComponent<BlockController>().cardData, gOver.gameObject);
-            other.gameObject.GetComponent<BlockController>().DestroyObject();
-        }
-    }
+            BlockController blockObject = other.gameObject.GetComponent<BlockController>();
+            if (blockObject.cardData.random)
+            {
+                CardDataBase randomizedCard = blockObject.cardData.randomCards[Random.Range(0,
+                blockObject.cardData.randomCards.Count)];
 
-    void UpdateBlock(GameObject collectedObj)
-    {
-        collectedObj.SetActive(false);
-        if (collectedObj.GetComponent<BlockController>() != null)
-        {
-            BlockController otherDesc = collectedObj.GetComponent<BlockController>();
-            LODFunctionLibrary.ShowStoryText(otherDesc.cardData.cardStory, crawlTextUI, crawlText);
+                LODFunctionLibrary.UpdateScore(randomizedCard, GetComponent<PlayerStatus>(), scoreText);
+                LODFunctionLibrary.ShowStoryText(randomizedCard.cardStory, crawlTextUI, crawlText);
+                //if (!collectedCards.GetCollectedStoryCard.Contains(blockObject.cardData))
+                //{
+                collectedCards.GetCollectedStoryCard.Add(randomizedCard);
+                //}
+                LODFunctionLibrary.ApplyEffect(gameObject, randomizedCard, gOver.gameObject);
+            }
+            else
+            {
+                LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
+                LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
+                //if (!collectedCards.GetCollectedStoryCard.Contains(blockObject.cardData))
+                //{
+                collectedCards.GetCollectedStoryCard.Add(blockObject.cardData);
+                //}
+                LODFunctionLibrary.ApplyEffect(gameObject, blockObject.cardData, gOver.gameObject);
+            }
+            blockObject.DestroyObject();
         }
     }
 

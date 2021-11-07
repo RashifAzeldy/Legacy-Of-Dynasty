@@ -16,10 +16,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6cceba6ecae08024eb69e080b1c13175, type: 2}
   - {fileID: 11400000, guid: aaf945958fa16654197da1b99a4e3119, type: 2}
   - {fileID: 11400000, guid: 497b83d3eb4c9b1408d1ee14d0df774c, type: 2}
+  - {fileID: 11400000, guid: ceda72e7b22c1a5448f3445d6e3a319b, type: 2}
   normalEffortCards:
   - {fileID: 11400000, guid: 53d65f80be84df3429fdfb90e003499f, type: 2}
   - {fileID: 11400000, guid: eb12c27bbea6e1547b71ead495690393, type: 2}
   - {fileID: 11400000, guid: 1de2e87068ec8a145a2fb623451eaded, type: 2}
+  - {fileID: 11400000, guid: 9cfffa9de07917048bc7a9e77785f8b4, type: 2}
   lowEffortCards:
   - {fileID: 11400000, guid: 447669571f5284849806e7eebb3cc354, type: 2}
   - {fileID: 11400000, guid: cdcaeb52eb6c90f4885fa0aae38ce2f8, type: 2}
