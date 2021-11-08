@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Neutral_Low_ChildA
+  m_Name: CopyingHomework(Child)
   m_EditorClassIdentifier: 
-  cardName: Play Video Games
-  cardStory: After Discovering Joy of Video Games, You begin to playing it
+  cardName: Copy Homework before Class
+  cardStory: You Copied your Friend Homework before Class Started
   cardValue: 3
   cardScoreValue: 1000
   spawnRequirement:

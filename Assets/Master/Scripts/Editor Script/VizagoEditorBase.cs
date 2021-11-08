@@ -13,12 +13,13 @@ public class VizagoEditorBase : Editor
 {
     public override void OnInspectorGUI()
     {
-        RadiantActivitiesCardData radiantCard = (RadiantActivitiesCardData) target;
+        RadiantActivitiesCardData radiantCard = (RadiantActivitiesCardData)target;
 
         EditorGUILayout.LabelField("Card Config : ");
 
         SerializedProperty cardName = serializedObject.FindProperty("cardName");
         SerializedProperty cardStory = serializedObject.FindProperty("cardStory");
+        SerializedProperty isRandomCard = serializedObject.FindProperty("random");
         SerializedProperty cardScore = serializedObject.FindProperty("cardScoreValue");
         SerializedProperty spawnReq = serializedObject.FindProperty("spawnRequirement");
         SerializedProperty onCollected = serializedObject.FindProperty("OnCardCollected");
@@ -27,16 +28,21 @@ public class VizagoEditorBase : Editor
 
         EditorGUILayout.PropertyField(cardName, true);
         EditorGUILayout.PropertyField(cardStory, true);
+        EditorGUILayout.PropertyField(isRandomCard, true);
+        if (isRandomCard.boolValue == true)
+        {
+            SerializedProperty randomCards = serializedObject.FindProperty("randomCards");
+            EditorGUILayout.PropertyField(randomCards, true);
+        }
         EditorGUILayout.PropertyField(cardScore, true);
         EditorGUILayout.PropertyField(spawnReq, true);
         EditorGUILayout.PropertyField(onCollected, true);
         EditorGUILayout.PropertyField(cardValue, true);
         EditorGUILayout.PropertyField(cardEffect, true);
-
         serializedObject.ApplyModifiedProperties();
 
         // 1 = Changed Stats
-        if ( cardEffect.enumValueIndex == 1 )
+        if (cardEffect.enumValueIndex == 1)
         {
             SerializedProperty changedStats = serializedObject.FindProperty("changedStats");
             EditorGUILayout.PropertyField(changedStats, true);
@@ -44,13 +50,13 @@ public class VizagoEditorBase : Editor
             EditorGUILayout.PropertyField(changeLevel, true);
         }
         // 2 = Can't Jump
-        else if ( cardEffect.enumValueIndex == 2 )
+        else if (cardEffect.enumValueIndex == 2)
         {
             SerializedProperty delayTime = serializedObject.FindProperty("time");
             EditorGUILayout.PropertyField(delayTime, true);
         }
         // 3 = Dead
-        else
+        else if(cardEffect.enumValueIndex == 3)
         {
             SerializedProperty causingDeath = serializedObject.FindProperty("causingDeath");
             EditorGUILayout.PropertyField(causingDeath, true);

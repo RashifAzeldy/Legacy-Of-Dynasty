@@ -1837,7 +1837,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
   - {fileID: 11400000, guid: 672601154bc08e14c8aac056fdb0835b, type: 2}
   - {fileID: 11400000, guid: 1e51ef852dfc4cd4b81c61832b8c9c8f, type: 2}
-  - {fileID: 11400000, guid: 0cea389f6c06b0349bbb859cd18ee22a, type: 2}
+  - {fileID: 11400000, guid: 672601154bc08e14c8aac056fdb0835b, type: 2}
   spawnPositions:
   - effort: 0
     spawnPos:
@@ -2271,7 +2271,7 @@ MonoBehaviour:
   positiveSign: {fileID: 21300000, guid: 696b89e49536c3343b64b3b162a21b94, type: 3}
   neutralSign: {fileID: 21300000, guid: 25095d86b3525c54dbafb34c2116c848, type: 3}
   negativeSign: {fileID: 21300000, guid: f1e739d0679025040990dc046aec998b, type: 3}
-  mysterySign: {fileID: 0}
+  mysterySign: {fileID: 21300000, guid: b14924f7028985345b3d22014037904b, type: 3}
 --- !u!1 &531483580
 GameObject:
   m_ObjectHideFlags: 0

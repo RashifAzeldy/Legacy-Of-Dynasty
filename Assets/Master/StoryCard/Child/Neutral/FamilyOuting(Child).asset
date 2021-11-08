@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Negative_High_Child
+  m_Name: FamilyOuting(Child)
   m_EditorClassIdentifier: 
-  cardName: No Friemds Come to Your Birthday Party
-  cardStory: None of your Friends Come to Your Big Birthday Party
-  cardValue: 1
-  cardSpawnAtEffort: 0
-  cardScoreValue: -3000
+  cardName: Enjoy Family Outing
+  cardStory: You and Your Family Enjoyed Family Outing
+  cardValue: 3
+  cardScoreValue: 1000
   spawnRequirement:
-    playerScore: -9999
+    statusDataAs: 0
+    playerScore: -3000
     playerAge: 0
     educationStage: 0
     loverStage: 0
@@ -28,3 +28,7 @@ MonoBehaviour:
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
+  effect: 1
+  changedStats: 1
+  changeLevel: -1
+  time: 5

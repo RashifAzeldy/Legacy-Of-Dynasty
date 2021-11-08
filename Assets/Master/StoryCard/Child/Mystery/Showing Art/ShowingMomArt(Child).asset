@@ -10,12 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: Positive_High_Child
+  m_Name: ShowingMomArt(Child)
   m_EditorClassIdentifier: 
-  cardName: WIn  Language Competition
-  cardStory: You Won a Language Competition
-  cardValue: 0
-  cardScoreValue: 3000
+  cardName: Showing Mom Your Art
+  cardStory: Show Art
+  cardValue: 2
+  random: 1
+  randomCards:
+  - {fileID: 11400000, guid: 06d959da23d023147975325c363ac7c8, type: 2}
+  - {fileID: 11400000, guid: 58eebbf75f6744b4e90335533ce71efc, type: 2}
+  - {fileID: 11400000, guid: 7b7c52a47f7ff894e92090a3118c17ac, type: 2}
+  cardScoreValue: 0
   spawnRequirement:
     statusDataAs: 0
     playerScore: 0
@@ -25,7 +30,6 @@ MonoBehaviour:
     jobData:
       jobType: 0
       jobLevel: 0
-    dead: 0
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []
@@ -33,3 +37,4 @@ MonoBehaviour:
   changedStats: 0
   changeLevel: 0
   time: 0
+  causingDeath: 
