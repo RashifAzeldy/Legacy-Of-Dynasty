@@ -51,9 +51,11 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<BlockController>())
+        BlockController blockObject;
+
+        if (blockObject = other.gameObject.GetComponent<BlockController>())
         {
-            BlockController blockObject = other.gameObject.GetComponent<BlockController>();
+            
             if (blockObject.cardData.random)
             {
                 CardDataBase randomizedCard = blockObject.cardData.randomCards[Random.Range(0,
@@ -77,7 +79,30 @@ public class PlayerController : MonoBehaviour
                 //}
                 LODFunctionLibrary.ApplyEffect(gameObject, blockObject.cardData, gOver.gameObject);
             }
-            blockObject.DestroyObject();
+
+            string objectTagID;
+
+            switch (blockObject.cardData.cardValue)
+            {
+                case CardValue.Positive:
+                    objectTagID = "BlockPositive";
+                    break;
+                case CardValue.Negative:
+                    objectTagID = "BlockNegative";
+                    break;
+                case CardValue.Mystery:
+                    objectTagID = "BlockMystery";
+                    break;
+                case CardValue.Neutral:
+                    objectTagID = "BlockNeutral";
+                    break;
+                default:
+                    objectTagID = "BlockNeutral";
+                    break;
+            }
+
+            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, other.gameObject);
+
         }
     }
 
