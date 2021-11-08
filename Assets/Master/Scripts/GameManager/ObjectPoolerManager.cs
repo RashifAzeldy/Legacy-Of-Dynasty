@@ -34,8 +34,9 @@ public class ObjectPoolerManager : MonoBehaviour
 
     public void InitializePoolObject(string poolObjectTag)
     {
-        foreach (PoolObject pool in poolObjects.ToArray())
+        foreach (PoolObject pool in poolObjects)
         {
+
             if (pool.TagId == poolObjectTag)
             {
 
@@ -53,16 +54,12 @@ public class ObjectPoolerManager : MonoBehaviour
                 break;
 
             }
-            else
-                throw new System.ArgumentException("Can't pool object with tag :" + poolObjectTag);
 
         }
     }
 
     public GameObject SpawnObjectFromPool(string poolObjectsTag, Vector3 position, Quaternion rotation)
     {
-
-        Debug.Log(poolObjects.Count);
 
         if (!poolsDictionary.ContainsKey(poolObjectsTag))
             InitializePoolObject(poolObjectsTag);

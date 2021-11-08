@@ -51,8 +51,11 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
+        BlockController cacheController;
+
         //UpdateBlock(other.gameObject);
-        if (other.gameObject.GetComponent<BlockController>())
+        if (cacheController = other.gameObject.GetComponent<BlockController>())
         {
             LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
             LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
@@ -61,7 +64,30 @@ public class PlayerController : MonoBehaviour
             collectedCards.GetCollectedStoryCard.Add(other.gameObject.GetComponent<BlockController>().cardData);
             //}
             LODFunctionLibrary.ApplyEffect(gameObject, other.gameObject.GetComponent<BlockController>().cardData, gOver.gameObject);
-            other.gameObject.GetComponent<BlockController>().DestroyObject();
+
+            string objectTagID;
+
+            switch (cacheController.cardData.cardValue)
+            {
+                case CardValue.Positive:
+                    objectTagID = "BlockPositive";
+                    break;
+                case CardValue.Negative:
+                    objectTagID = "BlockNegative";
+                    break;
+                case CardValue.Mystery:
+                    objectTagID = "BlockMystery";
+                    break;
+                case CardValue.Neutral:
+                    objectTagID = "BlockNeutral";
+                    break;
+                default:
+                    objectTagID = "BlockNeutral";
+                    break;
+            }
+
+            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, other.gameObject);
+
         }
     }
 

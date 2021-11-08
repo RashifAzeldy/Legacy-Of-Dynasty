@@ -40,6 +40,28 @@ public class BlockController : MonoBehaviour
     public void DestroyObject()
     {
         spawner.GetSpawnedBlock.RemoveAt(spawner.GetSpawnedBlock.IndexOf(this.gameObject));
-        Destroy(gameObject);
+        
+        string objectTagID;
+
+        switch (cardData.cardValue)
+        {
+            case CardValue.Positive:
+                objectTagID = "BlockPositive";
+                break;
+            case CardValue.Negative:
+                objectTagID = "BlockNegative";
+                break;
+            case CardValue.Mystery:
+                objectTagID = "BlockMystery";
+                break;
+            case CardValue.Neutral:
+                objectTagID = "BlockNeutral";
+                break;
+            default:
+                objectTagID = "BlockNeutral";
+                break;
+        }
+
+        ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, gameObject);
     }
 }

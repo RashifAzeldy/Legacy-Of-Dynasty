@@ -44,7 +44,8 @@ public class BlockSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (spawnedBlock.Count < spawnLimit && _startCheck && Time.timeScale == 1)
+        //spawnedBlock.Count < spawnLimit &&
+        if (_startCheck && Time.timeScale == 1)
         {
             SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), gameObject.transform, 1);
         }
@@ -104,23 +105,28 @@ public class BlockSpawner : MonoBehaviour
                 switch (_cacheCard.cardValue)
                 {
                     case CardValue.Positive:
-                        _cacheBlock = Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockPositive", getSpawnPosition(effort), Quaternion.identity);
+                            //Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Negative:
-                        _cacheBlock = Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNegative", getSpawnPosition(effort), Quaternion.identity);
+                        //Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Mystery:
-                        _cacheBlock = Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockMystery", getSpawnPosition(effort), Quaternion.identity);
+                        //Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Neutral:
-                        _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
+                        //Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     default:
-                        _cacheBlock = Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
+                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
+                        //Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
                 }
 
