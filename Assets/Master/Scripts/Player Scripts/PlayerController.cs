@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
         if (blockObject = other.gameObject.GetComponent<BlockController>())
         {
-            
+
             if (blockObject.cardData.random)
             {
                 CardDataBase randomizedCard = blockObject.cardData.randomCards[Random.Range(0,
@@ -63,20 +63,14 @@ public class PlayerController : MonoBehaviour
 
                 LODFunctionLibrary.UpdateScore(randomizedCard, GetComponent<PlayerStatus>(), scoreText);
                 LODFunctionLibrary.ShowStoryText(randomizedCard.cardStory, crawlTextUI, crawlText);
-                //if (!collectedCards.GetCollectedStoryCard.Contains(blockObject.cardData))
-                //{
                 collectedCards.GetCollectedStoryCard.Add(randomizedCard);
-                //}
                 LODFunctionLibrary.ApplyEffect(gameObject, randomizedCard, gOver.gameObject);
             }
             else
             {
                 LODFunctionLibrary.UpdateScore(other.GetComponent<BlockController>().cardData, GetComponent<PlayerStatus>(), scoreText);
                 LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
-                //if (!collectedCards.GetCollectedStoryCard.Contains(blockObject.cardData))
-                //{
                 collectedCards.GetCollectedStoryCard.Add(blockObject.cardData);
-                //}
                 LODFunctionLibrary.ApplyEffect(gameObject, blockObject.cardData, gOver.gameObject);
             }
 

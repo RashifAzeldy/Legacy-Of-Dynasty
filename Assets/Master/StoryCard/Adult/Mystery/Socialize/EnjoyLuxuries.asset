@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
   m_Name: EnjoyLuxuries
   m_EditorClassIdentifier: 
-  cardName: Meet Celebrity
-  cardStory: You meet your Favourite Celebrity
-  cardValue: 0
+  cardName: Enjoy Luxuries
+  cardStory: You enjoyed your Luxuries
+  cardValue: 3
   random: 0
   randomCards: []
-  cardScoreValue: 3000
+  cardScoreValue: 1000
   spawnRequirement:
     statusDataAs: 0
     playerScore: 0

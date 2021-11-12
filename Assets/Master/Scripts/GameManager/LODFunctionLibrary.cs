@@ -155,18 +155,12 @@ public class LODFunctionLibrary
                 }
                 else
                 {
+                    gameManager.GetComponent<GameOverManager>().ShowCollectedAct();
                     gameManager.GetComponent<GameOverManager>().ShowGameOverMenu();
                 }
                 break;
         }
     }
-
-    /*
-    public static void ChangeStoryCard(storyCard, gameObject(SCObject))
-    {
-        gameObject.SCObject.GetStoryCard = storyCard;
-    }
-    */
 
     public static void CheckAchievementProgress(AchievementManager manager, PlayerController player,
         List<CardDataBase> collectedCard, AchievementScriptableObj achievement)
@@ -224,7 +218,6 @@ public class LODFunctionLibrary
         }
         // Check is The Achievement Completed?
         AchievementCompleted(achievement.playerProgress, achievement);
-        Debug.Log(achievement.achievementName + " : " + achievement.isCompleted);
     }
 
     public static void AchievementCompleted(int playerProgress, AchievementScriptableObj achievement)

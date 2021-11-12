@@ -248,7 +248,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -619,6 +619,93 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516291833067509492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516291833067509493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a433396bbb8b2b4fab6ec866601cba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hat: {fileID: 0}
+--- !u!1 &516291833067509493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516291833067509498}
+  - component: {fileID: 516291833067509499}
+  - component: {fileID: 516291833067509492}
+  - component: {fileID: 516291833067509497}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &516291833067509497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516291833067509493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5647daeeea1167940bba4c4adfbf5dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievementList:
+  - {fileID: 11400000, guid: 7d800f523d4a9474680e7c858f52f5a1, type: 2}
+  - {fileID: 11400000, guid: d65328555bb851e4daabe8d6bc5b17f8, type: 2}
+  - {fileID: 11400000, guid: 1f134af40fb7ba74d952118ea62231ea, type: 2}
+  notifPrefab: {fileID: 0}
+--- !u!4 &516291833067509498
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516291833067509493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516291833067509499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516291833067509493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7702ab2a6ccbb49963be642fd790b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuScene: MainMenu
+  skinScene: SkinSelectionScene
+  gameplayScene: GameplayScene
+  playerEquipedCostume: {fileID: 516291833067509492}
+  achievementManager: {fileID: 516291833067509497}
+  hatIndex: 0
+  mainMenuUIBase: {fileID: 4531096336175629266, guid: 4234e618b747f1b4b8dfb36ad29efb31,
+    type: 3}
+  achvDetailPrefab: {fileID: 5937487235025907571, guid: dcd82aaad8c7cc449809b836894bc3f4,
+    type: 3}
+  backButton: {fileID: 618427281783558266, guid: 90cb824037eb27548b7685c22d52d628,
+    type: 3}
 --- !u!1001 &4876531034491396642
 PrefabInstance:
   m_ObjectHideFlags: 0

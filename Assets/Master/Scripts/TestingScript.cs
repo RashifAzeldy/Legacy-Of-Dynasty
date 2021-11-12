@@ -4,15 +4,14 @@ using System.Collections.Generic;
 
 public class TestingScript : MonoBehaviour
 {
+    [SerializeField] AchievementScriptableObj achievement;
+    [SerializeField] Canvas parent;
     [SerializeField] GameObject testObjPrefab;
 
-    [SerializeField] CardDataList cardStagesList;
-
-    void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-
-        }
+        Debug.Log("WWWW");
+        GameObject test = Instantiate(testObjPrefab, parent.transform);
+        test.GetComponent<AchievementDetails>().SetAchivementDetails = achievement;
     }
 }

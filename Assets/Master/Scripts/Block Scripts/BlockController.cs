@@ -26,7 +26,7 @@ public class BlockController : MonoBehaviour
     {
         transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);
 
-        if ( cardData != null )
+        if (cardData != null)
         {
             text.text = cardData.cardName;
         }
@@ -39,8 +39,6 @@ public class BlockController : MonoBehaviour
 
     public void DestroyObject()
     {
-        spawner.GetSpawnedBlock.RemoveAt(spawner.GetSpawnedBlock.IndexOf(this.gameObject));
-        
         string objectTagID;
 
         switch (cardData.cardValue)

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
   m_Name: GetKickedOut
   m_EditorClassIdentifier: 
-  cardName: 
-  cardStory: 
-  cardValue: 0
+  cardName: Get Kicked Out From Restaurant
+  cardStory: You Get Kicked out from fine Restaurant
+  cardValue: 1
   random: 0
   randomCards: []
-  cardScoreValue: 0
+  cardScoreValue: -3000
   spawnRequirement:
     statusDataAs: 0
     playerScore: 0
-    playerAge: 0
+    playerAge: 2
     educationStage: 0
     loverStage: 0
     jobData:

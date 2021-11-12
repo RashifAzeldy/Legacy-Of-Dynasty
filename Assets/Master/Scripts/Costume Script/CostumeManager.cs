@@ -12,7 +12,6 @@ public class CostumeManager : MonoBehaviour
     [SerializeField] Button prevButton;
     [SerializeField] Button selectButton;
     [SerializeField] Image lockImage;
-    [SerializeField] string gameplaySceneName;
 
     public CostumeType CostumeType;
 
@@ -122,7 +121,11 @@ public class CostumeManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(gameManager.GameplaySceneName, LoadSceneMode.Single);
+    }
+    public void Back()
+    {
+        SceneManager.LoadScene(gameManager.MainMenuSceneName, LoadSceneMode.Single);
     }
 }
 

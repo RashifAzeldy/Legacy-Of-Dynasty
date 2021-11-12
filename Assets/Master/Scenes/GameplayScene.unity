@@ -1837,7 +1837,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1227ac79454e7b94293ff675e84aab45, type: 2}
   - {fileID: 11400000, guid: 672601154bc08e14c8aac056fdb0835b, type: 2}
   - {fileID: 11400000, guid: 1e51ef852dfc4cd4b81c61832b8c9c8f, type: 2}
-  - {fileID: 11400000, guid: 672601154bc08e14c8aac056fdb0835b, type: 2}
+  - {fileID: 11400000, guid: 0cea389f6c06b0349bbb859cd18ee22a, type: 2}
   spawnPositions:
   - effort: 0
     spawnPos:

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AchievementManager : MonoBehaviour
 {
     [SerializeField] List<AchievementScriptableObj> achievementList = new List<AchievementScriptableObj>();
+    public List<AchievementScriptableObj> GetAchievementList { get { return achievementList; } set { achievementList = value; } }
     [SerializeField] GameObject notifPrefab;
 
     public void AchievementProgress(PlayerController player, List<CardDataBase> collectedCard)

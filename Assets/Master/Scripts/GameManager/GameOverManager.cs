@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -37,25 +38,63 @@ public class GameOverManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI finalScoreText;
 
+    public GameManager m_gameManager;
+
     public bool gameOver;
     public TextMeshProUGUI SetCausingDeath
     {
         get { return causingDeathText; }
         set { causingDeathText = value; }
     }
+    List<CardDataBase> nonDuplicate = new List<CardDataBase>();
 
     private void Start()
     {
         gameOverMenu.SetActive(false);
         achievementManager = FindObjectOfType<AchievementManager>();
+        m_gameManager = FindObjectOfType<GameManager>();
+        m_gameManager.GameplaySetup();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.I))
         {
+            ShowCollectedAct();
             ShowGameOverMenu();
         }
+    }
+
+    public void ShowCollectedAct()
+    {
+        var cardDuplicate = player.GetCollectedCards.GetCollectedStoryCard.GroupBy(x => x)
+            .Where(g => g.Count() > 1)
+            .Select(y => new { Element = y.Key, Counter = y.Count() })
+            .ToList();
+
+        List<CardDataBase> duplicate = new List<CardDataBase>();
+        foreach (var item in cardDuplicate)
+        {
+            duplicate.Add(item.Element);
+        }
+
+        nonDuplicate = player.GetCollectedCards.GetCollectedStoryCard.Except(duplicate).ToList();
+
+        for (int i = 0; i < cardDuplicate.Count; i++)
+        {
+            GameObject actText = Instantiate(collectedActPrefab, collectedActParent);
+            actText.GetComponent<TextMeshProUGUI>().text = cardDuplicate[i].Element.cardName
+            + " | " + cardDuplicate[i].Counter + "x";
+        }
+
+        #region Show Collected Activities (Non-Duplicate)
+        for (int i = 0; i < nonDuplicate.Count; i++)
+        {
+            GameObject actText = Instantiate(collectedActPrefab, collectedActParent);
+            actText.GetComponent<TextMeshProUGUI>().text = nonDuplicate[i].cardName
+                + " | " + "1x";
+        }
+        #endregion
     }
 
     public void ShowGameOverMenu()
@@ -68,14 +107,7 @@ public class GameOverManager : MonoBehaviour
             dyScore.GetComponent<TextMeshProUGUI>().text = "" + player.GetScoreList[i];
         }
         #endregion
-        #region Show Collected Activities
-        for (int i = 0; i < player.GetCollectedCards.GetCollectedStoryCard.Count; i++)
-        {
-            GameObject actText = Instantiate(collectedActPrefab, collectedActParent);
-            actText.GetComponent<TextMeshProUGUI>().text = player.GetCollectedCards.GetCollectedStoryCard[i].cardName
-                + " | " + player.GetCollectedCards.GetCollectedStoryCard[i].cardScoreValue;
-        }
-        #endregion
+
         #region Show Character Per Dynasty
         state.AddCharaImage();
         for (int i = 0; i < state.GetCharacter.Count; i++)
@@ -125,7 +157,7 @@ public class GameOverManager : MonoBehaviour
 
     public void CostumeSelection()
     {
-        SceneManager.LoadScene("Skin Testing");
+        SceneManager.LoadScene(m_gameManager.GetComponent<GameManager>().SkinSelectionScene);
         Time.timeScale = 1;
     }
 }

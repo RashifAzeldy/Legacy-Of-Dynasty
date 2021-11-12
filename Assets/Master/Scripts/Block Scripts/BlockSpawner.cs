@@ -28,10 +28,6 @@ public class BlockSpawner : MonoBehaviour
 
     #endregion
 
-    [SerializeField] List<GameObject> spawnedBlock = new List<GameObject>();
-
-    public List<GameObject> GetSpawnedBlock { get { return spawnedBlock; } set { spawnedBlock = value; } }
-
     PlayerState player;
     PlayerStatus status;
     bool _startCheck = true;
@@ -106,27 +102,22 @@ public class BlockSpawner : MonoBehaviour
                 {
                     case CardValue.Positive:
                         _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockPositive", getSpawnPosition(effort), Quaternion.identity);
-                            //Instantiate(blockPositive.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Negative:
                         _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNegative", getSpawnPosition(effort), Quaternion.identity);
-                        //Instantiate(blockNegative.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Mystery:
                         _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockMystery", getSpawnPosition(effort), Quaternion.identity);
-                        //Instantiate(blockMystery.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     case CardValue.Neutral:
                         _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
-                        //Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
 
                     default:
                         _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
-                        //Instantiate(blockNeutral.gameObject, getSpawnPosition(effort), Quaternion.identity, parent);
                         break;
                 }
 
@@ -136,8 +127,6 @@ public class BlockSpawner : MonoBehaviour
                 _cacheBController.cardData = _cacheCard;
 
                 _cacheBController.InitBlock();
-
-                spawnedBlock.Add(_cacheBlock);
             }
         }
     }
