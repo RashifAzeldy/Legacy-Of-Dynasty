@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        ChangeScene("");
+        ChangeScene(_mainMenuSceneName);
     }
 
     private void ChangeScene(string SceneName)
