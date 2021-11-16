@@ -19,6 +19,6 @@ MonoBehaviour:
   scoreTarget: 10000
   actTarget: {fileID: 0}
   collectTarget: 0
-  isCompleted: 1
-  playerProgress: 0
+  isCompleted: 0
+  playerProgress: 11000
   reward: {fileID: 11400000, guid: 5092d99d4cf4bb645a71694dc44390f0, type: 2}

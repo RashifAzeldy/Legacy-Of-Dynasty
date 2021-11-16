@@ -38,8 +38,6 @@ public class GameOverManager : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI finalScoreText;
 
-    public GameManager m_gameManager;
-
     public bool gameOver;
     public TextMeshProUGUI SetCausingDeath
     {
@@ -52,8 +50,6 @@ public class GameOverManager : MonoBehaviour
     {
         gameOverMenu.SetActive(false);
         achievementManager = FindObjectOfType<AchievementManager>();
-        m_gameManager = FindObjectOfType<GameManager>();
-        m_gameManager.GameplaySetup();
     }
 
     private void Update()
@@ -157,7 +153,7 @@ public class GameOverManager : MonoBehaviour
 
     public void CostumeSelection()
     {
-        SceneManager.LoadScene(m_gameManager.GetComponent<GameManager>().SkinSelectionScene);
+        SceneManager.LoadScene(GameManager.Instance.SkinSelectionScene);
         Time.timeScale = 1;
     }
 }
