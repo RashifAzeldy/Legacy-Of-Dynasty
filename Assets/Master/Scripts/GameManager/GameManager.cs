@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] string gameplayScene;
     public string GameplaySceneName { get { return gameplayScene; } }
 
-    public  GameObject achievementObject { get; private set; }
-
     private static bool _created = false;
 
     [SerializeField] List<Costume> hatList = new List<Costume>();
@@ -27,8 +25,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject backButton;
     Canvas mainMenuCanvas;
 
-    GameObject achievementDetailBase;
-    AchievementManager achievementManager;
+    public GameObject achievementDetailBase { get; private set; }
+
+    [SerializeField] AchievementManager achievementManager;
     EquipedCostume playerEquipedCostume;
 
     #region Saved Data
@@ -42,26 +41,31 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+
+        achievementManager = GetComponent<AchievementManager>();
+        playerEquipedCostume = GetComponent<EquipedCostume>();
+
         if (!Instance)
         {
 
             Instance = this;
 
-            achievementManager = GetComponent<AchievementManager>();
-            playerEquipedCostume = GetComponent<EquipedCostume>();
             Debug.Log(achievementManager.name + ", " + playerEquipedCostume.name);
 
             DontDestroyOnLoad(this.gameObject);
             DontDestroyOnLoad(playerEquipedCostume);
             DontDestroyOnLoad(achievementManager);
-            _created = true;
 
         }
         else
+        {
+            Debug.Log(this.gameObject.name);
             Destroy(this.gameObject);
+        }
 
-        MainMenuSetup();
-
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu"))
+            MainMenuSetup();
+        
     }
 
     public void MainMenuSetup()
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviour
 
         achievementDetailBase = Instantiate(mainMenuUIBase, mainMenuCanvas.transform);
 
+        GameObject.FindObjectOfType<MainMenuManager>().achievementWidget = achievementDetailBase;
 
         foreach (AchievementScriptableObj item in achievementManager.GetAchievementList)
         {

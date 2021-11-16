@@ -15,28 +15,40 @@ public class MainMenuManager : MonoBehaviour
     [Space]
     [Header("Misc: ")]
     [SerializeField] string nextSceneName;
+    [SerializeField] public GameObject achievementWidget;
 
-    private void Awake()
+    private void Start()
     {
-        startButton.onClick.AddListener(() => 
-        {
 
-            SceneManager.LoadScene(nextSceneName);
-        
-        });
-
-        quitButton.onClick.AddListener(() => 
-        {
-
-        confirmWidget.ActivateWidget(
-            () => { Application.Quit(); }, 
-            ()=> { confirmWidget.DeactivateWidget(); 
-            });
-
-        });
+        if (achievementWidget)
+            achievementWidget.SetActive(false);
 
         confirmWidget.DeactivateWidget();
 
+        startButton.onClick.AddListener(() =>
+        {
+
+            SceneManager.LoadScene(nextSceneName);
+
+        });
+
+        achievementButton.onClick.AddListener(() =>
+        {
+
+            achievementWidget.SetActive(true);
+
+        });
+
+        quitButton.onClick.AddListener(() =>
+        {
+
+            confirmWidget.ActivateWidget(
+                () => { Application.Quit(); },
+                () => {
+                    confirmWidget.DeactivateWidget();
+                });
+
+        });
     }
 
     private void Update()
