@@ -666,11 +666,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b752d7010d7e442ab9bb5633fed105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  achievement: {fileID: 0}
   achievementName: {fileID: 8083787408339129886}
   achievementDescription: {fileID: 2297525219619326287}
   achievementProgress: {fileID: 8869932626794545966}
   achievementTarget: {fileID: 8635006922722219176}
+  progressSlider: {fileID: 1766739345124059066}
 --- !u!1 &6808925168187111627
 GameObject:
   m_ObjectHideFlags: 0

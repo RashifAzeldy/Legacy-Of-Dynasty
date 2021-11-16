@@ -7,11 +7,6 @@ using TMPro;
 
 public class LODFunctionLibrary
 {
-    public static void TeleportBlock(GameObject block, Vector3 destination)
-    {
-        block.transform.position = destination;
-    }
-
     /// <summary>
     /// Return a bool value of a comparison between two PlayerStatusData
     /// </summary>
@@ -179,16 +174,10 @@ public class LODFunctionLibrary
                             actProgress.Add(card);
                         }
                     }
-                    if (achievement.collectTarget == actProgress.Count)
-                    {
-                        achievement.playerProgress += 1;
-                    }
+                    achievement.playerProgress = actProgress.Count;
                     break;
                 case AchievementType.Score:
-                    if (achievement.scoreTarget == LODFunctionLibrary.CountFinalScore(player.GetScoreList))
-                    {
-                        achievement.playerProgress += 1;
-                    }
+                    achievement.playerProgress = LODFunctionLibrary.CountFinalScore(player.GetScoreList);
                     break;
             }
         }
@@ -263,9 +252,18 @@ public class LODFunctionLibrary
         }
     }
 
-    public static void GameOver(GameObject gameOverUI)
+    public static void SaveGame()
     {
-        gameOverUI.SetActive(true);
-        Time.timeScale = 0.1f;
+        SaveSystem.SavePlayerData();
+    }
+
+    public static void LoadGame()
+    {
+        PlayerData data = SaveSystem.LoadPlayerData();
+
+        GameManager.Instance.completedAchievementIndex = data.completedAchievementIndex;
+        GameManager.Instance.achievementProgressList = data.achievementProgress;
+        GameManager.Instance.unlockedHatList = data.unlockedHatIndex;
+        GameManager.Instance.hatIndex = data.equipedHatIndex;
     }
 }

@@ -18,14 +18,16 @@ public class CostumeManager : MonoBehaviour
     public bool ChoosingHat;
 
     int currentHatIndex;
-    GameManager gameManager;
     EquipedCostume playerCostume;
 
     private void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        playerCostume = gameManager.GetComponent<EquipedCostume>();
-        ShowCostume(gameManager.hatIndex);
+        playerCostume = GameManager.Instance.GetComponent<EquipedCostume>();
+        foreach (Costume item in GameManager.Instance.GetHatList)
+        {
+            hatList.Add(item);
+        }
+        ShowCostume(GameManager.Instance.hatIndex);
     }
 
     private void Update()
@@ -83,7 +85,7 @@ public class CostumeManager : MonoBehaviour
         {
             case CostumeType.Hat:
                 playerCostume.hat = hatList[currentHatIndex].CostumeSprite;
-                gameManager.hatIndex = currentHatIndex;
+                GameManager.Instance.hatIndex = currentHatIndex;
                 break;
         }
     }
@@ -121,11 +123,11 @@ public class CostumeManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(gameManager.GameplaySceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameManager.Instance.GameplaySceneName, LoadSceneMode.Single);
     }
     public void Back()
     {
-        SceneManager.LoadScene(gameManager.MainMenuSceneName, LoadSceneMode.Single);
+        SceneManager.LoadScene(GameManager.Instance.MainMenuSceneName, LoadSceneMode.Single);
     }
 }
 

@@ -699,13 +699,18 @@ MonoBehaviour:
   gameplayScene: GameplayScene
   playerEquipedCostume: {fileID: 516291833067509492}
   achievementManager: {fileID: 516291833067509497}
-  hatIndex: 0
+  hatList: []
+  detailList: []
   mainMenuUIBase: {fileID: 4531096336175629266, guid: 4234e618b747f1b4b8dfb36ad29efb31,
     type: 3}
   achvDetailPrefab: {fileID: 5937487235025907571, guid: dcd82aaad8c7cc449809b836894bc3f4,
     type: 3}
   backButton: {fileID: 618427281783558266, guid: 90cb824037eb27548b7685c22d52d628,
     type: 3}
+  completedAchievementIndex: 
+  achievementProgressList: 000000000000000000000000
+  unlockedHatList: 
+  hatIndex: 0
 --- !u!1001 &4876531034491396642
 PrefabInstance:
   m_ObjectHideFlags: 0
