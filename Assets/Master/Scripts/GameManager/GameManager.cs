@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] string gameplayScene;
     public string GameplaySceneName { get { return gameplayScene; } }
 
+    public  GameObject achievementObject { get; private set; }
+
     private static bool _created = false;
     //Accessible only trough editor or from this class
     [SerializeField] EquipedCostume playerEquipedCostume;
@@ -26,26 +28,35 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject backButton;
     Canvas mainMenuCanvas;
 
+    public static GameManager Instance { get; private set; }
+
     private void Awake()
     {
-        if (!_created)
+        if (!Instance)
         {
             DontDestroyOnLoad(this.gameObject);
             DontDestroyOnLoad(playerEquipedCostume);
             DontDestroyOnLoad(achievementManager);
             _created = true;
-        }
-    }
 
-    void Start()
-    {
+            Instance = this;
+
+        }
+        else
+            Destroy(this.gameObject);
+
         MainMenuSetup();
+
     }
 
     public void MainMenuSetup()
     {
         mainMenuCanvas = FindObjectOfType<Canvas>();
+        
         GameObject menuUIBase = Instantiate(mainMenuUIBase, mainMenuCanvas.transform);
+
+        achievementObject = menuUIBase;
+
         foreach (AchievementScriptableObj item in achievementManager.GetAchievementList)
         {
             GameObject achievementDetail = Instantiate(achvDetailPrefab,
