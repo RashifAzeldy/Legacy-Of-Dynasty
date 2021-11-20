@@ -174,10 +174,17 @@ public class LODFunctionLibrary
                             actProgress.Add(card);
                         }
                     }
-                    achievement.playerProgress = actProgress.Count;
+                    if (actProgress.Count != achievement.collectTarget)
+                    {
+                        achievement.playerProgress = 0;
+                    }
                     break;
                 case AchievementType.Score:
                     achievement.playerProgress = LODFunctionLibrary.CountFinalScore(player.GetScoreList);
+                    if (LODFunctionLibrary.CountFinalScore(player.GetScoreList) != achievement.scoreTarget)
+                    {
+                        achievement.playerProgress = 0;
+                    }
                     break;
             }
         }
@@ -206,7 +213,7 @@ public class LODFunctionLibrary
             //manager.SpawnAchivementNotification(achievement);
         }
         // Check is The Achievement Completed?
-        AchievementCompleted(achievement.playerProgress, achievement);
+        // AchievementCompleted(achievement.playerProgress, achievement);
     }
 
     public static void AchievementCompleted(int playerProgress, AchievementScriptableObj achievement)
@@ -219,6 +226,7 @@ public class LODFunctionLibrary
                     achievement.isCompleted = true;
                     // Unlock Reward
                     achievement.reward.IsCostumeUnlocked = true;
+                    GameManager.Instance.unlockedHatList.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
                     Debug.Log(achievement.achievementName + " is Completed !");
                 }
                 break;
@@ -228,6 +236,7 @@ public class LODFunctionLibrary
                     achievement.isCompleted = true;
                     // Unlock Reward
                     achievement.reward.IsCostumeUnlocked = true;
+                    GameManager.Instance.unlockedHatList.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
                     Debug.Log(achievement.achievementName + " is Completed !");
                 }
                 break;

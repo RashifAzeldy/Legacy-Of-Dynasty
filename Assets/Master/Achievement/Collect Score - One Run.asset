@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Collect Score - One Run
   m_EditorClassIdentifier: 
   achievementName: Collect Score - One Run
-  description: Collect 50000 Score in One Run
+  description: Collect 20000 Score in One Run
   type: 1
   inOneRun: 1
-  scoreTarget: 50000
+  scoreTarget: 20000
   actTarget: {fileID: 0}
   collectTarget: 0
   isCompleted: 0
-  target: 1
   playerProgress: 0
   reward: {fileID: 11400000, guid: c744395e9479fce40969eccb265c1782, type: 2}

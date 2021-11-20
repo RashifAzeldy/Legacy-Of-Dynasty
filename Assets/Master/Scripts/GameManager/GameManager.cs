@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject mainMenuUIBase;
     [SerializeField] GameObject achvDetailPrefab;
-    [SerializeField] GameObject backButton;
     Canvas mainMenuCanvas;
 
     public GameObject achievementDetailBase { get; private set; }
@@ -64,29 +63,24 @@ public class GameManager : MonoBehaviour
         }
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu"))
+        {
             MainMenuSetup();
-        
+        }
+
     }
 
     public void MainMenuSetup()
     {
-        mainMenuCanvas = FindObjectOfType<Canvas>();
-
-        achievementDetailBase = Instantiate(mainMenuUIBase, mainMenuCanvas.transform);
-
-        GameObject.FindObjectOfType<MainMenuManager>().achievementWidget = achievementDetailBase;
+        MainMenuManager menuManager = FindObjectOfType<MainMenuManager>();
+        GameObject achWidget = menuManager.achievementWidget;
 
         foreach (AchievementScriptableObj item in achievementManager.GetAchievementList)
         {
             GameObject achievementDetail = Instantiate(achvDetailPrefab,
-                achievementDetailBase.GetComponentInChildren<VerticalLayoutGroup>().transform);
+                achWidget.GetComponentInChildren<VerticalLayoutGroup>().transform);
             detailList.Add(achievementDetail.GetComponent<AchievementDetails>());
             achievementDetail.GetComponent<AchievementDetails>().SetDetails(item);
         }
-
-        Instantiate(backButton, achievementDetailBase.GetComponentInChildren<VerticalLayoutGroup>().transform);
-
-
     }
 
     private void Update()
@@ -112,7 +106,6 @@ public class GameManager : MonoBehaviour
             }
             foreach (var item in unlockedHatList)
             {
-                // Here
                 hatList[item].IsCostumeUnlocked = true;
             }
         }

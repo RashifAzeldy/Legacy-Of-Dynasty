@@ -27,6 +27,22 @@ public class AchievementDetails : MonoBehaviour
             progressSlider.maxValue = achievement.collectTarget;
             achievementTarget.text = achievement.collectTarget.ToString();
         }
-        progressSlider.value = achievement.playerProgress;
+        if (achievement.isCompleted)
+        {
+            switch (achievement.type)
+            {
+                case AchievementType.Collect:
+                    progressSlider.value = achievement.collectTarget;
+                    break;
+                case AchievementType.Score:
+                    progressSlider.value = achievement.scoreTarget;
+                    break;
+            }
+            achievementProgress.text = achievement.scoreTarget.ToString();
+        }
+        else
+        {
+            progressSlider.value = achievement.playerProgress;
+        }
     }
 }

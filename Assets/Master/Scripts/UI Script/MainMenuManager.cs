@@ -9,6 +9,8 @@ public class MainMenuManager : MonoBehaviour
     [Header("UI Component:  ")]
     [SerializeField] Button startButton;
     [SerializeField] Button achievementButton;
+    [SerializeField] GameObject achievementBack;
+    [SerializeField] Button achievementBackButton;
     [SerializeField] Button customCharButton;
     [SerializeField] Button quitButton;
     [SerializeField] ConfirmationWidget confirmWidget;
@@ -16,6 +18,8 @@ public class MainMenuManager : MonoBehaviour
     [Header("Misc: ")]
     [SerializeField] string nextSceneName;
     [SerializeField] public GameObject achievementWidget;
+
+    public GameObject SetBackButton { get { return achievementBack; } set { achievementBack = value; } }
 
     private void Start()
     {
@@ -34,8 +38,13 @@ public class MainMenuManager : MonoBehaviour
 
         achievementButton.onClick.AddListener(() =>
         {
-
             achievementWidget.SetActive(true);
+
+        });
+
+        achievementBackButton.onClick.AddListener(() =>
+        {
+            achievementWidget.SetActive(false);
 
         });
 
@@ -44,11 +53,14 @@ public class MainMenuManager : MonoBehaviour
 
             confirmWidget.ActivateWidget(
                 () => { Application.Quit(); },
-                () => {
+                () =>
+                {
                     confirmWidget.DeactivateWidget();
                 });
 
         });
+
+        achievementBack.transform.SetAsLastSibling();
     }
 
     private void Update()

@@ -20,5 +20,5 @@ MonoBehaviour:
   actTarget: {fileID: 11400000, guid: 447669571f5284849806e7eebb3cc354, type: 2}
   collectTarget: 3
   isCompleted: 0
-  playerProgress: 3
+  playerProgress: 0
   reward: {fileID: 11400000, guid: c744395e9479fce40969eccb265c1782, type: 2}
