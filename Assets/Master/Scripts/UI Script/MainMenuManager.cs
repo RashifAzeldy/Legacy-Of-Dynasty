@@ -30,27 +30,18 @@ public class MainMenuManager : MonoBehaviour
         confirmWidget.DeactivateWidget();
 
         startButton.onClick.AddListener(() =>
-        {
-
-            SceneManager.LoadScene(nextSceneName);
-
-        });
+        { SceneManager.LoadScene(nextSceneName); });
 
         achievementButton.onClick.AddListener(() =>
-        {
-            achievementWidget.SetActive(true);
-
-        });
+        { achievementWidget.SetActive(true); });
 
         achievementBackButton.onClick.AddListener(() =>
-        {
-            achievementWidget.SetActive(false);
+        { achievementWidget.SetActive(false); });
 
-        });
+        customCharButton.onClick.AddListener(() => { SceneManager.LoadScene("SkinSelectionScene"); });
 
         quitButton.onClick.AddListener(() =>
         {
-
             confirmWidget.ActivateWidget(
                 () => { Application.Quit(); },
                 () =>

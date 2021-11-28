@@ -1863,7 +1863,6 @@ MonoBehaviour:
   blockMystery: {fileID: -8102298011867001065, guid: 680a9fe8294e48c44bf7343fb64142ad,
     type: 3}
   blockSpeed: 6.5
-  spawnedBlock: []
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0
@@ -9013,7 +9012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e305fba4425031489492dd1ec74e104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMenuSceneName: 
+  _mainMenuSceneName: MainMenu
 --- !u!1 &6919568840008699784
 GameObject:
   m_ObjectHideFlags: 0
