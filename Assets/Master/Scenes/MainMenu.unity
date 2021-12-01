@@ -850,7 +850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   achievementList:
-  - {fileID: 11400000, guid: 7d800f523d4a9474680e7c858f52f5a1, type: 2}
+  - {fileID: 11400000, guid: 8e49a9275b38356439fa209bf49f962e, type: 2}
   - {fileID: 11400000, guid: d65328555bb851e4daabe8d6bc5b17f8, type: 2}
   - {fileID: 11400000, guid: 1f134af40fb7ba74d952118ea62231ea, type: 2}
   notifPrefab: {fileID: 0}
@@ -892,10 +892,11 @@ MonoBehaviour:
   achvDetailPrefab: {fileID: 5937487235025907571, guid: dcd82aaad8c7cc449809b836894bc3f4,
     type: 3}
   achievementManager: {fileID: 516291833067509497}
-  completedAchievementIndex: 
-  achievementProgressList: 000000000000000000000000
-  unlockedHatList: 00000000
-  hatIndex: 0
+  playerSavedData:
+    completedAchievementIndex: 
+    achievementProgress: 
+    unlockedHatIndex: 
+    equipedHatIndex: 0
 --- !u!224 &1618551508499956528
 RectTransform:
   m_ObjectHideFlags: 0

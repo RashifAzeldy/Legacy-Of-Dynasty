@@ -27,7 +27,7 @@ public class CostumeManager : MonoBehaviour
         {
             hatList.Add(item);
         }
-        ShowCostume(GameManager.Instance.hatIndex);
+        ShowCostume(GameManager.Instance.playerSavedData.equipedHatIndex);
     }
 
     private void Update()
@@ -85,7 +85,7 @@ public class CostumeManager : MonoBehaviour
         {
             case CostumeType.Hat:
                 playerCostume.hat = hatList[currentHatIndex].CostumeSprite;
-                GameManager.Instance.hatIndex = currentHatIndex;
+                GameManager.Instance.playerSavedData.equipedHatIndex = currentHatIndex;
                 break;
         }
     }
@@ -115,7 +115,7 @@ public class CostumeManager : MonoBehaviour
                     costumePos[0].sprite = hatList[index].CostumeSprite;
                     costumePos[0].color = new Color(hatPosColor.r, hatPosColor.g, hatPosColor.b, 255);
                 }
-                break;
+                break; 
             default:
                 break;
         }
@@ -127,6 +127,9 @@ public class CostumeManager : MonoBehaviour
     }
     public void Back()
     {
+
+        GameManager.Instance.SaveGameData();
+
         SceneManager.LoadScene(GameManager.Instance.MainMenuSceneName, LoadSceneMode.Single);
     }
 }

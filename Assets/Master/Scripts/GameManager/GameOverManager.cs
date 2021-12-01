@@ -151,9 +151,11 @@ public class GameOverManager : MonoBehaviour
         // Re-Spawn All Blocks with Player Spawn Down Here : 
     }
 
-    public void CostumeSelection()
+    public void ContinueTo(string sceneName)
     {
-        SceneManager.LoadScene(GameManager.Instance.SkinSelectionScene);
+
+        GameManager.Instance.SaveGameData();
+        SceneManager.LoadScene(sceneName);
         Time.timeScale = 1;
     }
 }

@@ -13,11 +13,11 @@ public class PlayerData
     public int equipedHatIndex;
     #endregion
 
-    public PlayerData()
+    public PlayerData(List<int> completedAchievementIndex, List<int> achievementProgress, List<int> unlockedHatIndex, int equipedHatIndex)
     {
-        completedAchievementIndex = GameManager.Instance.CheckCompletedAchievementIndex();
-        achievementProgress = GameManager.Instance.CheckAchievementProgress();
-        unlockedHatIndex = GameManager.Instance.CheckUnlockedHat();
-        equipedHatIndex = GameManager.Instance.hatIndex;
+        this.completedAchievementIndex = completedAchievementIndex;
+        this.achievementProgress = achievementProgress;
+        this.unlockedHatIndex = unlockedHatIndex;
+        this.equipedHatIndex = equipedHatIndex;
     }
 }

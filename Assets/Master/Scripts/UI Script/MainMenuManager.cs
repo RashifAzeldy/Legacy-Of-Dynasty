@@ -43,7 +43,11 @@ public class MainMenuManager : MonoBehaviour
         quitButton.onClick.AddListener(() =>
         {
             confirmWidget.ActivateWidget(
-                () => { Application.Quit(); },
+                () => 
+                { 
+                    Application.Quit();
+                    GameManager.Instance.SaveGameData();
+                },
                 () =>
                 {
                     confirmWidget.DeactivateWidget();

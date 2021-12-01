@@ -226,7 +226,7 @@ public class LODFunctionLibrary
                     achievement.isCompleted = true;
                     // Unlock Reward
                     achievement.reward.IsCostumeUnlocked = true;
-                    GameManager.Instance.unlockedHatList.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
+                    GameManager.Instance.playerSavedData.unlockedHatIndex.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
                     Debug.Log(achievement.achievementName + " is Completed !");
                 }
                 break;
@@ -236,7 +236,7 @@ public class LODFunctionLibrary
                     achievement.isCompleted = true;
                     // Unlock Reward
                     achievement.reward.IsCostumeUnlocked = true;
-                    GameManager.Instance.unlockedHatList.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
+                    GameManager.Instance.playerSavedData.unlockedHatIndex.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
                     Debug.Log(achievement.achievementName + " is Completed !");
                 }
                 break;
@@ -261,18 +261,4 @@ public class LODFunctionLibrary
         }
     }
 
-    public static void SaveGame()
-    {
-        SaveSystem.SavePlayerData();
-    }
-
-    public static void LoadGame()
-    {
-        PlayerData data = SaveSystem.LoadPlayerData();
-
-        GameManager.Instance.completedAchievementIndex = data.completedAchievementIndex;
-        GameManager.Instance.achievementProgressList = data.achievementProgress;
-        GameManager.Instance.unlockedHatList = data.unlockedHatIndex;
-        GameManager.Instance.hatIndex = data.equipedHatIndex;
-    }
 }

@@ -30,10 +30,13 @@ public class GameManager : MonoBehaviour
     EquipedCostume playerEquipedCostume;
 
     #region Saved Data
-    public List<int> completedAchievementIndex = new List<int>();
-    public List<int> achievementProgressList = new List<int>();
-    public List<int> unlockedHatList = new List<int>();
-    public int hatIndex; // Save !
+   // public List<int> completedAchievementIndex = new List<int>();
+   // public List<int> achievementProgressList = new List<int>();
+   // public List<int> unlockedHatList = new List<int>();
+
+    public PlayerData playerSavedData;
+    //public int currentHatIndex;
+
     #endregion
 
     public static GameManager Instance { get; private set; }
@@ -41,13 +44,21 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
 
-        achievementManager = GetComponent<AchievementManager>();
-        playerEquipedCostume = GetComponent<EquipedCostume>();
-
-        if (!Instance)
+        if (Instance)
         {
 
+            Destroy(this.gameObject);
+
+        }
+        else
+        {
+
+            LoadGameData();
+
             Instance = this;
+
+            achievementManager = GetComponent<AchievementManager>();
+            playerEquipedCostume = GetComponent<EquipedCostume>();
 
             Debug.Log(achievementManager.name + ", " + playerEquipedCostume.name);
 
@@ -56,11 +67,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(achievementManager);
 
         }
-        else
-        {
-            Debug.Log(this.gameObject.name);
-            Destroy(this.gameObject);
-        }
+        
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu"))
         {
@@ -92,22 +99,43 @@ public class GameManager : MonoBehaviour
         }
 #endif
 
-        if (Input.GetKeyDown(KeyCode.S))
+//        if (Input.GetKeyDown(KeyCode.S))
+//        {
+//            SaveGameData();
+//        }
+//        else if (Input.GetKeyDown(KeyCode.Q))
+//        {
+//            LoadGameData();
+//        }
+
+    }
+
+    public void SaveGameData()
+    {
+
+        PlayerData cacheSaveData = new PlayerData(CheckCompletedAchievementIndex(), CheckAchievementProgress(), CheckUnlockedHat(), playerSavedData.equipedHatIndex);
+
+        SaveSystem.SavePlayerData(cacheSaveData);
+    }
+
+    public void LoadGameData()
+    {
+
+        PlayerData cachePData = SaveSystem.LoadPlayerData();
+
+        playerSavedData.completedAchievementIndex = cachePData.completedAchievementIndex;
+        playerSavedData.achievementProgress = cachePData.achievementProgress;
+        playerSavedData.unlockedHatIndex = cachePData.unlockedHatIndex;
+        playerSavedData.equipedHatIndex = cachePData.equipedHatIndex;
+
+        for (int i = 0; i < detailList.Count; i++)
         {
-            LODFunctionLibrary.SaveGame();
+            achievementManager.GetAchievementList[i].playerProgress = playerSavedData.achievementProgress[i];
+            detailList[i].SetDetails(achievementManager.GetAchievementList[i]);
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        foreach (var item in playerSavedData.unlockedHatIndex)
         {
-            LODFunctionLibrary.LoadGame();
-            for (int i = 0; i < detailList.Count; i++)
-            {
-                achievementManager.GetAchievementList[i].playerProgress = achievementProgressList[i];
-                detailList[i].SetDetails(achievementManager.GetAchievementList[i]);
-            }
-            foreach (var item in unlockedHatList)
-            {
-                hatList[item].IsCostumeUnlocked = true;
-            }
+            hatList[item].IsCostumeUnlocked = true;
         }
 
     }
