@@ -123,19 +123,24 @@ public class GameManager : MonoBehaviour
 
         PlayerData cachePData = SaveSystem.LoadPlayerData();
 
-        playerSavedData.completedAchievementIndex = cachePData.completedAchievementIndex;
-        playerSavedData.achievementProgress = cachePData.achievementProgress;
-        playerSavedData.unlockedHatIndex = cachePData.unlockedHatIndex;
-        playerSavedData.equipedHatIndex = cachePData.equipedHatIndex;
+        if (cachePData != null)
+        {
 
-        for (int i = 0; i < detailList.Count; i++)
-        {
-            achievementManager.GetAchievementList[i].playerProgress = playerSavedData.achievementProgress[i];
-            detailList[i].SetDetails(achievementManager.GetAchievementList[i]);
-        }
-        foreach (var item in playerSavedData.unlockedHatIndex)
-        {
-            hatList[item].IsCostumeUnlocked = true;
+            playerSavedData.completedAchievementIndex = cachePData.completedAchievementIndex;
+            playerSavedData.achievementProgress = cachePData.achievementProgress;
+            playerSavedData.unlockedHatIndex = cachePData.unlockedHatIndex;
+            playerSavedData.equipedHatIndex = cachePData.equipedHatIndex;
+
+            for (int i = 0; i < detailList.Count; i++)
+            {
+                achievementManager.GetAchievementList[i].playerProgress = playerSavedData.achievementProgress[i];
+                detailList[i].SetDetails(achievementManager.GetAchievementList[i]);
+            }
+            foreach (var item in playerSavedData.unlockedHatIndex)
+            {
+                hatList[item].IsCostumeUnlocked = true;
+            }
+
         }
 
     }
