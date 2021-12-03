@@ -143,7 +143,8 @@ public class LODFunctionLibrary
                 controller.StartJumpDelay(card.time);
                 break;
             case CardEffect.Dead:
-                if (player.GetComponent<PlayerStatus>().haveChild)
+                controller.AddCurrentScore();
+                if (PlayerStatus.Instance.haveChild)
                 {
                     gameManager.GetComponent<GameOverManager>().ShowDeadMenu();
                     gameManager.GetComponent<GameOverManager>().SetCausingDeath.text = card.causingDeath;
