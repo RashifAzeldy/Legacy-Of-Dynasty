@@ -100,12 +100,14 @@ public class GameOverManager : MonoBehaviour
         for (int i = 0; i < player.GetScoreList.Count; i++)
         {
             GameObject dyScore = Instantiate(dynastyScorePrefab, dynastyScoreParent);
-            dyScore.GetComponent<TextMeshProUGUI>().text = "" + player.GetScoreList[i];
+            dyScore.GetComponent<TextMeshProUGUI>().text = "Dynasty " + (i + 1) + " : " + player.GetScoreList[i];
         }
         #endregion
 
         #region Show Character Per Dynasty
-        state.AddCharaImage();
+        if (state.GetPlayerCurrentState != Age.Elder)
+            state.AddCharaImage();
+
         for (int i = 0; i < state.GetCharacter.Count; i++)
         {
             GameObject chara = Instantiate(characterPrefab, characterParent);

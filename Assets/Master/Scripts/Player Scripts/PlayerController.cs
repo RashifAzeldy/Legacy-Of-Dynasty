@@ -110,6 +110,12 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ResetJump(time));
     }
 
+    public void AddCurrentScore()
+    {
+        playerScore.Add(PlayerStatus.Instance.playerStatusData.PlayerScore);
+        PlayerStatus.Instance.playerStatusData.PlayerScore = 0;
+    }
+
     IEnumerator ResetJump(float time)
     {
         delayIsRunning = true;

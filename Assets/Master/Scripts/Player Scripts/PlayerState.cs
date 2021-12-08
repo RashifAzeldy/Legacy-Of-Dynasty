@@ -7,6 +7,7 @@ public class PlayerState : MonoBehaviour
     [SerializeField] List<AgeState> ageList = new List<AgeState>();
     [SerializeField] SpriteRenderer player;
     [SerializeField] PlayerStatus status;
+    [SerializeField] PlayerController playerController;
     bool switchState;
     int ageIndex = 0;
     Age currentState;
@@ -27,10 +28,6 @@ public class PlayerState : MonoBehaviour
         if (switchState)
         {
             StartCoroutine(SwitchAgeState(60));
-            if ( currentState == Age.Adult )
-            {
-                AddCharaImage();
-            }
             switchState = false;
         }
     }
@@ -40,9 +37,11 @@ public class PlayerState : MonoBehaviour
         ageIndex += 1;
         if (ageIndex >= ageList.Count)
         {
+            // Change Dynasty ~
+            playerController.AddCurrentScore();
+            AddCharaImage();
             ageIndex = 0;
         }
-        // Change To Game Object When it's Converted to 3D Game!
         player.sprite = ageList[ageIndex].GetAgeObject;
         currentState = ageList[ageIndex].GetState;
         status.playerStatusData.PlayerAge = currentState;
