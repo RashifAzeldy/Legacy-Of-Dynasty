@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -10.606628, y: -10.606689}
-  m_SizeDelta: {x: 175, y: 175}
+  m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4530553697527855358
 CanvasRenderer:
@@ -86,7 +86,7 @@ Animator:
   m_GameObject: {fileID: 1532857375824675662}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a86b5ef697226f24996f910c722aa89f, type: 2}
+  m_Controller: {fileID: 9100000, guid: fd8898c48b676af48a9cea9cfba7997c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
