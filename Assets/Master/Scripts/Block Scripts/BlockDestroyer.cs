@@ -5,36 +5,18 @@ using UnityEngine;
 public class BlockDestroyer : MonoBehaviour
 {
     [SerializeField] Transform cam;
-    [SerializeField] Vector2 offset;
+    [SerializeField] Vector2 offset; 
 
+    private BlockController _blockController;
+    
+    
     void OnTriggerEnter2D(Collider2D collider)
     {
-        BlockController cacheController;
+        _blockController = !_blockController ? collider.gameObject.GetComponent<BlockController>() : _blockController;
 
-        if (cacheController = collider.gameObject.GetComponent<BlockController>())
+        if (_blockController)
         {
-            string objectTagID;
-
-            switch (cacheController.cardData.cardValue)
-            {
-                case CardValue.Positive:
-                    objectTagID = "BlockPositive";
-                    break;
-                case CardValue.Negative:
-                    objectTagID = "BlockNegative";
-                    break;
-                case CardValue.Mystery:
-                    objectTagID = "BlockMystery";
-                    break;
-                case CardValue.Neutral:
-                    objectTagID = "BlockNeutral";
-                    break;
-                default:
-                    objectTagID = "BlockNeutral";
-                    break;
-            }
-
-            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, collider.gameObject);
+            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(collider.gameObject);
         }
         if ( collider.GetComponent<StoryCardTextCrawl>() )
         {
