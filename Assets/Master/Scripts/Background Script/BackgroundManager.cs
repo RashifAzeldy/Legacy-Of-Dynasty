@@ -62,7 +62,9 @@ public class BackgroundManager : MonoBehaviour
     {
         if ( skyBG != null )
         {
-            skyBG.transform.Translate(new Vector3(-0.1f * Time.deltaTime, 0, 0));
+            SpriteRenderer render = skyBG.GetComponent<SpriteRenderer>();
+            Vector2 offset = new Vector2(-1.0f * Time.deltaTime, 0);
+            render.material.SetTextureOffset("_MainTex", offset);
         }
 
         foreach ( GameObject item in propAList )
