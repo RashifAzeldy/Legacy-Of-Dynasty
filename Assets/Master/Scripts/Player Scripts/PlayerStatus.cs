@@ -18,11 +18,11 @@ public class PlayerStatus : MonoBehaviour
     #endregion
     public PlayerStatusData playerStatusData;
 
-    LoverStage GetLover() { return playerStatusData.LoverStage; }
-    JobData GetJobData() { return playerStatusData.JobData; }
-    Age GetAge() { return playerStatusData.PlayerAge; }
-    EducationStage GetEducation() { return playerStatusData.EducationStage; }
-    int GetScore() { return playerStatusData.PlayerScore; }
+    public LoverStage Lover { get=> playerStatusData.LoverStage; }
+    public JobData JobData { get=> playerStatusData.JobData; }
+    public Age Age { get=> playerStatusData.PlayerAge; }
+    public EducationStage Education { get=> playerStatusData.EducationStage; }
+    public int Score { get=> playerStatusData.PlayerScore; }
 
     public bool haveChild;
 }
