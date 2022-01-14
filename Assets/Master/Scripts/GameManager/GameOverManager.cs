@@ -96,7 +96,9 @@ public class GameOverManager : MonoBehaviour
     public void ShowGameOverMenu()
     {
         pauseButton.SetActive(false);
+
         #region Add Score
+        player.GetScoreList.Add(status.playerStatusData.PlayerScore);
         for (int i = 0; i < player.GetScoreList.Count; i++)
         {
             GameObject dyScore = Instantiate(dynastyScorePrefab, dynastyScoreParent);
@@ -127,7 +129,6 @@ public class GameOverManager : MonoBehaviour
         gameOver = true;
         Time.timeScale = 0;
         gameOverMenu.SetActive(true);
-        player.GetScoreList.Add(status.playerStatusData.PlayerScore);
         finalScoreText.text = "" + LODFunctionLibrary.CountFinalScore(player.GetScoreList);
         pauseButton.SetActive(false);
         achievementManager.AchievementProgress(player, player.GetCollectedCards.GetCollectedStoryCard);
@@ -155,9 +156,9 @@ public class GameOverManager : MonoBehaviour
 
     public void ContinueTo(string sceneName)
     {
-
         GameManager.Instance.SaveGameData();
         SceneManager.LoadScene(sceneName);
+
         Time.timeScale = 1;
     }
 }

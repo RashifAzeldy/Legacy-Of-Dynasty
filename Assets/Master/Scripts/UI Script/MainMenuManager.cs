@@ -18,6 +18,7 @@ public class MainMenuManager : MonoBehaviour
     [Header("Misc: ")]
     [SerializeField] string nextSceneName;
     [SerializeField] public GameObject achievementWidget;
+    [SerializeField] Transform historyObjectParent;
 
     public GameObject SetBackButton { get { return achievementBack; } set { achievementBack = value; } }
 
@@ -30,7 +31,9 @@ public class MainMenuManager : MonoBehaviour
         confirmWidget.DeactivateWidget();
 
         startButton.onClick.AddListener(() =>
-        { SceneManager.LoadScene(nextSceneName); });
+        {
+            SceneManager.LoadScene(nextSceneName);
+        });
 
         achievementButton.onClick.AddListener(() =>
         { achievementWidget.SetActive(true); });
@@ -43,8 +46,8 @@ public class MainMenuManager : MonoBehaviour
         quitButton.onClick.AddListener(() =>
         {
             confirmWidget.ActivateWidget(
-                () => 
-                { 
+                () =>
+                {
                     Application.Quit();
                     GameManager.Instance.SaveGameData();
                 },

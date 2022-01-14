@@ -25,7 +25,7 @@ public class PlayerStatusData
 }
 
 [System.Serializable]
-public enum StatusDataAs 
-{ 
-    PlayerStatus, RadiantCardRequirement, CareerCardRequirement, EducationCardRequirement, LoverCardRequirement 
+public enum StatusDataAs
+{
+    PlayerStatus, RadiantCardRequirement, CareerCardRequirement, EducationCardRequirement, LoverCardRequirement
 }

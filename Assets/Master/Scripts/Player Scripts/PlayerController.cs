@@ -21,8 +21,6 @@ public class PlayerController : MonoBehaviour
     public List<int> GetScoreList { get { return playerScore; } set { playerScore = value; } }
     bool pause;
     public bool PlayerPause { get { return pause; } set { pause = value; } }
-    bool dead;
-    public bool PlayerIsDead { get { return dead; } set { dead = value; } }
 
     public StoryCardCollector GetCollectedCards { get { return collectedCards; } }
 

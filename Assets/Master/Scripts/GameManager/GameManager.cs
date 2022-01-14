@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
     EquipedCostume playerEquipedCostume;
 
     #region Saved Data
-   // public List<int> completedAchievementIndex = new List<int>();
-   // public List<int> achievementProgressList = new List<int>();
-   // public List<int> unlockedHatList = new List<int>();
+    // public List<int> completedAchievementIndex = new List<int>();
+    // public List<int> achievementProgressList = new List<int>();
+    // public List<int> unlockedHatList = new List<int>();
 
     public PlayerData playerSavedData;
     //public int currentHatIndex;
@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(achievementManager);
 
         }
-        
+
 
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("MainMenu"))
         {
@@ -90,29 +90,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SceneManager.LoadScene(skinScene, LoadSceneMode.Single);
-        }
-#endif
-
-//        if (Input.GetKeyDown(KeyCode.S))
-//        {
-//            SaveGameData();
-//        }
-//        else if (Input.GetKeyDown(KeyCode.Q))
-//        {
-//            LoadGameData();
-//        }
-
-    }
-
     public void SaveGameData()
     {
-
         PlayerData cacheSaveData = new PlayerData(CheckCompletedAchievementIndex(), CheckAchievementProgress(), CheckUnlockedHat(), playerSavedData.equipedHatIndex);
 
         SaveSystem.SavePlayerData(cacheSaveData);

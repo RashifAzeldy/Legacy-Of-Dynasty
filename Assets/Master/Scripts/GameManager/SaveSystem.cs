@@ -5,7 +5,6 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-
     public static List<int> completedAchievementIndex = new List<int>();
     public static List<int> achievementProgressList = new List<int>();
     public static List<int> unlockedHatList = new List<int>();
@@ -27,7 +26,7 @@ public static class SaveSystem
     public static PlayerData LoadPlayerData()
     {
         string path = Application.persistentDataPath + "/PlayerData.save";
-                
+
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
