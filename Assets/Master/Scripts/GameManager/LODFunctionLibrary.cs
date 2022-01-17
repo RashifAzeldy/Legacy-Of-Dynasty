@@ -158,10 +158,17 @@ public class LODFunctionLibrary
         }
     }
 
-    public static void CheckAchievementProgress(AchievementManager manager, PlayerController player,
-        List<CardDataBase> collectedCard, AchievementScriptableObj achievement)
+    public static void CheckAchievementProgress(PlayerController player, List<CardDataBase> collectedCard,
+        AchievementScriptableObj achievement, PlayerStatus status)
     {
         int baseProgress = achievement.playerProgress;
+        bool scoreCompare = LODFunctionLibrary.CountFinalScore(player.GetScoreList) > achievement.limit.minScoreLimit &&
+            LODFunctionLibrary.CountFinalScore(player.GetScoreList) < achievement.limit.maxScoreLimit;
+        bool ageComparison = status.playerStatusData.PlayerAge == achievement.data.ageStatus;
+        bool educationComparison = status.playerStatusData.EducationStage == achievement.data.educationStatus;
+        bool loverComparison = status.playerStatusData.LoverStage == achievement.data.loverStatus;
+        bool jobLevelComparison = status.playerStatusData.JobData.jobLevel == achievement.data.jobStatus;
+
         if (achievement.inOneRun)
         {
             List<CardDataBase> actProgress = new List<CardDataBase>();
@@ -179,10 +186,43 @@ public class LODFunctionLibrary
                     {
                         achievement.playerProgress = 0;
                     }
+                    else
+                    {
+                        achievement.playerProgress = 1;
+                    }
                     break;
                 case AchievementType.Score:
                     achievement.playerProgress = LODFunctionLibrary.CountFinalScore(player.GetScoreList);
                     if (LODFunctionLibrary.CountFinalScore(player.GetScoreList) != achievement.scoreTarget)
+                    {
+                        achievement.playerProgress = 0;
+                    }
+                    else
+                    {
+                        achievement.playerProgress = 1;
+                    }
+                    break;
+                case AchievementType.StatusAndScore:
+                    Debug.Log(scoreCompare + ", " + ageComparison + ", " + educationComparison + ", " + jobLevelComparison
+                    + ", " + loverComparison);
+                    if (scoreCompare && ageComparison && educationComparison
+                        && jobLevelComparison && loverComparison)
+                    {
+                        achievement.playerProgress = 1;
+                    }
+                    else
+                    {
+                        achievement.playerProgress = 0;
+                    }
+                    break;
+                case AchievementType.StatusAndStatus:
+                    Debug.Log(ageComparison + ", " + educationComparison + ", " + jobLevelComparison
+                        + ", " + loverComparison);
+                    if (ageComparison && educationComparison && jobLevelComparison && loverComparison)
+                    {
+                        achievement.playerProgress = 1;
+                    }
+                    else
                     {
                         achievement.playerProgress = 0;
                     }
@@ -209,20 +249,14 @@ public class LODFunctionLibrary
                     break;
             }
         }
-        if (baseProgress != achievement.playerProgress)
-        {
-            //manager.SpawnAchivementNotification(achievement);
-        }
-        // Check is The Achievement Completed?
-        // AchievementCompleted(achievement.playerProgress, achievement);
     }
 
-    public static void AchievementCompleted(int playerProgress, AchievementScriptableObj achievement)
+    public static void AchievementCompleted(AchievementScriptableObj achievement)
     {
         switch (achievement.type)
         {
             case AchievementType.Collect:
-                if (playerProgress >= achievement.collectTarget)
+                if (achievement.playerProgress >= achievement.collectTarget)
                 {
                     achievement.isCompleted = true;
                     // Unlock Reward
@@ -232,7 +266,27 @@ public class LODFunctionLibrary
                 }
                 break;
             case AchievementType.Score:
-                if (playerProgress >= achievement.scoreTarget)
+                if (achievement.playerProgress >= achievement.scoreTarget)
+                {
+                    achievement.isCompleted = true;
+                    // Unlock Reward
+                    achievement.reward.IsCostumeUnlocked = true;
+                    GameManager.Instance.playerSavedData.unlockedHatIndex.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
+                    Debug.Log(achievement.achievementName + " is Completed !");
+                }
+                break;
+            case AchievementType.StatusAndScore:
+                if (achievement.playerProgress >= 1)
+                {
+                    achievement.isCompleted = true;
+                    // Unlock Reward
+                    achievement.reward.IsCostumeUnlocked = true;
+                    GameManager.Instance.playerSavedData.unlockedHatIndex.Add(GameManager.Instance.GetHatList.IndexOf(achievement.reward));
+                    Debug.Log(achievement.achievementName + " is Completed !");
+                }
+                break;
+            case AchievementType.StatusAndStatus:
+                if (achievement.playerProgress >= 1)
                 {
                     achievement.isCompleted = true;
                     // Unlock Reward
@@ -242,24 +296,25 @@ public class LODFunctionLibrary
                 }
                 break;
         }
-    }
 
-    public static void SetAchivementNotification(AchievementScriptableObj achievement, GameObject notificationObject)
-    {
-        AchievementNotification notif = notificationObject.GetComponent<AchievementNotification>();
-        notif.achievementName.text = achievement.achievementName;
-        notif.achievementDescription.text = achievement.description;
-        switch (achievement.type)
+    }
+    /*
+        public static void SetAchivementNotification(AchievementScriptableObj achievement, GameObject notificationObject)
         {
-            case AchievementType.Collect:
-                notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.collectTarget;
-                notif.progressBar.value = achievement.playerProgress * achievement.collectTarget / 100;
-                break;
-            case AchievementType.Score:
-                notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.scoreTarget;
-                notif.progressBar.value = achievement.playerProgress * achievement.scoreTarget / 100;
-                break;
+            AchievementNotification notif = notificationObject.GetComponent<AchievementNotification>();
+            notif.achievementName.text = achievement.achievementName;
+            notif.achievementDescription.text = achievement.description;
+            switch (achievement.type)
+            {
+                case AchievementType.Collect:
+                    notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.collectTarget;
+                    notif.progressBar.value = achievement.playerProgress * achievement.collectTarget / 100;
+                    break;
+                case AchievementType.Score:
+                    notif.achievementProgress.text = achievement.playerProgress + " / " + achievement.scoreTarget;
+                    notif.progressBar.value = achievement.playerProgress * achievement.scoreTarget / 100;
+                    break;
+            }
         }
-    }
-
+    */
 }

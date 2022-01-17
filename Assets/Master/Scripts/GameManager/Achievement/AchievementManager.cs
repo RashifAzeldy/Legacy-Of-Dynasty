@@ -14,14 +14,16 @@ public class AchievementManager : MonoBehaviour
         {
             if (!item.isCompleted)
             {
-                LODFunctionLibrary.CheckAchievementProgress(this, player, collectedCard, item);
+                LODFunctionLibrary.CheckAchievementProgress(player, collectedCard, item, player.gameObject.GetComponent<PlayerStatus>());
+                LODFunctionLibrary.AchievementCompleted(item);
             }
         }
     }
-
-    public void SpawnAchivementNotification(AchievementScriptableObj achievement)
-    {
-        GameObject notifObject = Instantiate(notifPrefab, notifPrefab.GetComponent<AchievementNotification>().notifParent);
-        LODFunctionLibrary.SetAchivementNotification(achievement, notifObject);
-    }
+    /*
+        public void SpawnAchivementNotification(AchievementScriptableObj achievement)
+        {
+            GameObject notifObject = Instantiate(notifPrefab, notifPrefab.GetComponent<AchievementNotification>().notifParent);
+            LODFunctionLibrary.SetAchivementNotification(achievement, notifObject);
+        }
+        */
 }

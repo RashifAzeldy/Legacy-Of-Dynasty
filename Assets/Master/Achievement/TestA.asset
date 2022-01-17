@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c492ab2061635c40bd56c92e47edc44, type: 3}
-  m_Name: Collect Child Act
+  m_Name: TestA
   m_EditorClassIdentifier: 
-  achievementName: Discover Video Games
-  description: Collect "Discover Video Games" Act 3 Times
-  type: 0
-  inOneRun: 0
+  achievementName: Test A
+  description: Just Test
+  type: 2
+  inOneRun: 1
   scoreTarget: 0
-  actTarget: {fileID: 11400000, guid: 447669571f5284849806e7eebb3cc354, type: 2}
-  collectTarget: 3
+  actTarget: {fileID: 0}
+  collectTarget: 0
   isCompleted: 0
   limit:
-    minScoreLimit: 0
-    maxScoreLimit: 0
+    minScoreLimit: 1000
+    maxScoreLimit: 10000
   data:
     ageStatus: 0
     educationStatus: 0

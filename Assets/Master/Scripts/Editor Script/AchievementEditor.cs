@@ -38,8 +38,20 @@ public class AchievementEditor : Editor
         }
         else if (achievementType.enumValueIndex == 1)
         {
-            SerializedProperty scoreTarget = serializedObject.FindProperty("scoreTarget");
-            EditorGUILayout.PropertyField(scoreTarget, true);
+            SerializedProperty score = serializedObject.FindProperty("scoreTarget");
+            EditorGUILayout.PropertyField(score, true);
+        }
+        else if (achievementType.enumValueIndex == 2)
+        {
+            SerializedProperty limit = serializedObject.FindProperty("limit");
+            EditorGUILayout.PropertyField(limit, true);
+            SerializedProperty status = serializedObject.FindProperty("data");
+            EditorGUILayout.PropertyField(status, true);
+        }
+        else if (achievementType.enumValueIndex == 3)
+        {
+            SerializedProperty status = serializedObject.FindProperty("data");
+            EditorGUILayout.PropertyField(status, true);
         }
         serializedObject.ApplyModifiedProperties();
     }

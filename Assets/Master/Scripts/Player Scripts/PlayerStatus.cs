@@ -25,4 +25,16 @@ public class PlayerStatus : MonoBehaviour
     int GetScore() { return playerStatusData.PlayerScore; }
 
     public bool haveChild;
+
+    private void Update()
+    {
+        if (GetJobData().jobType == JobType.None && GetJobData().jobLevel != JobLevel.None)
+        {
+            JobData initJobData = new JobData();
+            initJobData.jobType = GetJobData().jobType;
+            initJobData.jobLevel = JobLevel.None;
+
+            playerStatusData.JobData = initJobData;
+        }
+    }
 }
