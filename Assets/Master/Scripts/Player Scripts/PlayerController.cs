@@ -70,30 +70,9 @@ public class PlayerController : MonoBehaviour
                 LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
                 collectedCards.GetCollectedStoryCard.Add(blockObject.cardData);
                 LODFunctionLibrary.ApplyEffect(gameObject, blockObject.cardData, gOver.gameObject);
-            }
-
-            string objectTagID;
-
-            switch (blockObject.cardData.cardValue)
-            {
-                case CardValue.Positive:
-                    objectTagID = "BlockPositive";
-                    break;
-                case CardValue.Negative:
-                    objectTagID = "BlockNegative";
-                    break;
-                case CardValue.Mystery:
-                    objectTagID = "BlockMystery";
-                    break;
-                case CardValue.Neutral:
-                    objectTagID = "BlockNeutral";
-                    break;
-                default:
-                    objectTagID = "BlockNeutral";
-                    break;
-            }
-
-            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, other.gameObject);
+            } 
+            
+            ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(blockObject.gameObject);
 
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,26 +7,26 @@ using TMPro;
 public class BlockController : MonoBehaviour
 {
     [Header("Block Config : ")]
-    [SerializeField] public Vector2 blockSpeedRange = new Vector2(1.5f, 3.5f);
+    //[SerializeField] public Vector2 blockSpeedRange = new Vector2(1.5f, 3.5f);
     [SerializeField] TextMeshProUGUI blockTitleText;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject blockSign;
-
+    
     [HideInInspector] public CardDataBase cardData;
 
-    public float blockSpeed { get; set; }
-    public GameObject GetBlockSign { get { return blockSign; } set { blockSign = value; } }
+    private float _blockSpeed;
 
-    BlockSpawner spawner;
-
-    void Start()
+    public GameObject GetBlockSign
     {
-        spawner = FindObjectOfType<BlockSpawner>();
+        get { return blockSign; }
+        set { blockSign = value; }
     }
+    
     void Update()
     {
-        transform.Translate(-blockSpeed * Time.deltaTime, 0, 0);
-
+        _blockSpeed = BlockSpawner.Instance.BlockSpeed;
+        transform.Translate(-_blockSpeed * Time.deltaTime, 0, 0);
+        //Debug.Log(blockSpeed);
         if (cardData != null)
         {
             text.text = cardData.cardName;
@@ -39,27 +40,7 @@ public class BlockController : MonoBehaviour
 
     public void DestroyObject()
     {
-        string objectTagID;
-
-        switch (cardData.cardValue)
-        {
-            case CardValue.Positive:
-                objectTagID = "BlockPositive";
-                break;
-            case CardValue.Negative:
-                objectTagID = "BlockNegative";
-                break;
-            case CardValue.Mystery:
-                objectTagID = "BlockMystery";
-                break;
-            case CardValue.Neutral:
-                objectTagID = "BlockNeutral";
-                break;
-            default:
-                objectTagID = "BlockNeutral";
-                break;
-        }
-
-        ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(objectTagID, gameObject);
+        ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(gameObject);
+        
     }
 }

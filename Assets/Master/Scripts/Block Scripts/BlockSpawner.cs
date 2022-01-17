@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -17,16 +19,32 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] List<EffortPosition> spawnPositions = new List<EffortPosition>();
 
     [Space]
-
-    [Header("Block Config : ")]
-    [SerializeField] BlockController blockNeutral;
-    [SerializeField] BlockController blockPositive;
-    [SerializeField] BlockController blockNegative;
-    [SerializeField] BlockController blockMystery;
+    
+    [Header("Block Config:")]
+    public BlockController BlockNeutralPrefab;
+    public BlockController BlockPositivePrefab;
+    public BlockController BlockNegativePrefab;
+    public BlockController BlockMysteryPrefab;
+    
     [Space]
-    [SerializeField] float blockSpeed;
+    
+    [SerializeField] float blockSpeed = 5.5f;
 
     #endregion
+
+    public static BlockSpawner Instance { get; private set; }
+
+    public float BlockSpeed
+    {
+        get => blockSpeed;
+    }
+    
+    private void OnEnable()
+    {
+        if (!Instance)
+            Instance = this;
+        
+    }
 
     PlayerState player;
     PlayerStatus status;
@@ -59,7 +77,7 @@ public class BlockSpawner : MonoBehaviour
         return 0;
     }
 
-    Vector3 getSpawnPosition(BlockEffort spawnAtEffort)
+    Vector3 GetSpawnPosition(BlockEffort spawnAtEffort)
     {
 
         foreach (EffortPosition item in spawnPositions)
@@ -90,43 +108,27 @@ public class BlockSpawner : MonoBehaviour
     {
         for (int i = 0; i < objQuantity; i++)
         {
-            GameObject _cacheBlock;
-            BlockController _cacheBController;
-            CardDataBase _cacheCard = GetStoryCard(CheckRequirement(status, effort, cardList));
+            CardDataBase cCard = GetStoryCard(CheckRequirement(status, effort, cardList));
 
             yield return new WaitForSeconds(time);
 
-            if (_cacheCard)
+            if (cCard)
             {
-                switch (_cacheCard.cardValue)
-                {
-                    case CardValue.Positive:
-                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockPositive", getSpawnPosition(effort), Quaternion.identity);
-                        break;
+                BlockController cBlockController = null;
+                GameObject cBlockReference =
+                    cCard.cardValue == CardValue.Positive ? BlockPositivePrefab.gameObject
+                    : cCard.cardValue == CardValue.Negative ? BlockNegativePrefab.gameObject
+                    : cCard.cardValue == CardValue.Mystery ? BlockMysteryPrefab.gameObject
+                    : cCard.cardValue == CardValue.Neutral ? BlockNeutralPrefab.gameObject
+                    : null;
 
-                    case CardValue.Negative:
-                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNegative", getSpawnPosition(effort), Quaternion.identity);
-                        break;
+                gameObject.InstantiatePool(cBlockReference, GetSpawnPosition(effort), Quaternion.identity);
+                
+                cBlockController = cBlockReference.GetComponent<BlockController>();
+                
+                cBlockController.cardData = cCard;
 
-                    case CardValue.Mystery:
-                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockMystery", getSpawnPosition(effort), Quaternion.identity);
-                        break;
-
-                    case CardValue.Neutral:
-                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
-                        break;
-
-                    default:
-                        _cacheBlock = ObjectPoolerManager.Instance.SpawnObjectFromPool("BlockNeutral", getSpawnPosition(effort), Quaternion.identity);
-                        break;
-                }
-
-                _cacheBController = _cacheBlock.GetComponent<BlockController>();
-                _cacheBController.blockSpeed = blockSpeed;
-
-                _cacheBController.cardData = _cacheCard;
-
-                _cacheBController.InitBlock();
+                cBlockController.InitBlock();
             }
         }
     }
