@@ -17,10 +17,6 @@ public class AchievementScriptableObj : ScriptableObject
     public CardDataBase actTarget;
     public int collectTarget;
     public bool isCompleted;
-    // If type == CollectAndScoreLimit, Status will shown
-    public ScoreLimit limit;
-    // If type == StatusAndStatus, Status will shown
-    public Status data;
 
     // Progress
     public int playerProgress;
@@ -28,26 +24,8 @@ public class AchievementScriptableObj : ScriptableObject
     public Costume reward;
 }
 
-[System.Serializable]
-public class ScoreLimit
-{
-    public int minScoreLimit;
-    public int maxScoreLimit;
-}
-
 public enum AchievementType
 {
     Collect,
-    Score,
-    StatusAndScore, // One Run Only !
-    StatusAndStatus // One Run Only !
-}
-
-[System.Serializable]
-public class Status
-{
-    public Age ageStatus;
-    public EducationStage educationStatus;
-    public JobLevel jobStatus;
-    public LoverStage loverStatus;
+    Score
 }

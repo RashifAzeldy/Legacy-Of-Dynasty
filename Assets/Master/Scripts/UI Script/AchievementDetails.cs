@@ -27,12 +27,6 @@ public class AchievementDetails : MonoBehaviour
             progressSlider.maxValue = achievement.collectTarget;
             achievementTarget.text = achievement.collectTarget.ToString();
         }
-        else if (achievement.type == AchievementType.StatusAndScore ||
-            achievement.type == AchievementType.StatusAndStatus)
-        {
-            progressSlider.maxValue = 1;
-            achievementTarget.text = progressSlider.maxValue.ToString();
-        }
         if (achievement.isCompleted)
         {
             switch (achievement.type)
@@ -43,24 +37,12 @@ public class AchievementDetails : MonoBehaviour
                 case AchievementType.Score:
                     progressSlider.value = achievement.scoreTarget;
                     break;
-                case AchievementType.StatusAndScore:
-                    progressSlider.value = 1;
-                    break;
-                case AchievementType.StatusAndStatus:
-                    progressSlider.value = 1;
-                    break;
             }
             achievementProgress.text = achievement.scoreTarget.ToString();
         }
         else
         {
             progressSlider.value = achievement.playerProgress;
-        }
-
-        if (achievement.playerProgress < 0)
-        {
-            achievement.playerProgress = 0;
-            achievementProgress.text = "0";
         }
     }
 }
