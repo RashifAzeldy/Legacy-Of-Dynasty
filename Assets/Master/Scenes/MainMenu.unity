@@ -581,7 +581,37 @@ PrefabInstance:
     - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1506375942}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowInterstitialAd
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: AdsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3111749257070387817, guid: c23742ccaceb2f74abb986121b20b083,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c23742ccaceb2f74abb986121b20b083, type: 3}
@@ -920,6 +950,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30fc6bd14c020ca479ab0faca6a24ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1506375941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1506375943}
+  - component: {fileID: 1506375942}
+  m_Layer: 0
+  m_Name: AdsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1506375942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506375941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c282cca76f63d3e468f1b4df4e38af1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interstitialAdID: ca-app-pub-3940256099942544/1033173712
+--- !u!4 &1506375943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506375941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 371.2509, y: 531.1747, z: -479.4405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1516146844 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 618427282598087777, guid: 90cb824037eb27548b7685c22d52d628,
@@ -1079,12 +1153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ba697b8aff89d449ab62cd25058d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardList: []
-  latestScore: 0
-  tempHistory:
-    score: 0
-    collected: []
-  setHistory: 0
 --- !u!114 &516291833067509497
 MonoBehaviour:
   m_ObjectHideFlags: 0

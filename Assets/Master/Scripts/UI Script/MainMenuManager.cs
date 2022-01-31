@@ -32,7 +32,13 @@ public class MainMenuManager : MonoBehaviour
 
         startButton.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene(nextSceneName);
+            
+            AdsManager.Instance.ShowInterstitialAd();
+            AdsManager.InterstitialAdManager.InterstitialAd.OnAdClosed += (obj, args) =>
+            {
+                SceneManager.LoadScene(nextSceneName);
+            };
+            
         });
 
         achievementButton.onClick.AddListener(() =>
