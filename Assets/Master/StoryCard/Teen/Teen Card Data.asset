@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
+  m_Name: Teen Card Data
+  m_EditorClassIdentifier: 
+  highEffortCards:
+  - {fileID: 11400000, guid: 63e2e8c575668a54193b05dd5578920d, type: 2}
+  - {fileID: 11400000, guid: 68d0446e830419c408a7c4664052c0a5, type: 2}
+  - {fileID: 11400000, guid: 0bfb174a96568904f8f54205a00e20c8, type: 2}
+  - {fileID: 11400000, guid: 2fab4fae181379248939ef2f35d73748, type: 2}
+  - {fileID: 11400000, guid: 6e4f64ce444d85f488b00d4fbbaf7856, type: 2}
+  - {fileID: 11400000, guid: 5486e22b63bae9541aa410cc52328f1d, type: 2}
+  - {fileID: 11400000, guid: f3f78c559f3b3ef43baaf985ad63f855, type: 2}
+  - {fileID: 11400000, guid: 65384f38c2dc33247b9d8c16e3be2751, type: 2}
+  - {fileID: 11400000, guid: dfb4cb00a4714d14b85eb2897617ee37, type: 2}
+  - {fileID: 11400000, guid: fdab21127e434e04a9cad01e818f92fe, type: 2}
+  - {fileID: 11400000, guid: 7fb0aa8fcab8fa64ba5a2b5cd29ef55c, type: 2}
+  - {fileID: 11400000, guid: 00796d2ba1301834e937c42d98c897e8, type: 2}
+  normalEffortCards:
+  - {fileID: 11400000, guid: 2405f5ce2d5203b43b4a02bf401bcc81, type: 2}
+  - {fileID: 11400000, guid: 230d57082ff0aa440800af8f318c6f35, type: 2}
+  - {fileID: 11400000, guid: 2afa7550918c49f4cafc46f582cee512, type: 2}
+  - {fileID: 11400000, guid: edf4304232f84ad41aab58aaefcf9dc7, type: 2}
+  - {fileID: 11400000, guid: 8eeee3cf26351054eafb596e3b9372b8, type: 2}
+  - {fileID: 11400000, guid: 1b9ff7d1d9fa928448cf899872fe9aa2, type: 2}
+  - {fileID: 11400000, guid: 07c55cb406eb96b4e92ec0eed1cad85a, type: 2}
+  - {fileID: 11400000, guid: 504a34b5fe8de654f8c551e45ce0f810, type: 2}
+  - {fileID: 11400000, guid: 1e59b21dc36b87248ad29b2a15284c44, type: 2}
+  - {fileID: 11400000, guid: f1f8396a9321bfe4a818ef34acdc2a6a, type: 2}
+  - {fileID: 11400000, guid: e60d8dc527126544e9c4e6dee3c299ef, type: 2}
+  - {fileID: 11400000, guid: 524d16f1e1b15094b9c5f2c3009fc5f8, type: 2}
+  - {fileID: 11400000, guid: ee655690c1906114b9e8bf6e1d90f331, type: 2}
+  - {fileID: 11400000, guid: 59fd888a21d25fb408558290a41d2eee, type: 2}
+  - {fileID: 11400000, guid: 15478a28922814240878e78e2db5da72, type: 2}
+  lowEffortCards:
+  - {fileID: 11400000, guid: 998af46772f9f5f4581bd630999ccb5f, type: 2}
+  - {fileID: 11400000, guid: 10af40b4782df9140b683ac6857a06ac, type: 2}
+  - {fileID: 11400000, guid: d414cac25d6aeb045bd92c2097e6c4be, type: 2}
+  - {fileID: 11400000, guid: bb7370350e50d024e861419be7e6b6bf, type: 2}
+  - {fileID: 11400000, guid: ccfbce16a3d7b174db73225a48b53135, type: 2}
+  - {fileID: 11400000, guid: 78f0488ebf90f104da248a2b302dc641, type: 2}
+  - {fileID: 11400000, guid: 2dad2865154917d4ea4aebfdd41b5986, type: 2}
+  - {fileID: 11400000, guid: ca64cb3d469348047b364eb7f640fe91, type: 2}
+  - {fileID: 11400000, guid: a9002a63f5a33ba4484e064c057a6a2d, type: 2}
+  - {fileID: 11400000, guid: 480782564777b264a90b4c5f1eeb82f9, type: 2}
+  - {fileID: 11400000, guid: 14a4a94f7fc5a6a4fb93cb9e2f36a831, type: 2}

@@ -17,10 +17,10 @@ public class LODFunctionLibrary
     {
         bool scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore;
         bool ageComparison = playerStatus.PlayerAge == CompareData.PlayerAge;
-        bool educationComparison = playerStatus.EducationStage == CompareData.EducationStage;
-        bool loverComparison = playerStatus.LoverStage == CompareData.LoverStage;
-        bool jobLevelComparison = playerStatus.JobData.jobLevel == CompareData.JobData.jobLevel;
-        bool jobTypeComparison = playerStatus.JobData.jobType == CompareData.JobData.jobType;
+        bool educationComparison = playerStatus.EducationStage == CompareData.EducationStage || CompareData.EducationStage == EducationStage.None;
+        bool loverComparison = playerStatus.LoverStage == CompareData.LoverStage || CompareData.LoverStage == LoverStage.None;
+        bool jobLevelComparison = playerStatus.JobData.jobLevel == CompareData.JobData.jobLevel || CompareData.JobData.jobLevel == JobLevel.None;
+        bool jobTypeComparison = playerStatus.JobData.jobType == CompareData.JobData.jobType || CompareData.JobData.jobType == JobType.None;
 
         return scoreComparison && ageComparison && educationComparison && loverComparison && jobLevelComparison && jobTypeComparison;
     }

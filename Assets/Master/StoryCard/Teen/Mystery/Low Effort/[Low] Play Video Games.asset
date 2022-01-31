@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
+  m_Name: '[Low] Play Video Games'
+  m_EditorClassIdentifier: 
+  cardName: Play Some VIdeo Games
+  cardStory: You Played Some Video Games
+  cardValue: 2
+  random: 1
+  randomCards:
+  - {fileID: 11400000, guid: 9eeddda566e062a4fbd5853b6f7ccfe8, type: 2}
+  - {fileID: 11400000, guid: 68b997062f945634f91fb6f16ced3267, type: 2}
+  - {fileID: 11400000, guid: b26906e3c39c28a4488b45bf17c91592, type: 2}
+  - {fileID: 11400000, guid: f93f472f98e9e7f4881b46f217989089, type: 2}
+  cardScoreValue: 0
+  spawnRequirement:
+    statusDataAs: 0
+    playerScore: 0
+    playerAge: 1
+    educationStage: 2
+    loverStage: 0
+    jobData:
+      jobType: 0
+      jobLevel: 0
+  OnCardCollected:
+    m_PersistentCalls:
+      m_Calls: []
+  effect: 0
+  changedStats: 0
+  changeLevel: 0
+  time: 0
+  causingDeath: 
