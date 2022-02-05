@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: '[Low Mystery 2]'
+  m_Name: '[Low] Get Motivated from Failure'
   m_EditorClassIdentifier: 
-  cardName: Grounded for a week in school
-  cardStory: Your Teacher Grounded you for a week in school
-  cardValue: 1
+  cardName: Get Motivated from Failure
+  cardStory: You're Motivated from Failure
+  cardValue: 0
   random: 0
   randomCards: []
-  cardScoreValue: -300
+  cardScoreValue: 1000
   stackable: 0
   stackCount: 0
   spawnRequirement:
     statusDataAs: 0
-    playerScore: -99999
-    playerAge: 1
-    educationStage: 1
+    playerScore: -1000
+    playerAge: 3
+    educationStage: 0
     loverStage: 0
     jobData:
       jobType: 0
       jobLevel: 0
-  scoreCondition: 0
+  scoreCondition: 1
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []

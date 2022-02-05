@@ -27,11 +27,15 @@ public class CardDataBase : ScriptableObject
 
     [Tooltip("Certain score value that will be added to the player score if being collected")]
     public int cardScoreValue;
+    [Tooltip("Is This Card Make Player Dead if Stacked ?")]
+    public bool stackable;
+    public int stackCount;
 
     [Space]
 
     [Header("Spawn Config : ")]
     public PlayerStatusData spawnRequirement;
+    public ScoreCheck scoreCondition;
 
     public UnityEvent OnCardCollected;
 
@@ -40,13 +44,17 @@ public class CardDataBase : ScriptableObject
     // Changed Stats
     public Stats changedStats;
     public int changeLevel;
-    // Can't Jump
     public float time;
-    // Dead
     public string causingDeath;
     #endregion
 }
 
+public enum ScoreCheck
+{
+    MoreThan, // >
+    LessThan, // <
+    Equal // ==
+}
 public enum CardEffect
 {
     None,
@@ -60,4 +68,13 @@ public enum Stats
     Education,
     Job,
     Lover
+}
+
+public enum Skills
+{
+    Language,
+    Science,
+    Music,
+    Athletic
+
 }

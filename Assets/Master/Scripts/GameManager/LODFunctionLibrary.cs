@@ -13,15 +13,26 @@ public class LODFunctionLibrary
     /// <param name="playerStatus"> Player status that will be compared with the other data</param>
     /// <param name="CompareData"> The Data that will be the standard requirement of the player status data</param>
     /// <returns></returns>
-    public static bool ComparePlayerStatusData(PlayerStatusData playerStatus, PlayerStatusData CompareData)
+    public static bool ComparePlayerStatusData(PlayerStatusData playerStatus, PlayerStatusData CompareData, ScoreCheck condition)
     {
-        bool scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore;
-        bool ageComparison = playerStatus.PlayerAge == CompareData.PlayerAge;
+        bool scoreComparison = false;
+        if (condition == ScoreCheck.MoreThan)
+        {
+            scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore;
+        }
+        else if (condition == ScoreCheck.LessThan)
+        {
+            scoreComparison = playerStatus.PlayerScore < CompareData.PlayerScore;
+        }
+        else
+        {
+            scoreComparison = playerStatus.PlayerScore == CompareData.PlayerScore;
+        }
+        bool ageComparison = playerStatus.PlayerAge == CompareData.PlayerAge || CompareData.PlayerAge == Age.None;
         bool educationComparison = playerStatus.EducationStage == CompareData.EducationStage || CompareData.EducationStage == EducationStage.None;
         bool loverComparison = playerStatus.LoverStage == CompareData.LoverStage || CompareData.LoverStage == LoverStage.None;
         bool jobLevelComparison = playerStatus.JobData.jobLevel == CompareData.JobData.jobLevel || CompareData.JobData.jobLevel == JobLevel.None;
         bool jobTypeComparison = playerStatus.JobData.jobType == CompareData.JobData.jobType || CompareData.JobData.jobType == JobType.None;
-
         return scoreComparison && ageComparison && educationComparison && loverComparison && jobLevelComparison && jobTypeComparison;
     }
 
@@ -155,6 +166,26 @@ public class LODFunctionLibrary
                     gameManager.GetComponent<GameOverManager>().ShowGameOverMenu();
                 }
                 break;
+        }
+    }
+
+    public static void CheckStackedCards(CardDataBase card, List<CardDataBase> cardList,
+        PlayerController controller, GameOverManager manager)
+    {
+        var cardDuplicate = cardList.GroupBy(x => x)
+            .Where(g => g.Count() > 1)
+            .Select(y => new { Element = y.Key, Counter = y.Count() })
+            .ToList();
+
+        foreach (var item in cardDuplicate)
+        {
+            if (item.Element.stackable == true && item.Counter == item.Element.stackCount)
+            {
+                controller.AddCurrentScore();
+
+                manager.GetComponent<GameOverManager>().ShowCollectedAct();
+                manager.GetComponent<GameOverManager>().ShowGameOverMenu();
+            }
         }
     }
 

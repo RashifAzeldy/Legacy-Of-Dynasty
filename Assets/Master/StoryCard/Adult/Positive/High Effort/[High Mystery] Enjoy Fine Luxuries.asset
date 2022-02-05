@@ -18,15 +18,18 @@ MonoBehaviour:
   random: 0
   randomCards: []
   cardScoreValue: 1000
+  stackable: 0
+  stackCount: 0
   spawnRequirement:
     statusDataAs: 0
     playerScore: 5000
-    playerAge: 2
+    playerAge: 3
     educationStage: 0
     loverStage: 0
     jobData:
       jobType: 0
       jobLevel: 0
+  scoreCondition: 0
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: '[Low Mystery 2]'
+  m_Name: '[High] Completing 1000 Puzzle'
   m_EditorClassIdentifier: 
-  cardName: Grounded for a week in school
-  cardStory: Your Teacher Grounded you for a week in school
-  cardValue: 1
+  cardName: Completing 1000 Piece Puzzle
+  cardStory: You Completed 1000 Piece Puzzle
+  cardValue: 0
   random: 0
   randomCards: []
-  cardScoreValue: -300
+  cardScoreValue: 1000
   stackable: 0
   stackCount: 0
   spawnRequirement:
     statusDataAs: 0
-    playerScore: -99999
+    playerScore: 1000
     playerAge: 1
     educationStage: 1
     loverStage: 0
@@ -36,5 +36,5 @@ MonoBehaviour:
   effect: 0
   changedStats: 0
   changeLevel: 0
-  time: 0
+  time: 9
   causingDeath: 

@@ -20,15 +20,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 22cf9c3bbd87dd2449b8f972f03a80a7, type: 2}
   - {fileID: 11400000, guid: 3a16f677c0c20a241b9c79a5178613cd, type: 2}
   cardScoreValue: 0
+  stackable: 0
+  stackCount: 0
   spawnRequirement:
     statusDataAs: 0
     playerScore: -1000
-    playerAge: 0
+    playerAge: 1
     educationStage: 1
     loverStage: 0
     jobData:
       jobType: 0
       jobLevel: 0
+  scoreCondition: 0
   OnCardCollected:
     m_PersistentCalls:
       m_Calls: []

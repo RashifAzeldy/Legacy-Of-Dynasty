@@ -22,20 +22,30 @@ public class VizagoEditorBase : Editor
         SerializedProperty isRandomCard = serializedObject.FindProperty("random");
         SerializedProperty cardScore = serializedObject.FindProperty("cardScoreValue");
         SerializedProperty spawnReq = serializedObject.FindProperty("spawnRequirement");
+        SerializedProperty scoreCondition = serializedObject.FindProperty("scoreCondition");
         SerializedProperty onCollected = serializedObject.FindProperty("OnCardCollected");
         SerializedProperty cardValue = serializedObject.FindProperty("cardValue");
         SerializedProperty cardEffect = serializedObject.FindProperty("effect");
+        SerializedProperty isStackable = serializedObject.FindProperty("stackable");
+
 
         EditorGUILayout.PropertyField(cardName, true);
         EditorGUILayout.PropertyField(cardStory, true);
         EditorGUILayout.PropertyField(isRandomCard, true);
+        EditorGUILayout.PropertyField(cardScore, true);
+        EditorGUILayout.PropertyField(isStackable, true);
         if (isRandomCard.boolValue == true)
         {
             SerializedProperty randomCards = serializedObject.FindProperty("randomCards");
             EditorGUILayout.PropertyField(randomCards, true);
         }
-        EditorGUILayout.PropertyField(cardScore, true);
+        if (isStackable.boolValue == true)
+        {
+            SerializedProperty stackCount = serializedObject.FindProperty("stackCount");
+            EditorGUILayout.PropertyField(stackCount, true);
+        }
         EditorGUILayout.PropertyField(spawnReq, true);
+        EditorGUILayout.PropertyField(scoreCondition, true);
         EditorGUILayout.PropertyField(onCollected, true);
         EditorGUILayout.PropertyField(cardValue, true);
         EditorGUILayout.PropertyField(cardEffect, true);
@@ -56,7 +66,7 @@ public class VizagoEditorBase : Editor
             EditorGUILayout.PropertyField(delayTime, true);
         }
         // 3 = Dead
-        else if(cardEffect.enumValueIndex == 3)
+        else if (cardEffect.enumValueIndex == 3)
         {
             SerializedProperty causingDeath = serializedObject.FindProperty("causingDeath");
             EditorGUILayout.PropertyField(causingDeath, true);

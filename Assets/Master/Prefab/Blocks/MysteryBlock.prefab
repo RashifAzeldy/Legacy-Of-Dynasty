@@ -245,10 +245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74aeef92351c11d4fb58cbd62e27d1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSpeedRange: {x: 1.5, y: 3.5}
   blockTitleText: {fileID: 1365654901793233918}
-  cardData: {fileID: 0}
   text: {fileID: 1365654901793233918}
+  blockSign: {fileID: 1532857375824675662, guid: cfd87dbb77d5c69409b0c28fa9f6cdb2,
+    type: 3}
+  cardData: {fileID: 11400000, guid: 6b3089e9a65116a438ee332f7cb21161, type: 2}
 --- !u!1 &8015439018593576350
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +315,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Ditch Homeworks to Relax
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

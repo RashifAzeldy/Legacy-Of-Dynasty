@@ -1993,7 +1993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 15
-  spawnIntervalRange: {x: 2.5, y: 3.5}
+  spawnIntervalRange: {x: 3, y: 5}
   cardList:
   - {fileID: 11400000, guid: f6434e0a08eb28b46bef04a98b2daa47, type: 2}
   - {fileID: 11400000, guid: dda967b9ad32833418f25fbbd02ed801, type: 2}
@@ -2024,6 +2024,8 @@ MonoBehaviour:
   BlockMysteryPrefab: {fileID: -8102298011867001065, guid: 680a9fe8294e48c44bf7343fb64142ad,
     type: 3}
   blockSpeed: 3.5
+  player: {fileID: 462669932}
+  status: {fileID: 6897627098548547269}
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0
@@ -5774,7 +5776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387111736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.25, y: 0, z: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1426509566}
@@ -9156,6 +9158,7 @@ MonoBehaviour:
   scoreText: {fileID: 1553262571}
   collectedCards: {fileID: 6897627098548547274}
   gOver: {fileID: 462669933}
+  manager: {fileID: 0}
   canJump: 0
 --- !u!114 &6897627098548547276
 MonoBehaviour:

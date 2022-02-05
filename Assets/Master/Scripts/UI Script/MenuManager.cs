@@ -22,14 +22,12 @@ public class MenuManager : MonoBehaviour
 
     public void UnpauseGame()
     {
-        // Hide Pause Menu
-        pauseMenu.SetActive(false);
-        // Start CountDown
         StartCoroutine(UnpauseCountdown(countdown));
     }
 
     IEnumerator UnpauseCountdown(int time)
     {
+        pauseMenu.SetActive(false);
         // Show Text Countdown
         countdownText.gameObject.SetActive(true);
         countdownText.text = " ";
