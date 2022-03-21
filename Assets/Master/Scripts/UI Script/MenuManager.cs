@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,14 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] int countdown;
 
+    AdsManager.BannerAd bannerAd;
+
+    private void Awake()
+    {
+        bannerAd = AdsManager.Instance.CreateBannerAd();
+        bannerAd.ToggleAd(false);
+    }
+
     public void PauseGame()
     {
         // Show Pause Menu
@@ -18,6 +27,9 @@ public class MenuManager : MonoBehaviour
         pauseMenu.SetActive(true);
         // Stop Game Time
         Time.timeScale = 0;
+
+        bannerAd.ToggleAd(true);
+
     }
 
     public void UnpauseGame()
@@ -25,6 +37,9 @@ public class MenuManager : MonoBehaviour
         // Hide Pause Menu
         pauseMenu.SetActive(false);
         // Start CountDown
+        
+        
+        bannerAd.ToggleAd(false);
         StartCoroutine(UnpauseCountdown(countdown));
     }
 

@@ -1,0 +1,125 @@
+{
+    "m_SelectedDeviceId": "RWMVDYFIRSPNYLKV",
+    "m_SelectedPackage": {
+        "deviceId": "RWMVDYFIRSPNYLKV",
+        "name": "com.SkyBlueGames.LegacyofDynasty",
+        "processId": 4776,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.bbk.launcher2",
+            "processId": 2405,
+            "exited": false
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 30999,
+            "exited": true
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 653,
+            "exited": true
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 10214,
+            "exited": true
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 18763,
+            "exited": true
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 21726,
+            "exited": true
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 25518,
+            "exited": false
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 29347,
+            "exited": false
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 31934,
+            "exited": false
+        },
+        {
+            "deviceId": "RWMVDYFIRSPNYLKV",
+            "name": "com.SkyBlueGames.LegacyofDynasty",
+            "processId": 4776,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_Filter": "Id",
+    "m_FilterIsRegularExpression": true,
+    "m_SymbolPaths": []
+}

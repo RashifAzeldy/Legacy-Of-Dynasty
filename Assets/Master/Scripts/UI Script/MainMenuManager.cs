@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,15 @@ public class MainMenuManager : MonoBehaviour
 
     public GameObject SetBackButton { get { return achievementBack; } set { achievementBack = value; } }
 
+    private AdsManager.BannerAd bannerAd;
+    private AdsManager.InterstitialAd interstitialAd;
+    
     private void Start()
     {
-
+        
+        //Creating Interstitial Ad
+        interstitialAd = AdsManager.Instance.CreateInterstitialAd();
+        
         if (achievementWidget)
             achievementWidget.SetActive(false);
 
@@ -32,14 +39,28 @@ public class MainMenuManager : MonoBehaviour
 
         startButton.onClick.AddListener(() =>
         {
-            
-            AdsManager.Instance.ShowInterstitialAd();
-            AdsManager.InterstitialAdManager.InterstitialAd.OnAdClosed += (obj, args) =>
+
+            if (interstitialAd.AdInstance.IsLoaded())
             {
+                interstitialAd.AdInstance.OnAdClosed += (obj, args) =>
+                {
+                    SceneManager.LoadScene(nextSceneName);
+                };
+
+                interstitialAd.AdInstance.OnAdFailedToShow += (obj, args) =>
+                {
+                    SceneManager.LoadScene(nextSceneName);
+                };
+
+                interstitialAd.ShowAd();
+            }
+            else
                 SceneManager.LoadScene(nextSceneName);
-            };
             
         });
+
+        //Showing banner ad
+        bannerAd = AdsManager.Instance.CreateBannerAd();
 
         achievementButton.onClick.AddListener(() =>
         { achievementWidget.SetActive(true); });
@@ -65,6 +86,9 @@ public class MainMenuManager : MonoBehaviour
         });
 
         achievementBack.transform.SetAsLastSibling();
+        
+        
+
     }
 
     private void Update()
