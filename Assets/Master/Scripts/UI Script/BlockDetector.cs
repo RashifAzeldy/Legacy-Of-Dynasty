@@ -16,31 +16,35 @@ public class BlockDetector : MonoBehaviour
 
     void ShowSign(BlockController block)
     {
-        GameObject sign = Instantiate(signPrefab, parent);
-        block.GetBlockSign = sign;
-        switch ( block.cardData.cardValue )
+        if (block.cardData)
         {
-            case CardValue.Positive:
-            sign.GetComponent<Image>().sprite = positiveSign;
-            break;
-            case CardValue.Negative:
-            sign.GetComponent<Image>().sprite = negativeSign;
-            break;
-            case CardValue.Mystery:
-            sign.GetComponent<Image>().sprite = mysterySign;
-            break;
-            case CardValue.Neutral:
-            sign.GetComponent<Image>().sprite = neutralSign;
-            break;
-            default:
-            sign.GetComponent<Image>().sprite = neutralSign;
-            break;
+            GameObject sign = Instantiate(signPrefab, parent);
+            block.GetBlockSign = sign;
+            switch (block.cardData.cardValue)
+            {
+                case CardValue.Positive:
+                    sign.GetComponent<Image>().sprite = positiveSign;
+                    break;
+                case CardValue.Negative:
+                    sign.GetComponent<Image>().sprite = negativeSign;
+                    break;
+                case CardValue.Mystery:
+                    sign.GetComponent<Image>().sprite = mysterySign;
+                    break;
+                case CardValue.Neutral:
+                    sign.GetComponent<Image>().sprite = neutralSign;
+                    break;
+                default:
+                    sign.GetComponent<Image>().sprite = neutralSign;
+                    break;
+            }
+
+            RectTransform signRect = sign.GetComponent<RectTransform>();
+            sign.GetComponent<Image>().preserveAspect = true;
+            signRect.position = Camera.main.WorldToScreenPoint(new Vector3(
+                0, block.transform.position.y, 0));
+            signRect.position = new Vector3(tempSignPos.position.x, signRect.position.y, signRect.position.z);
         }
-        RectTransform signRect = sign.GetComponent<RectTransform>();
-        sign.GetComponent<Image>().preserveAspect = true;
-        signRect.position = Camera.main.WorldToScreenPoint(new Vector3(
-            0, block.transform.position.y, 0));
-        signRect.position = new Vector3(tempSignPos.position.x, signRect.position.y, signRect.position.z);
     }
 
     private void OnTriggerEnter2D( Collider2D collision )

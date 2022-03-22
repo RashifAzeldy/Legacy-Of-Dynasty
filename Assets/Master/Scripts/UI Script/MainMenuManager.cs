@@ -44,11 +44,15 @@ public class MainMenuManager : MonoBehaviour
             {
                 interstitialAd.AdInstance.OnAdClosed += (obj, args) =>
                 {
+                    interstitialAd = null;
+                    bannerAd = null;
                     SceneManager.LoadScene(nextSceneName);
                 };
 
                 interstitialAd.AdInstance.OnAdFailedToShow += (obj, args) =>
                 {
+                    interstitialAd = null;
+                    bannerAd = null;
                     SceneManager.LoadScene(nextSceneName);
                 };
 
@@ -68,15 +72,21 @@ public class MainMenuManager : MonoBehaviour
         achievementBackButton.onClick.AddListener(() =>
         { achievementWidget.SetActive(false); });
 
-        customCharButton.onClick.AddListener(() => { SceneManager.LoadScene("SkinSelectionScene"); });
+        customCharButton.onClick.AddListener(() =>
+        {
+            bannerAd = null;
+            SceneManager.LoadScene("SkinSelectionScene");
+        });
 
         quitButton.onClick.AddListener(() =>
         {
             confirmWidget.ActivateWidget(
                 () =>
                 {
-                    Application.Quit();
+                    interstitialAd = null;
+                    bannerAd = null;
                     GameManager.Instance.SaveGameData();
+                    Application.Quit();
                 },
                 () =>
                 {

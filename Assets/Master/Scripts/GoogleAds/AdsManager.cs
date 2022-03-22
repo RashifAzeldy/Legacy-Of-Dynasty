@@ -13,13 +13,13 @@ public class AdsManager : MonoBehaviour
    [SerializeField] protected string m_interstitialAdID;
    [SerializeField] protected string m_bannerAdID;
 
-   
-   
-   
    private void Awake()
    {
       if (!Instance)
+      {
          Instance = this;
+         DontDestroyOnLoad(Instance);
+      }
       else
          Destroy(gameObject);
 
