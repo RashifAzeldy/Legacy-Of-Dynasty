@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
+  m_Name: '[High] Plot bank robbery'
+  m_EditorClassIdentifier: 
+  cardName: Plot bank robbery
+  cardStory: Plot bank robbery
+  cardValue: 2
+  random: 1
+  randomCards:
+  - {fileID: 11400000, guid: 43d4df38a7d57074d8d9d1f48ca2de10, type: 2}
+  - {fileID: 11400000, guid: 303d7d966d77cf747a041a9bb578a24c, type: 2}
+  cardScoreValue: 0
+  stackable: 0
+  stackCount: 0
+  spawnRequirement:
+    statusDataAs: 0
+    playerScore: -3000
+    playerAge: 3
+    educationStage: 0
+    loverStage: 0
+    jobData:
+      jobType: 1
+      jobLevel: 0
+  scoreCondition: 1
+  OnCardCollected:
+    m_PersistentCalls:
+      m_Calls: []
+  effect: 0
+  changedStats: 0
+  changeLevel: 0
+  time: 0
+  causingDeath: 

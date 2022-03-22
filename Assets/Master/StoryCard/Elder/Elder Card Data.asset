@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8827cdb7d275154b855857af8b68565, type: 3}
+  m_Name: Elder Card Data
+  m_EditorClassIdentifier: 
+  highEffortCards:
+  - {fileID: 11400000, guid: cdfc1183f2fc3704f8a571473fc0717d, type: 2}
+  - {fileID: 11400000, guid: b97182ad7ca2b53419a3b37151f93d35, type: 2}
+  - {fileID: 11400000, guid: a500a0b39f18fac45bde24a93f675975, type: 2}
+  - {fileID: 11400000, guid: 95a8ac339f3e6f14ea5a0a4abb0eb8e5, type: 2}
+  - {fileID: 11400000, guid: 0dfd35c7fc64eb149b065b0b16b57746, type: 2}
+  - {fileID: 11400000, guid: 6cb54f496ec8f9f4a94bd6073d87da98, type: 2}
+  normalEffortCards:
+  - {fileID: 11400000, guid: f816c4b1868de7841aa494ee8b01add5, type: 2}
+  - {fileID: 11400000, guid: 59957fd6f7842b947aca5a7e79eebae8, type: 2}
+  - {fileID: 11400000, guid: 6694ba658d676c049b0285ab3c07085f, type: 2}
+  - {fileID: 11400000, guid: f4b671e3ac2736147abbb427c4cdd330, type: 2}
+  - {fileID: 11400000, guid: 71f930f27d302544aa00d037aaa462ab, type: 2}
+  lowEffortCards:
+  - {fileID: 11400000, guid: 1e30aee323652f548a1a9875d28f6f76, type: 2}
+  - {fileID: 11400000, guid: 128dd024f5b778e42ad3a4903991a0f7, type: 2}
+  - {fileID: 11400000, guid: b7b4f3efe4b782c43802be907d63ad00, type: 2}
+  - {fileID: 11400000, guid: 7e8ebce2ce2218e488d4d5661b2fce2d, type: 2}
+  - {fileID: 11400000, guid: 0d576b03a763c7f478fc38393b400c17, type: 2}

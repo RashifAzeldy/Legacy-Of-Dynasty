@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] StoryCardCollector collectedCards;
     [SerializeField] GameOverManager gOver;
+    [SerializeField] GameOverManager manager;
 
     Rigidbody2D rb;
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        manager = FindObjectOfType<GameOverManager>();
         canJump = true;
     }
 
@@ -70,8 +72,10 @@ public class PlayerController : MonoBehaviour
                 LODFunctionLibrary.ShowStoryText(other.GetComponent<BlockController>().cardData.cardStory, crawlTextUI, crawlText);
                 collectedCards.GetCollectedStoryCard.Add(blockObject.cardData);
                 LODFunctionLibrary.ApplyEffect(gameObject, blockObject.cardData, gOver.gameObject);
-            } 
-            
+            }
+            LODFunctionLibrary.CheckStackedCards(blockObject.cardData, collectedCards.GetCollectedStoryCard,
+                this, manager);
+
             ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(blockObject.gameObject);
 
         }

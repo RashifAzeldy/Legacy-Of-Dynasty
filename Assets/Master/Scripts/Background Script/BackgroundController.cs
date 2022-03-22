@@ -7,15 +7,16 @@ using Random = UnityEngine.Random;
 public class BackgroundController : MonoBehaviour
 {
 
-    [Header("Config:")] 
+    [Header("Config:")]
     [SerializeField] private PlayerStatus m_player;
 
-    [Header("Main Background:")] [SerializeField]
+    [Header("Main Background:")]
+    [SerializeField]
     private GameObject[] m_dayCycleRenderer;
 
     [SerializeField] private float m_dayCycleAnimRate = 0.75f;
 
-    [Header("Layer Properties:")] 
+    [Header("Layer Properties:")]
     [SerializeField] private BackgroundLayerData m_firstLayerProps;
     [SerializeField] private BackgroundLayerData m_secondLayerProps;
     [SerializeField] private BackgroundLayerData m_thirdLayerProps;
@@ -26,7 +27,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private Transform m_thirdLayerParent;
 
     private Camera _playerCamera;
-    
+
     private List<GameObject> _currentPropObjects = new List<GameObject>();
 
     private float _mainBgLength;
@@ -41,7 +42,7 @@ public class BackgroundController : MonoBehaviour
 
         if (!_playerCamera)
             _playerCamera = Camera.main;
-        
+
         if (!m_player)
             m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
 
@@ -55,9 +56,9 @@ public class BackgroundController : MonoBehaviour
     void LateUpdate()
     {
         BackgroundMovement(m_dayCycleRenderer, m_dayCycleAnimRate);
-        
+
         LayerPropsSpawner();
-        
+
         MoveProps(_currentPropObjects, m_firstLayerProps.AnimSpeed);
 
         foreach (var propObject in _currentPropObjects)
@@ -68,7 +69,7 @@ public class BackgroundController : MonoBehaviour
                 gameObject.DestroyPool(propObject);
             }
         }
-        
+
     }
 
     private void LayerPropsSpawner()
@@ -98,9 +99,9 @@ public class BackgroundController : MonoBehaviour
         }
         else
             _thirdLayerSpawnTimer += Time.deltaTime;
-        
+
     }
-    
+
     /// <summary>
     /// Move the background based on the moveSpeed
     /// </summary>
@@ -135,12 +136,12 @@ public class BackgroundController : MonoBehaviour
             }
         }
     }
-    
+
     private GameObject SpawnProp(PropertiesData propsData, Transform spawnParent)
     {
         if (propsData.requirementEnable)
         {
-            if (LODFunctionLibrary.ComparePlayerStatusData(m_player.playerStatusData, propsData.SpawnRequirement))
+            if (LODFunctionLibrary.ComparePlayerStatusData(m_player.playerStatusData, propsData.SpawnRequirement, ScoreCheck.Equal))
                 return gameObject.InstantiatePool(propsData.Prefabs, transform.position, Quaternion.identity);
         }
         else
@@ -156,7 +157,7 @@ public class BackgroundController : MonoBehaviour
 
         while (!cPropObj)
         {
-            cPropObj = 
+            cPropObj =
                 SpawnProp(layerData.LayerPropPrefabs[Random.Range(0, layerData.LayerPropPrefabs.Length)], spawnParent);
         }
 

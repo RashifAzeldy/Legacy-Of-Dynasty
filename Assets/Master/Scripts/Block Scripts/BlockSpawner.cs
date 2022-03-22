@@ -11,7 +11,7 @@ public class BlockSpawner : MonoBehaviour
 
     [Header("Spawning Config : ")]
     [SerializeField] int spawnLimit = 15;
-    [SerializeField] Vector2 spawnIntervalRange = new Vector2(0, 10);
+    [SerializeField] Vector2 spawnIntervalRange = new Vector2(5, 15);
 
     [Space]
 
@@ -19,15 +19,15 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] List<EffortPosition> spawnPositions = new List<EffortPosition>();
 
     [Space]
-    
+
     [Header("Block Config:")]
     public BlockController BlockNeutralPrefab;
     public BlockController BlockPositivePrefab;
     public BlockController BlockNegativePrefab;
     public BlockController BlockMysteryPrefab;
-    
+
     [Space]
-    
+
     [SerializeField] float blockSpeed = 5.5f;
 
     #endregion
@@ -38,27 +38,20 @@ public class BlockSpawner : MonoBehaviour
     {
         get => blockSpeed;
     }
-    
+
     private void OnEnable()
     {
         if (!Instance)
             Instance = this;
-        
+
     }
 
-    PlayerState player;
-    PlayerStatus status;
+    [SerializeField] PlayerState player;
+    [SerializeField] PlayerStatus status;
     bool _startCheck = true;
-
-    private void Start()
-    {
-        player = FindObjectOfType<PlayerState>();
-        status = FindObjectOfType<PlayerStatus>();
-    }
 
     private void Update()
     {
-        //spawnedBlock.Count < spawnLimit &&
         if (_startCheck && Time.timeScale == 1)
         {
             SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), gameObject.transform, 1);
@@ -123,9 +116,9 @@ public class BlockSpawner : MonoBehaviour
                     : null;
 
                 gameObject.InstantiatePool(cBlockReference, GetSpawnPosition(effort), Quaternion.identity);
-                
+
                 cBlockController = cBlockReference.GetComponent<BlockController>();
-                
+
                 cBlockController.cardData = cCard;
 
                 cBlockController.InitBlock();
@@ -150,32 +143,28 @@ public class BlockSpawner : MonoBehaviour
                 {
                     foreach (CardDataBase item in baseCardList[0].highEffortCards)
 
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Teen)
                 {
                     foreach (CardDataBase item in baseCardList[1].highEffortCards)
 
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Adult)
                 {
                     foreach (CardDataBase item in baseCardList[2].highEffortCards)
 
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Elder)
                 {
                     foreach (CardDataBase item in baseCardList[3].highEffortCards)
 
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
 
@@ -185,29 +174,25 @@ public class BlockSpawner : MonoBehaviour
                 if (player.GetPlayerCurrentState == Age.Child)
                 {
                     foreach (CardDataBase item in baseCardList[0].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Teen)
                 {
                     foreach (CardDataBase item in baseCardList[1].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Adult)
                 {
                     foreach (CardDataBase item in baseCardList[2].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Elder)
                 {
                     foreach (CardDataBase item in baseCardList[3].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
 
@@ -217,29 +202,25 @@ public class BlockSpawner : MonoBehaviour
                 if (player.GetPlayerCurrentState == Age.Child)
                 {
                     foreach (CardDataBase item in baseCardList[0].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Teen)
                 {
                     foreach (CardDataBase item in baseCardList[1].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Adult)
                 {
                     foreach (CardDataBase item in baseCardList[2].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
                 else if (player.GetPlayerCurrentState == Age.Elder)
                 {
                     foreach (CardDataBase item in baseCardList[3].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement) || item.spawnRequirement.EducationStage == EducationStage.None
-                        || item.spawnRequirement.JobData.jobType == JobType.None || item.spawnRequirement.JobData.jobLevel == JobLevel.None || item.spawnRequirement.LoverStage == LoverStage.None)
+                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
                             cacheSpawnableCards.Add(item);
                 }
 

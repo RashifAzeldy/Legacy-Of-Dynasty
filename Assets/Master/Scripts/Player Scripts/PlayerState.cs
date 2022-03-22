@@ -19,7 +19,6 @@ public class PlayerState : MonoBehaviour
 
     private void Start()
     {
-        ageIndex = -1;
         switchState = true;
     }
 
@@ -40,11 +39,42 @@ public class PlayerState : MonoBehaviour
             // Change Dynasty ~
             playerController.AddCurrentScore();
             AddCharaImage();
-            ageIndex = 0;
+            ageIndex = 1;
         }
         player.sprite = ageList[ageIndex].GetAgeObject;
         currentState = ageList[ageIndex].GetState;
         status.playerStatusData.PlayerAge = currentState;
+
+        switch (currentState)
+        {
+            case Age.Child:
+                status.playerStatusData.EducationStage = EducationStage.GradeSchool;
+                break;
+            case Age.Teen:
+                status.playerStatusData.EducationStage = EducationStage.MiddleSchool;
+                yield return new WaitForSeconds(time / 2);
+                status.playerStatusData.EducationStage = EducationStage.HighSchool;
+                break;
+            case Age.Adult:
+                status.playerStatusData.EducationStage = EducationStage.University;
+                yield return new WaitForSeconds(time / 3);
+                status.playerStatusData.EducationStage = EducationStage.None;
+                JobData playerJob = new JobData();
+                playerJob.jobType = (JobType)Random.Range(1, 4);
+                playerJob.jobLevel = (JobLevel)1;
+                status.playerStatusData.JobData = playerJob;
+                yield return new WaitForSeconds(time / 3);
+                playerJob.jobLevel = (JobLevel)2;
+                status.playerStatusData.JobData = playerJob;
+                yield return new WaitForSeconds(time / 3);
+                playerJob.jobLevel = (JobLevel)3;
+                status.playerStatusData.JobData = playerJob;
+                break;
+            case Age.Elder:
+                JobData elder = new JobData();
+                status.playerStatusData.JobData = elder;
+                break;
+        }
 
         yield return new WaitForSeconds(time);
         switchState = true;
@@ -69,6 +99,7 @@ public class AgeState
 
 public enum Age
 {
+    None,
     Child,
     Teen,
     Adult,

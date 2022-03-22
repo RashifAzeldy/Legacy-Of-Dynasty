@@ -11,7 +11,7 @@ public class BlockController : MonoBehaviour
     [SerializeField] TextMeshProUGUI blockTitleText;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject blockSign;
-    
+
     [HideInInspector] public CardDataBase cardData;
 
     private float _blockSpeed;
@@ -21,12 +21,11 @@ public class BlockController : MonoBehaviour
         get { return blockSign; }
         set { blockSign = value; }
     }
-    
+
     void Update()
     {
         _blockSpeed = BlockSpawner.Instance.BlockSpeed;
         transform.Translate(-_blockSpeed * Time.deltaTime, 0, 0);
-        //Debug.Log(blockSpeed);
         if (cardData != null)
         {
             text.text = cardData.cardName;
@@ -41,6 +40,6 @@ public class BlockController : MonoBehaviour
     public void DestroyObject()
     {
         ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(gameObject);
-        
+
     }
 }
