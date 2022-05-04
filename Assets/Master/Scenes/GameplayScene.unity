@@ -1995,10 +1995,7 @@ MonoBehaviour:
   spawnLimit: 15
   spawnIntervalRange: {x: 3, y: 5}
   cardList:
-  - {fileID: 11400000, guid: f6434e0a08eb28b46bef04a98b2daa47, type: 2}
-  - {fileID: 11400000, guid: dda967b9ad32833418f25fbbd02ed801, type: 2}
-  - {fileID: 11400000, guid: e7bf69e664be8734dad4392a33cdb9e7, type: 2}
-  - {fileID: 11400000, guid: f264dfbcbd7545847ab38b3183a93f00, type: 2}
+  - {fileID: 11400000, guid: 24cd22e46abc854409c277ced37a0587, type: 2}
   spawnPositions:
   - effort: 0
     spawnPos:
@@ -2026,6 +2023,7 @@ MonoBehaviour:
   blockSpeed: 3.5
   player: {fileID: 462669932}
   status: {fileID: 6897627098548547269}
+  activeCards: []
 --- !u!4 &462669929
 Transform:
   m_ObjectHideFlags: 0
@@ -9006,7 +9004,7 @@ MonoBehaviour:
   playerStatusData:
     statusDataAs: 0
     playerScore: 0
-    playerAge: 3
+    playerAge: 1
     educationStage: 1
     loverStage: 0
     jobData:

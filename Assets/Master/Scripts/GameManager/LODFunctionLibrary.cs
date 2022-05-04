@@ -13,6 +13,57 @@ public class LODFunctionLibrary
     /// <param name="playerStatus"> Player status that will be compared with the other data</param>
     /// <param name="CompareData"> The Data that will be the standard requirement of the player status data</param>
     /// <returns></returns>
+    /// 
+
+    public static bool SpawnableScoreLimitCount( PlayerStatusData playerStatus, CardDataBase card )
+    {
+        bool canSpawn = false;
+        int spawnable = 0;
+
+        var cardDuplicate = BlockSpawner.Instance.GetActiveCards.GroupBy(x => x)
+            .Where(g => g.Count() > 1)
+            .Select(y => new { Element = y.Key, Counter = y.Count() })
+            .ToList();
+
+        if ( !BlockSpawner.Instance.GetActiveCards.Contains(card) && card.scoresLimit[0] == 0 )
+        {
+            spawnable++;
+        }
+        else
+        {
+            for ( int i = 0; i < card.scoresLimit.Count; i++ )
+            {
+                if ( playerStatus.PlayerScore >= card.scoresLimit[i] )
+                {
+                    spawnable++;
+                }
+            }
+
+            foreach ( var item in cardDuplicate )
+            {
+                Debug.Log("Item : " + item.Element.cardName + ", Count : " + item.Counter);
+                if ( item.Element == card )
+                {
+                    spawnable -= item.Counter;
+                }
+            }
+
+        }
+
+        if ( spawnable > 0 )
+        {
+            canSpawn = true;
+        }
+        else
+        {
+            canSpawn = false;
+        }
+
+        Debug.Log(spawnable);
+        Debug.Log(card.cardName + " is Spawnable ? " + canSpawn);
+        return canSpawn;
+    }
+
     public static bool ComparePlayerStatusData(PlayerStatusData playerStatus, PlayerStatusData CompareData, ScoreCheck condition)
     {
         bool scoreComparison = false;
@@ -57,11 +108,6 @@ public class LODFunctionLibrary
             default:
                 break;
         }
-    }
-
-    public static void SetBlockStoryCard(BlockController block, CardDataBase card)
-    {
-        block.cardData = card;
     }
 
     public static void FreezeYRigidbody(GameObject gameObj)

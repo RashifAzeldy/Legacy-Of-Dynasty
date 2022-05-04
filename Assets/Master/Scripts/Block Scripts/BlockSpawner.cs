@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -41,7 +42,7 @@ public class BlockSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!Instance)
+        if ( !Instance )
             Instance = this;
 
     }
@@ -50,32 +51,36 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField] PlayerStatus status;
     bool _startCheck = true;
 
+    [SerializeField] List<CardDataBase> activeCards = new List<CardDataBase>();
+    public List<CardDataBase> GetActiveCards { get { return activeCards; } set { activeCards = value; } }
+
     private void Update()
     {
-        if (_startCheck && Time.timeScale == 1)
+        if ( _startCheck && Time.timeScale == 1 )
         {
-            SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y), gameObject.transform, 1);
+            _startCheck = false;
+            SpawnBlock(Random.Range(spawnIntervalRange.x, spawnIntervalRange.y));
         }
     }
 
-    int SpawnPosIndex(BlockEffort effort)
+    int SpawnPosIndex( BlockEffort effort )
     {
 
-        foreach (EffortPosition item in spawnPositions)
+        foreach ( EffortPosition item in spawnPositions )
         {
-            if (item.GetEffort == effort)
+            if ( item.GetEffort == effort )
                 return spawnPositions.IndexOf(item);
 
         }
         return 0;
     }
 
-    Vector3 GetSpawnPosition(BlockEffort spawnAtEffort)
+    Vector3 GetSpawnPosition( BlockEffort spawnAtEffort )
     {
 
-        foreach (EffortPosition item in spawnPositions)
+        foreach ( EffortPosition item in spawnPositions )
         {
-            if (item.GetEffort == spawnAtEffort)
+            if ( item.GetEffort == spawnAtEffort )
             {
                 int posIndex = SpawnPosIndex(spawnAtEffort);
 
@@ -87,144 +92,308 @@ public class BlockSpawner : MonoBehaviour
         return Vector3.zero;
     }
 
-    public void SpawnBlock(float delay, Transform parent, int quantity)
+    public void SpawnBlock( float delay )
     {
-
-        _startCheck = false;
-        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.High));
-        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Medium));
-        StartCoroutine(SpawnDelay(delay, parent, quantity, BlockEffort.Low));
-        StartCoroutine(CheckingCountdown(delay * quantity));
+        StartCoroutine(SpawnDelay(delay, BlockEffort.High));
+        StartCoroutine(SpawnDelay(delay, BlockEffort.Medium));
+        StartCoroutine(SpawnDelay(delay, BlockEffort.Low));
+        StartCoroutine(CheckingCountdown(delay));
     }
 
-    IEnumerator SpawnDelay(float time, Transform parent, int objQuantity, BlockEffort effort)
+    IEnumerator SpawnDelay( float time, BlockEffort effort )
     {
-        for (int i = 0; i < objQuantity; i++)
+        CardDataBase cCard = GetStoryCard(CheckRequirement(status, effort, cardList));
+        yield return new WaitForSeconds(time);
+
+        if ( cCard )
         {
-            CardDataBase cCard = GetStoryCard(CheckRequirement(status, effort, cardList));
+            BlockController cBlockController = null;
+            GameObject cBlockReference =
+                cCard.cardValue == CardValue.Positive ? BlockPositivePrefab.gameObject
+                : cCard.cardValue == CardValue.Negative ? BlockNegativePrefab.gameObject
+                : cCard.cardValue == CardValue.Mystery ? BlockMysteryPrefab.gameObject
+                : cCard.cardValue == CardValue.Neutral ? BlockNeutralPrefab.gameObject
+                : null;
 
-            yield return new WaitForSeconds(time);
+            gameObject.InstantiatePool(cBlockReference, GetSpawnPosition(effort), Quaternion.identity);
+            cBlockController = cBlockReference.GetComponent<BlockController>();
+            cBlockController.cardData = cCard;
 
-            if (cCard)
-            {
-                BlockController cBlockController = null;
-                GameObject cBlockReference =
-                    cCard.cardValue == CardValue.Positive ? BlockPositivePrefab.gameObject
-                    : cCard.cardValue == CardValue.Negative ? BlockNegativePrefab.gameObject
-                    : cCard.cardValue == CardValue.Mystery ? BlockMysteryPrefab.gameObject
-                    : cCard.cardValue == CardValue.Neutral ? BlockNeutralPrefab.gameObject
-                    : null;
-
-                gameObject.InstantiatePool(cBlockReference, GetSpawnPosition(effort), Quaternion.identity);
-
-                cBlockController = cBlockReference.GetComponent<BlockController>();
-
-                cBlockController.cardData = cCard;
-
-                cBlockController.InitBlock();
-            }
+            cBlockController.InitBlock();
+            cBlockController.addCard = true;
         }
     }
 
-    public IEnumerator CheckingCountdown(float time)
+    public IEnumerator CheckingCountdown( float time )
     {
         yield return new WaitForSeconds(time);
         _startCheck = true;
     }
 
-    List<CardDataBase> CheckRequirement(PlayerStatus status, BlockEffort effort, List<CardDataList> baseCardList)
+    // Add When Player Touch With Blocks
+    public void RemoveActiveCard( CardDataBase card )
+    {
+        CardDataBase removedCard = activeCards.FirstOrDefault(( a ) => a.cardName == card.cardName);
+        activeCards.Remove(removedCard);
+    }
+
+    List<CardDataBase> CheckRequirement( PlayerStatus status, BlockEffort effort, List<CardDataList> baseCardList )
     {
         List<CardDataBase> cacheSpawnableCards = new List<CardDataBase>();
         // Here.
-        switch (effort)
+        switch ( effort )
         {
             case BlockEffort.High:
-                if (player.GetPlayerCurrentState == Age.Child)
+            if ( player.GetPlayerCurrentState == Age.Child )
+            {
+                foreach ( CardDataBase item in baseCardList[0].highEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[0].highEffortCards)
-
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Teen)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Teen )
+            {
+                foreach ( CardDataBase item in baseCardList[1].highEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[1].highEffortCards)
-
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Adult)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Adult )
+            {
+                foreach ( CardDataBase item in baseCardList[2].highEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[2].highEffortCards)
-
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Elder)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Elder )
+            {
+                foreach ( CardDataBase item in baseCardList[3].highEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[3].highEffortCards)
-
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
+            }
 
-                break;
+            break;
 
             case BlockEffort.Medium:
-                if (player.GetPlayerCurrentState == Age.Child)
+            if ( player.GetPlayerCurrentState == Age.Child )
+            {
+                foreach ( CardDataBase item in baseCardList[0].normalEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[0].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Teen)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Teen )
+            {
+                foreach ( CardDataBase item in baseCardList[1].normalEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[1].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Adult)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Adult )
+            {
+                foreach ( CardDataBase item in baseCardList[2].normalEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[2].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Elder)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Elder )
+            {
+                foreach ( CardDataBase item in baseCardList[3].normalEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[3].normalEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
+            }
 
-                break;
+            break;
 
             case BlockEffort.Low:
-                if (player.GetPlayerCurrentState == Age.Child)
+            if ( player.GetPlayerCurrentState == Age.Child )
+            {
+                foreach ( CardDataBase item in baseCardList[0].lowEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[0].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Teen)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Teen )
+            {
+                foreach ( CardDataBase item in baseCardList[1].lowEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[1].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Adult)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Adult )
+            {
+                foreach ( CardDataBase item in baseCardList[2].lowEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[2].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
-                else if (player.GetPlayerCurrentState == Age.Elder)
+            }
+            else if ( player.GetPlayerCurrentState == Age.Elder )
+            {
+                foreach ( CardDataBase item in baseCardList[3].lowEffortCards )
                 {
-                    foreach (CardDataBase item in baseCardList[3].lowEffortCards)
-                        if (LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition))
+                    if ( item.scoreSpawn )
+                    {
+                        if ( LODFunctionLibrary.SpawnableScoreLimitCount(status.playerStatusData, item) )
+                        {
                             cacheSpawnableCards.Add(item);
+                        }
+                    }
+                    else
+                    {
+                        if ( LODFunctionLibrary.ComparePlayerStatusData(status.playerStatusData, item.spawnRequirement, item.scoreCondition) )
+                        {
+                            cacheSpawnableCards.Add(item);
+                        }
+                    }
                 }
+            }
 
-                break;
+            break;
         }
         return cacheSpawnableCards;
     }
@@ -233,9 +402,9 @@ public class BlockSpawner : MonoBehaviour
     // Teen Index State = 1
     // Adult Index State = 2
     // Elder Index State = 3
-    CardDataBase GetStoryCard(List<CardDataBase> cardList)
+    CardDataBase GetStoryCard( List<CardDataBase> cardList )
     {
-        if (cardList.Count != 0)
+        if ( cardList.Count != 0 )
             return cardList[Random.Range(0, cardList.Count)];
 
         return null;

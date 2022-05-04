@@ -7,14 +7,14 @@ using TMPro;
 public class BlockController : MonoBehaviour
 {
     [Header("Block Config : ")]
-    //[SerializeField] public Vector2 blockSpeedRange = new Vector2(1.5f, 3.5f);
     [SerializeField] TextMeshProUGUI blockTitleText;
     [SerializeField] TextMeshProUGUI text;
     [SerializeField] GameObject blockSign;
 
-    [HideInInspector] public CardDataBase cardData;
+    public CardDataBase cardData;
 
     private float _blockSpeed;
+    public bool addCard;
 
     public GameObject GetBlockSign
     {
@@ -32,6 +32,23 @@ public class BlockController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(AddToActiveCard(0.5f));
+    }
+
+    private void OnTriggerEnter2D( Collider2D collision )
+    {
+        if (collision.GetComponent<BlockDestroyer>())
+            DestroyObject();
+    }
+
+    public IEnumerator AddToActiveCard ( float delay )
+    {
+        yield return new WaitForSeconds(delay);
+        BlockSpawner.Instance.GetActiveCards.Add(cardData);
+    }
+
     public void InitBlock()
     {
         blockTitleText.text = cardData.cardName;
@@ -39,7 +56,7 @@ public class BlockController : MonoBehaviour
 
     public void DestroyObject()
     {
-        ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(gameObject);
-
+        
+        BlockSpawner.Instance.RemoveActiveCard(cardData);
     }
 }

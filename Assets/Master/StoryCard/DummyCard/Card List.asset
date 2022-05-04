@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Card List
   m_EditorClassIdentifier: 
   highEffortCards:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fbecb7d30504007439937e97e4621bb1, type: 2}
+  - {fileID: 11400000, guid: 7d73ff08bdb1d744bbf9d751a828b1ec, type: 2}
   normalEffortCards: []
   lowEffortCards: []

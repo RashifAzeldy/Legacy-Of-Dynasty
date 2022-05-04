@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: '[Low Mystery 2] Get Grounded for a week in School'
+  m_Name: Test Main
   m_EditorClassIdentifier: 
-  cardName: Grounded for a week in school
-  cardStory: Your Teacher Grounded you for a week in school
-  cardValue: 1
+  cardName: Test Main
+  cardStory: Testing Main Base Cards
+  cardValue: 0
   random: 0
   randomCards: []
-  cardScoreValue: -300
+  cardScoreValue: 50
   stackable: 0
   stackCount: 0
+  scoreSpawn: 1
+  scoresLimit: 0000000064000000
+  spawnableCount: 0
   spawnRequirement:
     statusDataAs: 0
-    playerScore: -99999
-    playerAge: 1
-    educationStage: 1
+    playerScore: 0
+    playerAge: 0
+    educationStage: 0
     loverStage: 0
     jobData:
       jobType: 0

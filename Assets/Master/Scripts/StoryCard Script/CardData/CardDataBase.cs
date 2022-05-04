@@ -30,6 +30,10 @@ public class CardDataBase : ScriptableObject
     [Tooltip("Is This Card Make Player Dead if Stacked ?")]
     public bool stackable;
     public int stackCount;
+    [Tooltip("Is This Card Spawn Limited by Scores ?")]
+    public bool scoreSpawn;
+    public List<int> scoresLimit = new List<int>();
+    public int spawnableCount;
 
     [Space]
 

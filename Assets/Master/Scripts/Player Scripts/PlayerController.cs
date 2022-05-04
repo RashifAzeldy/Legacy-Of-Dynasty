@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
                 this, manager);
 
             ObjectPoolerManager.Instance.DestroyPoolObjectFromScene(blockObject.gameObject);
+            BlockSpawner.Instance.RemoveActiveCard(blockObject.cardData);
 
         }
     }

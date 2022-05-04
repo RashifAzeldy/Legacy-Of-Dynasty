@@ -181,7 +181,10 @@ public class ObjectPoolerManager : MonoBehaviour
 
     }
 
-    public void DestroyPoolObjectFromScene(GameObject gObject){ gObject.SetActive(false); }
+    public void DestroyPoolObjectFromScene(GameObject gObject)
+    {
+        gObject.SetActive(false);
+    }
 
     public void DestroyAllPool()
     {

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b25ae1ae3781e534c8aff0d429775e37, type: 3}
-  m_Name: '[Low]'
+  m_Name: '[Low] Steal Cookies from the Cabinet'
   m_EditorClassIdentifier: 
   cardName: Steal Cookies from the Cabinet
   cardStory: You Steal some Cookies from the Cabinet

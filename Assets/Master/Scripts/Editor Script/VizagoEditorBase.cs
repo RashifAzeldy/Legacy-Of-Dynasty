@@ -27,6 +27,7 @@ public class VizagoEditorBase : Editor
         SerializedProperty cardValue = serializedObject.FindProperty("cardValue");
         SerializedProperty cardEffect = serializedObject.FindProperty("effect");
         SerializedProperty isStackable = serializedObject.FindProperty("stackable");
+        SerializedProperty limitSpawn = serializedObject.FindProperty("scoreSpawn");
 
 
         EditorGUILayout.PropertyField(cardName, true);
@@ -34,6 +35,8 @@ public class VizagoEditorBase : Editor
         EditorGUILayout.PropertyField(isRandomCard, true);
         EditorGUILayout.PropertyField(cardScore, true);
         EditorGUILayout.PropertyField(isStackable, true);
+        EditorGUILayout.PropertyField(limitSpawn, true);
+
         if (isRandomCard.boolValue == true)
         {
             SerializedProperty randomCards = serializedObject.FindProperty("randomCards");
@@ -43,6 +46,13 @@ public class VizagoEditorBase : Editor
         {
             SerializedProperty stackCount = serializedObject.FindProperty("stackCount");
             EditorGUILayout.PropertyField(stackCount, true);
+        }
+        if ( limitSpawn.boolValue == true )
+        {
+            SerializedProperty limitList = serializedObject.FindProperty("scoresLimit");
+            EditorGUILayout.PropertyField(limitList, true);
+            SerializedProperty spawnableCount = serializedObject.FindProperty("spawnableCount");
+            EditorGUILayout.PropertyField(spawnableCount, true);
         }
         EditorGUILayout.PropertyField(spawnReq, true);
         EditorGUILayout.PropertyField(scoreCondition, true);
