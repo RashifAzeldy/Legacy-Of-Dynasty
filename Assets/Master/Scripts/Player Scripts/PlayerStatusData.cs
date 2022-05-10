@@ -11,16 +11,16 @@ public class PlayerStatusData
 
     [SerializeField] Age playerAge;
 
-    [SerializeField] EducationStage educationStage;
+    [SerializeField] EducationData educationData;
 
-    [SerializeField] LoverStage loverStage;
+    [SerializeField] LoverData loverData;
 
     [SerializeField] JobData jobData;
 
     public int PlayerScore { get => playerScore; set => playerScore = value; }
     public Age PlayerAge { get => playerAge; set => playerAge = value; }
-    public EducationStage EducationStage { get => educationStage; set => educationStage = value; }
-    public LoverStage LoverStage { get => loverStage; set => loverStage = value; }
+    public EducationData EducationData { get => educationData; set => educationData = value; }
+    public LoverData LoverData { get => loverData; set => loverData = value; }
     public JobData JobData { get => jobData; set => jobData = value; }
 }
 

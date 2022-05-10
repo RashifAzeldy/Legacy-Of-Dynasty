@@ -11,15 +11,19 @@ public enum LoverStage
 [System.Serializable]
 public class LoverCardData : CardDataBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[System.Serializable]
+public struct LoverData
+{
+    /// <summary>
+    /// What kind of job type is it ?
+    /// </summary>
+    public LoverStage loverStage;
+
+    /// <summary>
+    /// What is the job level ?
+    /// </summary>
+    public int loverScore;
 }

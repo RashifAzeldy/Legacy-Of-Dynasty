@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,22 +69,24 @@ public class LODFunctionLibrary
         bool scoreComparison = false;
         if (condition == ScoreCheck.MoreThan)
         {
-            scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore;
+            scoreComparison = playerStatus.PlayerScore >= CompareData.PlayerScore && playerStatus.EducationData.eduScore >= CompareData.EducationData.eduScore
+                              && playerStatus.LoverData.loverScore >= CompareData.JobData.jobScore && playerStatus.JobData.jobScore >= CompareData.JobData.jobScore;
         }
         else if (condition == ScoreCheck.LessThan)
         {
-            scoreComparison = playerStatus.PlayerScore < CompareData.PlayerScore;
+            scoreComparison = playerStatus.PlayerScore < CompareData.PlayerScore && playerStatus.EducationData.eduScore < CompareData.EducationData.eduScore
+                              && playerStatus.LoverData.loverScore < CompareData.JobData.jobScore && playerStatus.JobData.jobScore < CompareData.JobData.jobScore;
         }
         else
         {
-            scoreComparison = playerStatus.PlayerScore == CompareData.PlayerScore;
+            scoreComparison = playerStatus.PlayerScore == CompareData.PlayerScore && playerStatus.EducationData.eduScore == CompareData.EducationData.eduScore
+                              && playerStatus.LoverData.loverScore == CompareData.JobData.jobScore && playerStatus.JobData.jobScore == CompareData.JobData.jobScore;
         }
         bool ageComparison = playerStatus.PlayerAge == CompareData.PlayerAge || CompareData.PlayerAge == Age.None;
-        bool educationComparison = playerStatus.EducationStage == CompareData.EducationStage || CompareData.EducationStage == EducationStage.None;
-        bool loverComparison = playerStatus.LoverStage == CompareData.LoverStage || CompareData.LoverStage == LoverStage.None;
-        bool jobLevelComparison = playerStatus.JobData.jobLevel == CompareData.JobData.jobLevel || CompareData.JobData.jobLevel == JobLevel.None;
+        bool educationComparison = playerStatus.EducationData.eduStage == CompareData.EducationData.eduStage || CompareData.EducationData.eduStage == EducationStage.None;
+        bool loverComparison = playerStatus.LoverData.loverStage == CompareData.LoverData.loverStage || CompareData.LoverData.loverStage == LoverStage.None;
         bool jobTypeComparison = playerStatus.JobData.jobType == CompareData.JobData.jobType || CompareData.JobData.jobType == JobType.None;
-        return scoreComparison && ageComparison && educationComparison && loverComparison && jobLevelComparison && jobTypeComparison;
+        return scoreComparison && ageComparison && educationComparison && loverComparison && jobTypeComparison;
     }
 
     public static void RandomizeYPos(GameObject block, BlockEffort blockEffort)
@@ -166,32 +168,37 @@ public class LODFunctionLibrary
                 switch (card.changedStats)
                 {
                     case Stats.Education:
-                        int eduIndex = (int)status.EducationStage;
+                        EducationData eduStats = new EducationData();
+                        int eduIndex = (int)status.EducationData.eduStage;
                         eduIndex += card.changeLevel;
                         if (eduIndex < 0)
                         {
                             eduIndex = 0;
                         }
-                        status.EducationStage = (EducationStage)eduIndex;
+                        eduStats.eduStage = (EducationStage) eduIndex;
+                        eduStats.eduScore = status.EducationData.eduScore;
+                        status.EducationData = eduStats;
                         break;
                     case Stats.Job:
-                        int jobIndex = (int)status.JobData.jobLevel;
+                        int jobIndex = (int)status.JobData.jobType;
 
                         JobData dataResult = new JobData();
                         dataResult.jobType = status.JobData.jobType;
                         jobIndex += card.changeLevel;
-                        dataResult.jobLevel = (JobLevel)jobIndex;
+                        dataResult.jobType = (JobType)jobIndex;
 
                         status.JobData = dataResult;
                         break;
                     case Stats.Lover:
-                        int loverIndex = (int)status.LoverStage;
+                        LoverData loverStats = new LoverData();
+                        int loverIndex = (int)status.LoverData.loverStage;
                         loverIndex += card.changeLevel;
                         if (loverIndex < 0)
                         {
                             loverIndex = 0;
                         }
-                        status.LoverStage = (LoverStage)loverIndex;
+                        loverStats.loverStage = (LoverStage) loverIndex;
+                        loverStats.loverScore = status.LoverData.loverScore;
                         break;
                 }
                 break;

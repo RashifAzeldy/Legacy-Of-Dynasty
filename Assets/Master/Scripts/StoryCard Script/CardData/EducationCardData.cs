@@ -13,3 +13,17 @@ public class EducationCardData : CardDataBase
 {
    
 }
+
+[System.Serializable]
+public struct EducationData
+{
+    /// <summary>
+    /// What kind of job type is it ?
+    /// </summary>
+    public EducationStage eduStage;
+
+    /// <summary>
+    /// What is the job level ?
+    /// </summary>
+    public int eduScore;
+}

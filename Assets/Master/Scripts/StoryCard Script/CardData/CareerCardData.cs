@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum JobLevel { None, Entry, Intermediate, Advanced, Legendary }
 public enum JobType { None, Unemployed, Doctor, Salaryman, SupermarketCashier }
 
 [CreateAssetMenu(menuName = "Card/CardData/CareerActivityData", fileName = "CareerActivityCard")]
@@ -23,5 +22,5 @@ public struct JobData
     /// <summary>
     /// What is the job level ?
     /// </summary>
-    public JobLevel jobLevel;
+    public int jobScore;
 }

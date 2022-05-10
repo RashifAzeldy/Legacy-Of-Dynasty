@@ -6,5 +6,5 @@ using UnityEngine;
 [System.Serializable]
 public class RadiantActivitiesCardData : CardDataBase
 {
-
+    // Radiant Card Using Player Score
 }

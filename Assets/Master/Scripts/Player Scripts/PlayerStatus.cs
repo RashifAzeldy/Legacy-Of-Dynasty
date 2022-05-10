@@ -18,10 +18,10 @@ public class PlayerStatus : MonoBehaviour
     #endregion
     public PlayerStatusData playerStatusData;
 
-    public LoverStage Lover { get=> playerStatusData.LoverStage; }
+    public LoverData Lover { get=> playerStatusData.LoverData; }
     public JobData JobData { get=> playerStatusData.JobData; }
     public Age Age { get=> playerStatusData.PlayerAge; }
-    public EducationStage Education { get=> playerStatusData.EducationStage; }
+    public EducationData Education { get=> playerStatusData.EducationData; }
     public int Score { get=> playerStatusData.PlayerScore; }
 
     public bool haveChild;

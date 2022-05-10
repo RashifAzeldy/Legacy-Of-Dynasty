@@ -45,30 +45,28 @@ public class PlayerState : MonoBehaviour
         currentState = ageList[ageIndex].GetState;
         status.playerStatusData.PlayerAge = currentState;
 
+        EducationData playerEducation = new EducationData();
+        JobData playerJob = new JobData();
+
+
         switch (currentState)
         {
             case Age.Child:
-                status.playerStatusData.EducationStage = EducationStage.GradeSchool;
+                playerEducation.eduStage = EducationStage.GradeSchool;
+                playerEducation.eduScore = 0;
+                status.playerStatusData.EducationData = playerEducation;
                 break;
             case Age.Teen:
-                status.playerStatusData.EducationStage = EducationStage.MiddleSchool;
+                playerEducation.eduStage = EducationStage.MiddleSchool;
                 yield return new WaitForSeconds(time / 2);
-                status.playerStatusData.EducationStage = EducationStage.HighSchool;
+                playerEducation.eduStage = EducationStage.HighSchool;
                 break;
             case Age.Adult:
-                status.playerStatusData.EducationStage = EducationStage.University;
+                playerEducation.eduStage = EducationStage.University;
                 yield return new WaitForSeconds(time / 3);
-                status.playerStatusData.EducationStage = EducationStage.None;
-                JobData playerJob = new JobData();
+                playerEducation.eduStage = EducationStage.None;
                 playerJob.jobType = (JobType)Random.Range(1, 4);
-                playerJob.jobLevel = (JobLevel)1;
-                status.playerStatusData.JobData = playerJob;
-                yield return new WaitForSeconds(time / 3);
-                playerJob.jobLevel = (JobLevel)2;
-                status.playerStatusData.JobData = playerJob;
-                yield return new WaitForSeconds(time / 3);
-                playerJob.jobLevel = (JobLevel)3;
-                status.playerStatusData.JobData = playerJob;
+                playerJob.jobScore = 0;
                 break;
             case Age.Elder:
                 JobData elder = new JobData();
